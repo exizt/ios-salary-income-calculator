@@ -196,6 +196,7 @@
 				TargetAttributes = {
 					767FF4EF1EFB2920001329C1 = {
 						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = 3C745LWBXQ;
 						ProvisioningStyle = Automatic;
 					};
 					767FF5051EFB2923001329C1 = {
@@ -418,6 +419,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3C745LWBXQ;
 				INFOPLIST_FILE = SalaryIncomeCalculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kr.asv.SalaryIncomeCalculator;
@@ -430,6 +432,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3C745LWBXQ;
 				INFOPLIST_FILE = SalaryIncomeCalculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kr.asv.SalaryIncomeCalculator;
