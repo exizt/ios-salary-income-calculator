@@ -9,6 +9,9 @@
 import UIKit
 
 class FirstViewController: UIViewController {
+    @IBOutlet weak var resultSummary: UILabel!
+    @IBOutlet weak var inMoney: UITextField!
+    @IBOutlet weak var inTaxFree: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +23,8 @@ class FirstViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func calculate(_ sender: UIButton) {
+        resultSummary.text = "adasdf"
+    }
 }
 
