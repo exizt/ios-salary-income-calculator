@@ -15,6 +15,8 @@
 		767FF5001EFB2923001329C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 767FF4FE1EFB2923001329C1 /* LaunchScreen.storyboard */; };
 		767FF50B1EFB2924001329C1 /* SalaryIncomeCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF50A1EFB2924001329C1 /* SalaryIncomeCalculatorTests.swift */; };
 		767FF5161EFB2926001329C1 /* SalaryIncomeCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5151EFB2926001329C1 /* SalaryIncomeCalculatorUITests.swift */; };
+		767FF5251EFB385D001329C1 /* SalaryCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5241EFB385D001329C1 /* SalaryCalculator.swift */; };
+		767FF5271EFB41D8001329C1 /* InsuranceRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5261EFB41D8001329C1 /* InsuranceRate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		767FF5111EFB2924001329C1 /* SalaryIncomeCalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalaryIncomeCalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		767FF5151EFB2926001329C1 /* SalaryIncomeCalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryIncomeCalculatorUITests.swift; sourceTree = "<group>"; };
 		767FF5171EFB2926001329C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		767FF5241EFB385D001329C1 /* SalaryCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalaryCalculator.swift; sourceTree = "<group>"; };
+		767FF5261EFB41D8001329C1 /* InsuranceRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsuranceRate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,7 @@
 		767FF4F21EFB2920001329C1 /* SalaryIncomeCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				767FF5231EFB3799001329C1 /* salary_calculator */,
 				767FF4F31EFB2920001329C1 /* AppDelegate.swift */,
 				767FF4F51EFB2920001329C1 /* FirstViewController.swift */,
 				767FF4F71EFB2920001329C1 /* SecondViewController.swift */,
@@ -126,6 +131,15 @@
 				767FF5171EFB2926001329C1 /* Info.plist */,
 			);
 			path = SalaryIncomeCalculatorUITests;
+			sourceTree = "<group>";
+		};
+		767FF5231EFB3799001329C1 /* salary_calculator */ = {
+			isa = PBXGroup;
+			children = (
+				767FF5241EFB385D001329C1 /* SalaryCalculator.swift */,
+				767FF5261EFB41D8001329C1 /* InsuranceRate.swift */,
+			);
+			name = salary_calculator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,7 +279,9 @@
 			files = (
 				767FF4F81EFB2920001329C1 /* SecondViewController.swift in Sources */,
 				767FF4F41EFB2920001329C1 /* AppDelegate.swift in Sources */,
+				767FF5271EFB41D8001329C1 /* InsuranceRate.swift in Sources */,
 				767FF4F61EFB2920001329C1 /* FirstViewController.swift in Sources */,
+				767FF5251EFB385D001329C1 /* SalaryCalculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +530,7 @@
 				767FF51C1EFB2926001329C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		767FF51D1EFB2926001329C1 /* Build configuration list for PBXNativeTarget "SalaryIncomeCalculatorTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +539,7 @@
 				767FF51F1EFB2926001329C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		767FF5201EFB2926001329C1 /* Build configuration list for PBXNativeTarget "SalaryIncomeCalculatorUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +548,7 @@
 				767FF5221EFB2926001329C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
