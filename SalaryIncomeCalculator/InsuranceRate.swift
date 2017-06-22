@@ -7,9 +7,67 @@
 //
 
 import Foundation
-class InsuranceRate {
-    var nationalPension : Double?
-    var healthCare : Double?
-    var longTermCare : Double?
-    var employmentCare : Double?
+struct InsuranceRate {
+    var _nationalPension : Double = 4.5
+    var nationalPension : Double {
+        get {
+            return _nationalPension * 0.01
+        }
+        set(newVal){
+            if(newVal <= 0){
+                _nationalPension = 0
+            } else if(newVal > 100) {
+                _nationalPension = 100
+            } else {
+                _nationalPension = newVal
+            }
+        }
+    }
+    var _healthCare : Double = 3.06
+    var healthCare : Double {
+        get {
+            return _healthCare * 0.01
+        }
+        set(newVal){
+            if(newVal <= 0){
+                _healthCare = 0
+            } else if(newVal > 100) {
+                _healthCare = 100
+            } else {
+                _healthCare = newVal
+            }
+        }
+    }
+    var _longTermCare : Double = 6.55
+    var longTermCare : Double {
+        get {
+            return _longTermCare * 0.01
+        }
+        set(newVal){
+            if(newVal <= 0){
+                _longTermCare = 0
+            } else if(newVal > 100) {
+                _longTermCare = 100
+            } else {
+                _longTermCare = newVal
+            }
+        }
+    }
+    var _employmentCare : Double = 0.65
+    var employmentCare : Double {
+        get {
+            return _employmentCare * 0.01
+        }
+        set(newVal){
+            if(newVal <= 0){
+                _employmentCare = 0
+            } else if(newVal > 100) {
+                _employmentCare = 100
+            } else {
+                _employmentCare = newVal
+            }
+        }
+    }
+    
+    
 }

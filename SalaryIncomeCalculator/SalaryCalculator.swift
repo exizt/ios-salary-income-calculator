@@ -13,6 +13,8 @@ class SalaryCalculator {
     var family : Int?
     var child : Int?
     var taxFree : Int?
+    var insurance = Insurance()
+    var incomeTax = IncomeTax()
     
     func setOptions()
     {
@@ -20,25 +22,17 @@ class SalaryCalculator {
     }
     
     func calculate(){
-        var baseSalary = 0
+        var adjustedSalary : Double = 2000000
+        
+        insurance.calculate(adjustedSalary)
+        incomeTax.calculate(adjustedSalary, family: 1, child: 0, nationalPension: insurance.nationalPension)
         
         
     }
-    
-    func calculateNationalPension(_ adjustedSalary: Double)-> Double{
-        var salary: Double = adjustedSalary
-        if(adjustedSalary < 250000)
-        {
-            salary = 250000
-        }
-        if(adjustedSalary > 3980000)
-        {
-            salary = 3980000
-        }
-        
-        
-        var result : Double = salary * 0.01 * 0.34
-        return result
-        
+    func getInsurance() -> Insurance{
+        return insurance
+    }
+    func getIncomeTax() -> IncomeTax{
+        return incomeTax
     }
 }

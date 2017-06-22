@@ -17,6 +17,8 @@
 		767FF5161EFB2926001329C1 /* SalaryIncomeCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5151EFB2926001329C1 /* SalaryIncomeCalculatorUITests.swift */; };
 		767FF5251EFB385D001329C1 /* SalaryCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5241EFB385D001329C1 /* SalaryCalculator.swift */; };
 		767FF5271EFB41D8001329C1 /* InsuranceRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5261EFB41D8001329C1 /* InsuranceRate.swift */; };
+		767FF5291EFBA178001329C1 /* Insurance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5281EFBA178001329C1 /* Insurance.swift */; };
+		767FF52B1EFBAF80001329C1 /* IncomeTax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF52A1EFBAF80001329C1 /* IncomeTax.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		767FF5171EFB2926001329C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		767FF5241EFB385D001329C1 /* SalaryCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalaryCalculator.swift; sourceTree = "<group>"; };
 		767FF5261EFB41D8001329C1 /* InsuranceRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsuranceRate.swift; sourceTree = "<group>"; };
+		767FF5281EFBA178001329C1 /* Insurance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Insurance.swift; sourceTree = "<group>"; };
+		767FF52A1EFBAF80001329C1 /* IncomeTax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeTax.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,8 @@
 			children = (
 				767FF5241EFB385D001329C1 /* SalaryCalculator.swift */,
 				767FF5261EFB41D8001329C1 /* InsuranceRate.swift */,
+				767FF5281EFBA178001329C1 /* Insurance.swift */,
+				767FF52A1EFBAF80001329C1 /* IncomeTax.swift */,
 			);
 			name = salary_calculator;
 			sourceTree = "<group>";
@@ -279,6 +285,8 @@
 			files = (
 				767FF4F81EFB2920001329C1 /* SecondViewController.swift in Sources */,
 				767FF4F41EFB2920001329C1 /* AppDelegate.swift in Sources */,
+				767FF5291EFBA178001329C1 /* Insurance.swift in Sources */,
+				767FF52B1EFBAF80001329C1 /* IncomeTax.swift in Sources */,
 				767FF5271EFB41D8001329C1 /* InsuranceRate.swift in Sources */,
 				767FF4F61EFB2920001329C1 /* FirstViewController.swift in Sources */,
 				767FF5251EFB385D001329C1 /* SalaryCalculator.swift in Sources */,
