@@ -9,12 +9,11 @@
 import Foundation
 
 class SalaryCalculator {
-    var money : Double = 0
-    var family : Int = 1
-    var child : Int = 0
-    var taxFree : Int?
     var insurance = Insurance()
     var incomeTax = IncomeTax()
+    var options = SalaryCalculatorOptions()
+    var money : Double = 0
+    var netSalary : Double = 0
     
     func setOptions()
     {
@@ -26,11 +25,12 @@ class SalaryCalculator {
         money = income
     }
     func calculate(){
-        var adjustedSalary : Double = money
+        var baseSalary : Double = money
         
-        insurance.calculate(adjustedSalary)
-        incomeTax.calculate(adjustedSalary, family: 1, child: 0, nationalPension: insurance.nationalPension)
+        insurance.calculate(baseSalary)
+        incomeTax.calculate(baseSalary, family: 1, child: 0, nationalPension: insurance.nationalPension)
         
+        netSalary = baseSalary - insurance.summary - incomeTax.summary + options.taxFree;
         
     }
     func getInsurance() -> Insurance{
@@ -38,5 +38,8 @@ class SalaryCalculator {
     }
     func getIncomeTax() -> IncomeTax{
         return incomeTax
+    }
+    func Options() -> SalaryCalculatorOptions{
+        return options
     }
 }

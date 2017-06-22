@@ -19,6 +19,7 @@
 		767FF5271EFB41D8001329C1 /* InsuranceRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5261EFB41D8001329C1 /* InsuranceRate.swift */; };
 		767FF5291EFBA178001329C1 /* Insurance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5281EFBA178001329C1 /* Insurance.swift */; };
 		767FF52B1EFBAF80001329C1 /* IncomeTax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF52A1EFBAF80001329C1 /* IncomeTax.swift */; };
+		767FF52D1EFC1D57001329C1 /* SalaryCalculatorOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF52C1EFC1D57001329C1 /* SalaryCalculatorOption.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		767FF5261EFB41D8001329C1 /* InsuranceRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsuranceRate.swift; sourceTree = "<group>"; };
 		767FF5281EFBA178001329C1 /* Insurance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Insurance.swift; sourceTree = "<group>"; };
 		767FF52A1EFBAF80001329C1 /* IncomeTax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeTax.swift; sourceTree = "<group>"; };
+		767FF52C1EFC1D57001329C1 /* SalaryCalculatorOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalaryCalculatorOption.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				767FF5261EFB41D8001329C1 /* InsuranceRate.swift */,
 				767FF5281EFBA178001329C1 /* Insurance.swift */,
 				767FF52A1EFBAF80001329C1 /* IncomeTax.swift */,
+				767FF52C1EFC1D57001329C1 /* SalaryCalculatorOption.swift */,
 			);
 			name = salary_calculator;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				767FF52B1EFBAF80001329C1 /* IncomeTax.swift in Sources */,
 				767FF5271EFB41D8001329C1 /* InsuranceRate.swift in Sources */,
 				767FF4F61EFB2920001329C1 /* FirstViewController.swift in Sources */,
+				767FF52D1EFC1D57001329C1 /* SalaryCalculatorOption.swift in Sources */,
 				767FF5251EFB385D001329C1 /* SalaryCalculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -48,19 +48,21 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func calculate(_ sender: UIButton) {
-        var incomeMoney: Double {
-            if let text = inMoney.text {
-                return Double(text)!
-            } else {
-                return 0
-            }
+        guard let incomeMoney = Double((inMoney?.text!)!) else {
+            return
+        }
+        guard let incomeTaxFree = Double((inTaxFree?.text!)!) else {
+            return
         }
         
         var calculator = SalaryCalculator()
         calculator.prepare(incomeMoney)
+        calculator.Options().child = 0
+        calculator.Options().family = 1
+        calculator.Options().taxFree = incomeTaxFree
         calculator.calculate()
-        resultSummary.text = String(format:"%f",calculator.getInsurance().nationalPension)
-        
+        //resultSummary.text = String(format:"%f",formatter.string(from:calculator.netSalary))
+        resultSummary.text = formatCurrency(calculator.netSalary)
         //resultSummary.text = "adasdf"
         
         var insurance = Insurance()
@@ -69,8 +71,16 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
         var incomeTax = IncomeTax()
         incomeTax = calculator.getIncomeTax()
         
-        resultDetail.text = String(format:"국민연금 : %f \r\n건강보험 : %f \r\n요양보험 : %f \r\n고용보험 : %f \r\n소득세 : %f \r\n지방세 : %f",insurance.nationalPension,insurance.healthCare,insurance.longTermCare,insurance.employmentCare,incomeTax.incomeTax,incomeTax.localTax)
+        resultDetail.text = String(format:"국민연금 : %@ 원 \r\n건강보험 : %@ 원 \r\n요양보험 : %@ 원 \r\n고용보험 : %@ 원 \r\n소득세 : %@ 원 \r\n지방세 : %@ 원",formatCurrency(insurance.nationalPension),formatCurrency(insurance.healthCare),formatCurrency(insurance.longTermCare),formatCurrency(insurance.employmentCare),formatCurrency(incomeTax.incomeTax),formatCurrency(incomeTax.localTax))
 
+    }
+    func formatCurrency(_ value: Double)->String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale(identifier: Locale.current.identifier)
+        let result = formatter.string(from: value as NSNumber)
+        return result!
     }
 }
 
