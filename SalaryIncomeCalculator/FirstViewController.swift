@@ -32,12 +32,15 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
         
-        toolBar.setItems([doneButton], animated: false)
+        toolBar.setItems([flexibleSpace, doneButton], animated: false)
         
         //textfield 가 필요하면 여기에 추가
         inMoney.inputAccessoryView = toolBar
+        inTaxFree.inputAccessoryView = toolBar
     }
     func doneClicked()
     {
@@ -45,8 +48,16 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func calculate(_ sender: UIButton) {
+        var incomeMoney: Double {
+            if let text = inMoney.text {
+                return Double(text)!
+            } else {
+                return 0
+            }
+        }
         
         var calculator = SalaryCalculator()
+        calculator.prepare(incomeMoney)
         calculator.calculate()
         resultSummary.text = String(format:"%f",calculator.getInsurance().nationalPension)
         

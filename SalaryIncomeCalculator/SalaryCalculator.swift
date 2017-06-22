@@ -9,9 +9,9 @@
 import Foundation
 
 class SalaryCalculator {
-    var money : Int?
-    var family : Int?
-    var child : Int?
+    var money : Double = 0
+    var family : Int = 1
+    var child : Int = 0
     var taxFree : Int?
     var insurance = Insurance()
     var incomeTax = IncomeTax()
@@ -21,8 +21,12 @@ class SalaryCalculator {
         
     }
     
+    func prepare(_ income : Double)
+    {
+        money = income
+    }
     func calculate(){
-        var adjustedSalary : Double = 2000000
+        var adjustedSalary : Double = money
         
         insurance.calculate(adjustedSalary)
         incomeTax.calculate(adjustedSalary, family: 1, child: 0, nationalPension: insurance.nationalPension)
