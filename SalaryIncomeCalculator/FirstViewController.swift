@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class FirstViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var resultSummary: UILabel!
     @IBOutlet weak var inMoney: UITextField!
     @IBOutlet weak var inTaxFree: UITextField!
@@ -17,6 +17,9 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        viewDidLoad_keyboardDone()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,6 +27,23 @@ class FirstViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func viewDidLoad_keyboardDone()
+    {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        
+        toolBar.setItems([doneButton], animated: false)
+        
+        //textfield 가 필요하면 여기에 추가
+        inMoney.inputAccessoryView = toolBar
+    }
+    func doneClicked()
+    {
+        view.endEditing(true)
+    }
+    
     @IBAction func calculate(_ sender: UIButton) {
         
         var calculator = SalaryCalculator()
