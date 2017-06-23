@@ -59,7 +59,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
         let isAnnualIncome = (iSegmentedAnnual.selectedSegmentIndex == 0) ? true : false
         
         
-        var calculator = SalaryCalculator()
+        let calculator = SalaryCalculator()
         calculator.prepare(incomeMoney)
         calculator.Options().child = 0
         calculator.Options().family = 1

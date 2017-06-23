@@ -25,7 +25,7 @@ class SalaryCalculator {
         money = income
     }
     func calculate(){
-        var baseSalary : Double = computeSalary()
+        let baseSalary : Double = computeSalary()
         
         insurance.calculate(baseSalary)
         incomeTax.calculate(baseSalary, family: 1, child: 0)
