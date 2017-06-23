@@ -50,7 +50,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="g1v-bf-IUT">
-                                <rect key="frame" x="127" y="184" width="121" height="29"/>
+                                <rect key="frame" x="127" y="183" width="121" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="연봉"/>
@@ -99,6 +99,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="실수령액 계산" image="first" id="acW-dT-cKf"/>
                     <connections>
+                        <outlet property="iSegmentedAnnual" destination="g1v-bf-IUT" id="jpV-ae-iBZ"/>
                         <outlet property="inMoney" destination="to2-q2-9LH" id="BSm-5x-Mci"/>
                         <outlet property="inTaxFree" destination="VK7-6f-Vfk" id="Bkh-A9-hgA"/>
                         <outlet property="resultDetail" destination="WHi-ta-vWg" id="B6S-Z8-P7V"/>

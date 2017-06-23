@@ -11,5 +11,7 @@ class SalaryCalculatorOptions {
     var family : Int = 1
     var child : Int = 1
     var taxFree : Double = 0
+    var isAnnualIncome : Bool = true
+    var isIncludedSeverance : Bool = false
     
 }

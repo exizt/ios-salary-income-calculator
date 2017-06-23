@@ -13,6 +13,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var inMoney: UITextField!
     @IBOutlet weak var inTaxFree: UITextField!
     @IBOutlet weak var resultDetail: UILabel!
+    @IBOutlet weak var iSegmentedAnnual: UISegmentedControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,11 +56,15 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
+        let isAnnualIncome = (iSegmentedAnnual.selectedSegmentIndex == 0) ? true : false
+        
+        
         var calculator = SalaryCalculator()
         calculator.prepare(incomeMoney)
         calculator.Options().child = 0
         calculator.Options().family = 1
         calculator.Options().taxFree = incomeTaxFree
+        calculator.Options().isAnnualIncome = isAnnualIncome
         calculator.calculate()
         //resultSummary.text = String(format:"%f",formatter.string(from:calculator.netSalary))
         resultSummary.text = formatCurrency(calculator.netSalary)
