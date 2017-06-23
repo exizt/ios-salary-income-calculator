@@ -19,9 +19,14 @@ class IncomeTax{
             return incomeTax + localTax
         }
     }
+    let isDebugMode : Bool = false
     
     func calculate(_ salary: Double, family: Int, child: Int)
     {
+        if(salary < 106 * 10000){
+            incomeTax = 0
+            return
+        }
         if(salary > 1000 * 10000){
             incomeTax = getHighAmountTax(salary) + calculateIncomeTax(1000 * 10000, family: family, child: child)
         } else {
@@ -74,18 +79,20 @@ class IncomeTax{
          */
         let tax : Double = roundDown( taxYearlyFix/12, toNearest: 10)
         
-        print("구간 중간값 : \(adjustedSalary)")
-        print("연간 소득 금액 : \(adjustedSalaryYearly)")
-        print("근로 소득공제 : \(basicDeduction)")
-        print("인적 공제 : \(familyDeduction)")
-        print("연금보험료 공제 : \(pensionDeduction)")
-        print("특별소득공제 등 : \(deductionOthers)")
-        print("과세표준 : \(taxbasedSalary)")
-        print("산출세액 : \(taxYearly)")
-        print("근로소득 세액공제 : \(creditTax)")
-        print("결정 세액 : \(taxYearlyFix)")
-        print("간이 세액 : \(tax)")
-        
+        if(isDebugMode){
+            print("-------- 소득세 분석 ---------")
+            print("구간 중간값 : \(adjustedSalary)")
+            print("연간 소득 금액 : \(adjustedSalaryYearly)")
+            print("근로 소득공제 : \(basicDeduction)")
+            print("인적 공제 : \(familyDeduction)")
+            print("연금보험료 공제 : \(pensionDeduction)")
+            print("특별소득공제 등 : \(deductionOthers)")
+            print("과세표준 : \(taxbasedSalary)")
+            print("산출세액 : \(taxYearly)")
+            print("근로소득 세액공제 : \(creditTax)")
+            print("결정 세액 : \(taxYearlyFix)")
+            print("간이 세액 : \(tax)")
+        }
         return tax
     }
     

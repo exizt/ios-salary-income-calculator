@@ -20,7 +20,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         viewDidLoad_keyboardDone()
-        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,6 +48,22 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
+    @IBAction func textFieldMoney(_ sender: UITextField) {
+        guard let incomeMoney = Double((sender.text!)) else {
+            return
+        }
+        
+        if(incomeMoney < 100000)
+        {
+            return
+        }
+        
+        if(incomeMoney>=10000000){
+            self.iSegmentedAnnual.selectedSegmentIndex = 0
+        } else {
+            self.iSegmentedAnnual.selectedSegmentIndex = 1
+        }
+    }
     @IBAction func calculate(_ sender: UIButton) {
         guard let incomeMoney = Double((inMoney?.text!)!) else {
             return
