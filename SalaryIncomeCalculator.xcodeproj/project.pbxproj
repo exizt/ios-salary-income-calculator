@@ -20,6 +20,7 @@
 		767FF5291EFBA178001329C1 /* Insurance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5281EFBA178001329C1 /* Insurance.swift */; };
 		767FF52B1EFBAF80001329C1 /* IncomeTax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF52A1EFBAF80001329C1 /* IncomeTax.swift */; };
 		767FF52D1EFC1D57001329C1 /* SalaryCalculatorOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF52C1EFC1D57001329C1 /* SalaryCalculatorOption.swift */; };
+		76B5D9F11EFE6E61006D8476 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B5D9F01EFE6E61006D8476 /* GoogleMobileAds.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */

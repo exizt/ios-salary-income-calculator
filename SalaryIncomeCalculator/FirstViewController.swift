@@ -7,17 +7,23 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
-class FirstViewController: UIViewController, UITextFieldDelegate {
+class FirstViewController: UIViewController, UITextFieldDelegate,GADInterstitialDelegate {
     @IBOutlet weak var resultSummary: UILabel!
     @IBOutlet weak var inMoney: UITextField!
     @IBOutlet weak var inTaxFree: UITextField!
     @IBOutlet weak var resultDetail: UILabel!
     @IBOutlet weak var iSegmentedAnnual: UISegmentedControl!
 
+    var interstitial : GADInterstitial!
+    /**
+    * 기본 메서드.
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        interstitial = createAndLoadInterstitial()
         
         viewDidLoad_keyboardDone()
 
@@ -26,6 +32,39 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
         iSegmentedAnnual.addTarget(self, action: #selector(self.iSegmentedAnnual_userChanged), for: .valueChanged)
     }
 
+    func createAndLoadInterstitial() -> GADInterstitial?{
+        let interstitialGAD = GADInterstitial(adUnitID: "ca-app-pub-6702794513299112/1093139381")
+        interstitialGAD.delegate = self
+        
+        
+        let request = GADRequest()
+        request.testDevices = [ kGADSimulatorID,                    // all simulators
+                                "d73c08aad93622d32f26c3522eb69135" ] // SHiPhone7
+        interstitialGAD.load(request)
+        
+        return interstitialGAD
+    }
+    
+    func viewInterstitial(){
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        } else {
+            print("Ad wasn't ready")
+        }
+    }
+    
+    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+        print("Interstitial loaded successfully")
+        ad.present(fromRootViewController: self)
+    }
+    
+    func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
+        print("Fail to receive interstitial")
+    }
+    
+    /**
+    * 기본 메서드.
+    */
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
