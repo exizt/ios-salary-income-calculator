@@ -16,7 +16,9 @@ class FirstViewController: UIViewController, UITextFieldDelegate,GADInterstitial
     @IBOutlet weak var resultDetail: UILabel!
     @IBOutlet weak var iSegmentedAnnual: UISegmentedControl!
 
+    let calculator : SalaryCalculator = SalaryCalculator()
     var interstitial : GADInterstitial!
+    
     /**
     * 기본 메서드.
     */
@@ -29,7 +31,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate,GADInterstitial
 
         inMoney.addTarget(self, action: #selector(self.textFieldDidChanged_inMoney), for: .editingChanged)
         inTaxFree.addTarget(self, action: #selector(self.textFieldDidChange_inTaxFree), for: .editingChanged)
-        iSegmentedAnnual.addTarget(self, action: #selector(self.iSegmentedAnnual_userChanged), for: .valueChanged)
+        iSegmentedAnnual.addTarget(self, action: #selector(self.iSegmentedAnnual_valueChanged), for: .valueChanged)
     }
 
     func createAndLoadInterstitial() -> GADInterstitial?{
@@ -84,20 +86,6 @@ class FirstViewController: UIViewController, UITextFieldDelegate,GADInterstitial
             return
         }
         
-        // 계산 메서드 호출
-        calculate()
-    }
-    
-    
-    /**
-    * 계산 메서드.
-    * 가급적 바로 호출하지 마시고, loadCalculation 메서드로 호출해주세요.
-    * 테스트 할 시에만 직접 호출 하세요.
-    */
-    func calculate() {
-        guard let incomeMoney = Double((inMoney?.text!)!) else {
-            return
-        }
         guard let incomeTaxFree = Double((inTaxFree?.text!)!) else {
             return
         }
@@ -105,15 +93,34 @@ class FirstViewController: UIViewController, UITextFieldDelegate,GADInterstitial
         let isAnnualIncome = (iSegmentedAnnual.selectedSegmentIndex == 0) ? true : false
         
         
-        let calculator = SalaryCalculator()
-        calculator.prepare(incomeMoney)
-        calculator.Options().child = 0
-        calculator.Options().family = 1
-        calculator.Options().taxFree = incomeTaxFree
-        calculator.Options().isAnnualIncome = isAnnualIncome
+        let options = SalaryCalculatorOptions()
+        options.money = incomeMoney
+        options.family = 1
+        options.child = 0
+        options.taxFree = incomeTaxFree
+        options.isAnnualIncome = isAnnualIncome
+        
+        if(!calculator.Options().equals(options)){
+            // 계산 메서드 호출
+            calculate(options)
+        }
+    }
+    
+    /**
+    * 계산 메서드.
+    * 가급적 바로 호출하지 마시고, loadCalculation 메서드로 호출해주세요.
+    * 테스트 할 시에만 직접 호출 하세요.
+    */
+    func calculate(_ options : SalaryCalculatorOptions) {
+        
+        calculator.setOptions(options)
         calculator.calculate()
+        
+        /**
+        * 계산 결과 처리
+        */
         //resultSummary.text = String(format:"%f",formatter.string(from:calculator.netSalary))
-        resultSummary.text = formatCurrency(calculator.netSalary)
+        resultSummary.text = formatCurrency(calculator.netSalary) + " 원"
         //resultSummary.text = "adasdf"
         
         var insurance = Insurance()
@@ -166,8 +173,9 @@ class FirstViewController: UIViewController, UITextFieldDelegate,GADInterstitial
         loadCalculation()
     }
     
-    func iSegmentedAnnual_userChanged(_ sender: UISegmentedControl){
-        print("Segmented 변경됨")
+    func iSegmentedAnnual_valueChanged(_ sender: UISegmentedControl){
+        //print("Segmented 변경됨")
+        loadCalculation()
     }
     
     /**

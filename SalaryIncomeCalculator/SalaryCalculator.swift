@@ -15,20 +15,19 @@ class SalaryCalculator {
     var money : Double = 0
     var netSalary : Double = 0
     
-    func setOptions()
+    func setOptions(_ _options: SalaryCalculatorOptions)
     {
-        
+        options = _options
     }
-    
-    func prepare(_ income : Double)
-    {
-        money = income
-    }
+
+    /**
+    * 계산하기
+    */
     func calculate(){
         let baseSalary : Double = computeSalary()
         
         insurance.calculate(baseSalary)
-        incomeTax.calculate(baseSalary, family: 1, child: 0)
+        incomeTax.calculate(baseSalary, family: options.family, child: options.child)
         
         netSalary = baseSalary - insurance.summary - incomeTax.summary + options.taxFree;
         
@@ -44,6 +43,8 @@ class SalaryCalculator {
     }
     func computeSalary() -> Double
     {
+        let money = Options().money
+        
         // 월 수령액 을 계산. 연봉 입력시에는 12 로 나눈다.
         var grossSalary : Double = 0
         
