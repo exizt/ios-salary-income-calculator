@@ -22,6 +22,7 @@
 		767FF52D1EFC1D57001329C1 /* SalaryCalculatorOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF52C1EFC1D57001329C1 /* SalaryCalculatorOption.swift */; };
 		768FDEC91F02F3B800DF0BA9 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768FDEC81F02F3B800DF0BA9 /* SettingsTableViewController.swift */; };
 		76B5D9F11EFE6E61006D8476 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B5D9F01EFE6E61006D8476 /* GoogleMobileAds.framework */; };
+		76B5DBC81F05B1740056D499 /* MyAppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DBC71F05B1740056D499 /* MyAppSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		767FF52C1EFC1D57001329C1 /* SalaryCalculatorOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalaryCalculatorOption.swift; sourceTree = "<group>"; };
 		768FDEC81F02F3B800DF0BA9 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		76B5D9F01EFE6E61006D8476 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Libraries/GoogleMobileAds.framework; sourceTree = "<group>"; };
+		76B5DBC71F05B1740056D499 /* MyAppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAppSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,11 +121,12 @@
 				767FF4F31EFB2920001329C1 /* AppDelegate.swift */,
 				767FF4F51EFB2920001329C1 /* FirstViewController.swift */,
 				767FF4F71EFB2920001329C1 /* SecondViewController.swift */,
+				768FDEC81F02F3B800DF0BA9 /* SettingsTableViewController.swift */,
 				767FF4F91EFB2920001329C1 /* Main.storyboard */,
 				767FF4FC1EFB2922001329C1 /* Assets.xcassets */,
 				767FF4FE1EFB2923001329C1 /* LaunchScreen.storyboard */,
 				767FF5011EFB2923001329C1 /* Info.plist */,
-				768FDEC81F02F3B800DF0BA9 /* SettingsTableViewController.swift */,
+				76B5DBC71F05B1740056D499 /* MyAppSettings.swift */,
 			);
 			path = SalaryIncomeCalculator;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			files = (
 				767FF4F81EFB2920001329C1 /* SecondViewController.swift in Sources */,
 				767FF4F41EFB2920001329C1 /* AppDelegate.swift in Sources */,
+				76B5DBC81F05B1740056D499 /* MyAppSettings.swift in Sources */,
 				767FF5291EFBA178001329C1 /* Insurance.swift in Sources */,
 				767FF52B1EFBAF80001329C1 /* IncomeTax.swift in Sources */,
 				767FF5271EFB41D8001329C1 /* InsuranceRate.swift in Sources */,
