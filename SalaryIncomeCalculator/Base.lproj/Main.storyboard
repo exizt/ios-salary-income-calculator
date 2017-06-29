@@ -445,5 +445,6 @@
     <resources>
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
+        <image name="tabbar_settings" width="25" height="25"/>
     </resources>
 </document>
