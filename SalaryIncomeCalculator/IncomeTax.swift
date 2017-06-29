@@ -19,7 +19,7 @@ class IncomeTax{
             return incomeTax + localTax
         }
     }
-    let isDebugMode : Bool = false
+    let isDebugMode : Bool = true
     
     func calculate(_ salary: Double, family: Int, child: Int)
     {
@@ -32,6 +32,10 @@ class IncomeTax{
         } else {
             
             incomeTax = calculateIncomeTax(salary, family: family, child: child)
+        }
+        
+        if(incomeTax < 0){
+           incomeTax = 0
         }
     }
     /**
@@ -150,27 +154,6 @@ class IncomeTax{
     }
     
     /**
-     * 종합소득공제 산출
-     *
-     * 인적공제, 연금보험료공제, 특별소득공제 등 의 합계를 반환
-     * 주의 : 이 공제 계산식이 틀리면, 전체적으로 틀어지므로. 간이세액표 를 활용하는 것이 좋을 때도 있다.
-     *
-     */
-    func getIntegratedDeduction(_ incomeYearly:Double, family:Int, child:Int, nationalPension: Double) -> Double
-    {
-        // 1) 인적공제
-        let familyDeduction : Double = getFamilyDeduction(family:family, child:child)
-
-        // 2) 연금보험 공제
-        let pensionDeduction : Double = getPensionDeduction(incomeYearly/12);
-       
-        // 3) 특별소득공제
-        let deductionOthers : Double = getDeductionOthers(incomeYearly, family:family, child:child)
-        
-        return familyDeduction + pensionDeduction + deductionOthers;
-    }
-    
-    /**
     * 인적 공제
     * 공제대상가족 1명당 150만원 (공제대상가족 = 가족수 + 자녀수 (= 성인 + 자녀수 x 2배))
     */
@@ -220,7 +203,7 @@ class IncomeTax{
             }
         
             // 추가공제
-            if (incomeYearly >= 4000)
+            if (incomeYearly >= 4000 * 10000)
             {
                 deduction += (incomeYearly - 4000 * 10000) * 0.04
             }
@@ -236,7 +219,7 @@ class IncomeTax{
             } else if (incomeYearly <= 12000 * 10000) {
                 deduction = 360 * 10000 + incomeYearly * 0.01
             }
-        } else if(count==1){
+        } else if(count == 1){
             
             if (incomeYearly <= 3000 * 10000) {
                 deduction = 310 * 10000 + incomeYearly * 0.04
