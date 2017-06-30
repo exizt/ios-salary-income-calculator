@@ -9,48 +9,42 @@
 import UIKit
 import GoogleMobileAds
 
-class FirstViewController: UIViewController, UITextFieldDelegate,GADInterstitialDelegate {
+class FirstViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, GADInterstitialDelegate {
     let calculator : SalaryCalculator = SalaryCalculator()
     let calculatorOptions : SalaryCalculatorOptions = SalaryCalculatorOptions()
     var interstitial : GADInterstitial!
 
-    @IBOutlet weak var resultSummary: UILabel!
-    @IBOutlet weak var inMoney: UITextField!
-    @IBOutlet weak var viewFamily: UILabel!
-    @IBOutlet weak var inTaxFree: UITextField!
-    @IBOutlet weak var resultDetail: UILabel!
-    @IBOutlet weak var iSegmentedAnnual: UISegmentedControl!
-    @IBOutlet weak var lblChild: UILabel!
-    @IBOutlet weak var lblFamily: UILabel!
+    @IBOutlet weak var lbl_Result_NetSalary : UILabel!
+    @IBOutlet weak var lbl_Option_Family : UILabel!
+    @IBOutlet weak var lbl_Option_Child : UILabel!
+    @IBOutlet weak var in_Option_Money : UITextField!
+    @IBOutlet weak var in_Option_Taxfree : UITextField!
+    @IBOutlet weak var in_Option_Stepper_Family: UIStepper!
+    @IBOutlet weak var in_Option_Stepper_Child: UIStepper!
+    @IBOutlet weak var in_Option_Segmented_Annual : UISegmentedControl!
+    @IBOutlet weak var resultDetail : UILabel!
 
-    // 기본 메서드
-    // 로드 된 직후 호출
+    // 로드 된 직후 호출 (기본 메서드)
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        interstitial = createAndLoadInterstitial()
+        //interstitial = createAndLoadInterstitial()
         
         viewDidLoad_keyboardDone()
 
-        inMoney.addTarget(self, action: #selector(self.textFieldDidChanged_inMoney), for: .editingChanged)
-        inTaxFree.addTarget(self, action: #selector(self.textFieldDidChange_inTaxFree), for: .editingChanged)
-        iSegmentedAnnual.addTarget(self, action: #selector(self.iSegmentedAnnual_valueChanged), for: .valueChanged)
+        // textfield 이벤트
+        in_Option_Money.addTarget(self, action: #selector(self.textFieldMoney_didChanged), for: .editingChanged)
+        in_Option_Taxfree.addTarget(self, action: #selector(self.textFieldTaxfree_didChanged), for: .editingChanged)
+        
+        // stepper 이벤트
+        in_Option_Stepper_Family.addTarget(self, action: #selector(self.stepperFamily_valueChanged), for: .valueChanged)
+        in_Option_Stepper_Child.addTarget(self, action: #selector(self.stepperChild_valueChanged), for: .valueChanged)
+        
+        // 선택 이벤트
+        in_Option_Segmented_Annual.addTarget(self, action: #selector(self.iSegmentedAnnual_valueChanged), for: .valueChanged)
     }
 
-    @IBAction func stepperFamily_valueChanged(_ sender: UIStepper) {
-        lblFamily.text = String(format: "가족수 %d 명", Int(sender.value))
-        calculatorOptions.family = Int(sender.value)
-        loadCalculation()
-    }
-    
-    @IBAction func stepperChild_valueChanged(_ sender: UIStepper) {
-        lblChild.text = String(format: "자녀수 %d 명", Int(sender.value))
-        calculatorOptions.child = Int(sender.value)
-        loadCalculation()
-    }
-    
-    // 기본 메서드
-    // 메모리 워닝 관련
+    // 메모리 워닝 관련 (기본 메서드)
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -95,8 +89,8 @@ class FirstViewController: UIViewController, UITextFieldDelegate,GADInterstitial
         * 계산 결과 처리
         */
         //resultSummary.text = String(format:"%f",formatter.string(from:calculator.netSalary))
-        resultSummary.text = formatCurrency(calculator.netSalary) + " 원"
-        //resultSummary.text = "adasdf"
+        lbl_Result_NetSalary.text = formatCurrency(calculator.netSalary) + " 원"
+
         
         var insurance = Insurance()
         insurance = calculator.getInsurance()
@@ -107,16 +101,27 @@ class FirstViewController: UIViewController, UITextFieldDelegate,GADInterstitial
         resultDetail.text = String(format:"국민연금 : %@ 원 \r\n건강보험 : %@ 원 \r\n요양보험 : %@ 원 \r\n고용보험 : %@ 원 \r\n소득세 : %@ 원 \r\n지방세 : %@ 원",formatCurrency(insurance.nationalPension),formatCurrency(insurance.healthCare),formatCurrency(insurance.longTermCare),formatCurrency(insurance.employmentCare),formatCurrency(incomeTax.incomeTax),formatCurrency(incomeTax.localTax))
     }
     
-    /**
-    * 금액 입력 시 메서드
-    */
-    func textFieldDidChanged_inMoney(_ sender: UITextField) {
+    // 가족수 +-
+    func stepperFamily_valueChanged(_ sender: UIStepper) {
+        lbl_Option_Family.text = String(format: "가족수 %d 명", Int(sender.value))
+        calculatorOptions.family = Int(sender.value)
+        loadCalculation()
+    }
+    
+    // 자녀수 +-
+    func stepperChild_valueChanged(_ sender: UIStepper) {
+        lbl_Option_Child.text = String(format: "자녀수 %d 명", Int(sender.value))
+        calculatorOptions.child = Int(sender.value)
+        loadCalculation()
+    }
+    
+    // 금액 입력 시 메서드
+    func textFieldMoney_didChanged(_ sender: UITextField) {
         guard let incomeMoney = Double((sender.text!)) else {
             calculatorOptions.money = 0
             return
         }
         calculatorOptions.money = incomeMoney
-        
         if(incomeMoney < 100000)
         {
             return
@@ -124,10 +129,10 @@ class FirstViewController: UIViewController, UITextFieldDelegate,GADInterstitial
         
         //1000만원 보다 크면 연봉으로 감안, 적으면 월급으로 감안
         if(incomeMoney>=10000000){
-            self.iSegmentedAnnual.selectedSegmentIndex = 0
+            self.in_Option_Segmented_Annual.selectedSegmentIndex = 0
             calculatorOptions.isAnnualIncome  = true
         } else {
-            self.iSegmentedAnnual.selectedSegmentIndex = 1
+            self.in_Option_Segmented_Annual.selectedSegmentIndex = 1
             calculatorOptions.isAnnualIncome  = false
         }
         
@@ -135,16 +140,13 @@ class FirstViewController: UIViewController, UITextFieldDelegate,GADInterstitial
         loadCalculation()
     }
     
-    /**
-     * 비과세 입력 시 메서드
-     */
-    func textFieldDidChange_inTaxFree(_ sender: UITextField){
+    // 비과세 입력 시 메서드
+    func textFieldTaxfree_didChanged(_ sender: UITextField){
         guard let taxFree = Double((sender.text!)) else {
             calculatorOptions.taxFree = 0
             return
         }
         calculatorOptions.taxFree = taxFree
-        
         
         // 계산 호출
         loadCalculation()
@@ -165,14 +167,13 @@ class FirstViewController: UIViewController, UITextFieldDelegate,GADInterstitial
         toolBar.sizeToFit()
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
-        
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.keyboard_doneClicked))
         
         toolBar.setItems([flexibleSpace, doneButton], animated: false)
         
         //textfield 가 필요하면 여기에 추가
-        inMoney.inputAccessoryView = toolBar
-        inTaxFree.inputAccessoryView = toolBar
+        in_Option_Money.inputAccessoryView = toolBar
+        in_Option_Taxfree.inputAccessoryView = toolBar
     }
     
     
@@ -184,10 +185,8 @@ class FirstViewController: UIViewController, UITextFieldDelegate,GADInterstitial
         view.endEditing(true)
     }
     
-    /**
-    * 2000 (Double) -> 2,000 (String)
-    * 숫자를 금액처럼 , 넣고 변경해주는 메서드
-    */
+    // 2000 (Double) -> 2,000 (String)
+    // 숫자를 금액처럼 , 넣고 변경해주는 메서드
     func formatCurrency(_ value: Double)->String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
