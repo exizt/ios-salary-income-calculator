@@ -19,7 +19,7 @@ class IncomeTax{
             return incomeTax + localTax
         }
     }
-    let isDebugMode : Bool = true
+    let isDebugMode : Bool = false
     
     func calculate(_ salary: Double, family: Int, child: Int)
     {

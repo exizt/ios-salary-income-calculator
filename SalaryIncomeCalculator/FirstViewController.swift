@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMobileAds
 
-class FirstViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, GADInterstitialDelegate {
+class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitialDelegate {
     let calculator : SalaryCalculator = SalaryCalculator()
     let calculatorOptions : SalaryCalculatorOptions = SalaryCalculatorOptions()
     var interstitial : GADInterstitial!
@@ -23,7 +23,14 @@ class FirstViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     @IBOutlet weak var in_Option_Stepper_Child: UIStepper!
     @IBOutlet weak var in_Option_Segmented_Annual : UISegmentedControl!
     @IBOutlet weak var resultDetail : UILabel!
+    @IBOutlet weak var lbl_ResultDetail_NP: UILabel!
+    @IBOutlet weak var lbl_ResultDetail_HC: UILabel!
+    @IBOutlet weak var lbl_ResultDetail_LTC : UILabel!
+    @IBOutlet weak var lbl_ResultDetail_EC: UILabel!
+    @IBOutlet weak var lbl_ResultDetail_IncomeTax : UILabel!
+    @IBOutlet weak var lbl_ResultDetail_LocalTax : UILabel!
 
+    
     // 로드 된 직후 호출 (기본 메서드)
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +49,8 @@ class FirstViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         
         // 선택 이벤트
         in_Option_Segmented_Annual.addTarget(self, action: #selector(self.iSegmentedAnnual_valueChanged), for: .valueChanged)
+        
+        initDisplay()
     }
 
     // 메모리 워닝 관련 (기본 메서드)
@@ -50,6 +59,14 @@ class FirstViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         // Dispose of any resources that can be recreated.
     }
 
+    func initDisplay(){
+        lbl_ResultDetail_NP.text = "0 원"
+        lbl_ResultDetail_HC.text = "0 원"
+        lbl_ResultDetail_LTC.text = "0 원"
+        lbl_ResultDetail_EC.text = "0 원"
+        lbl_ResultDetail_IncomeTax.text = "0 원"
+        lbl_ResultDetail_LocalTax.text = "0 원"
+    }
     /**
     * 계산 메서드. 이 메서드로 호출해주자.
     */
@@ -74,7 +91,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     * 테스트 할 시에만 직접 호출 하세요.
     */
     func calculate(_ _options : SalaryCalculatorOptions) {
-        print(_options.toString())
+        //print(_options.toString())
         
         // 설정값 대입
         calculator.Options().money = _options.money
@@ -98,7 +115,14 @@ class FirstViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         var incomeTax = IncomeTax()
         incomeTax = calculator.getIncomeTax()
         
-        resultDetail.text = String(format:"국민연금 : %@ 원 \r\n건강보험 : %@ 원 \r\n요양보험 : %@ 원 \r\n고용보험 : %@ 원 \r\n소득세 : %@ 원 \r\n지방세 : %@ 원",formatCurrency(insurance.nationalPension),formatCurrency(insurance.healthCare),formatCurrency(insurance.longTermCare),formatCurrency(insurance.employmentCare),formatCurrency(incomeTax.incomeTax),formatCurrency(incomeTax.localTax))
+        //resultDetail.text = String(format:"국민연금 : %@ 원 \r\n건강보험 : %@ 원 \r\n요양보험 : %@ 원 \r\n고용보험 : %@ 원 \r\n소득세 : %@ 원 \r\n지방세 : %@ 원",formatCurrency(insurance.nationalPension),formatCurrency(insurance.healthCare),formatCurrency(insurance.longTermCare),formatCurrency(insurance.employmentCare),formatCurrency(incomeTax.incomeTax),formatCurrency(incomeTax.localTax))
+        
+        lbl_ResultDetail_NP.text = formatCurrency(insurance.nationalPension) + " 원"
+        lbl_ResultDetail_HC.text = formatCurrency(insurance.healthCare) + " 원"
+        lbl_ResultDetail_LTC.text = formatCurrency(insurance.longTermCare) + " 원"
+        lbl_ResultDetail_EC.text = formatCurrency(insurance.employmentCare) + " 원"
+        lbl_ResultDetail_IncomeTax.text = formatCurrency(incomeTax.incomeTax) + " 원"
+        lbl_ResultDetail_LocalTax.text = formatCurrency(incomeTax.localTax) + " 원"
     }
     
     // 가족수 +-
