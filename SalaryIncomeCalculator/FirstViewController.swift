@@ -29,6 +29,8 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     @IBOutlet weak var lbl_ResultDetail_EC: UILabel!
     @IBOutlet weak var lbl_ResultDetail_IncomeTax : UILabel!
     @IBOutlet weak var lbl_ResultDetail_LocalTax : UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var stackViewMaster: UIStackView!
 
     
     // 로드 된 직후 호출 (기본 메서드)
@@ -51,6 +53,14 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         in_Option_Segmented_Annual.addTarget(self, action: #selector(self.iSegmentedAnnual_valueChanged), for: .valueChanged)
         
         initDisplay()
+        getDefaultOptions()
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        scrollView.contentSize = CGSize(width: stackViewMaster.frame.width, height: stackViewMaster.frame.height)
+        
     }
 
     // 메모리 워닝 관련 (기본 메서드)
@@ -59,6 +69,48 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         // Dispose of any resources that can be recreated.
     }
 
+    // 화면이 드로잉 될때마다 호출됨
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // 설정 변경 되면, 변경된 값 적용시켜야 함.
+        // 물어보고 적용하는 방식이어야 할 듯
+    }
+    
+    func getDefaultOptions(){
+        print("[SH Debugger] FirstViewController getDefaultOptions "+MyAppSettings.InputDefaults.family.getValue())
+        
+        in_Option_Stepper_Family.value = Double(MyAppSettings.InputDefaults.family.getValue())!
+        updateCalcOption_Family()
+        
+        in_Option_Stepper_Child.value = Double(MyAppSettings.InputDefaults.child.getValue())!
+        updateCalcOption_Child()
+        
+        in_Option_Taxfree.text = MyAppSettings.InputDefaults.taxfree.getValue()
+        updateCalcOption_Taxfree()
+        
+    }
+    
+    // 설정이 되어있지 않았을 때 최초 1회만 실행한다.
+    func initDefaultOptions(){
+        /**
+         * 순서대로
+         * 1) 국민연금 요율
+         * 2)건강보험 요율
+         * 3)요양보험 요율
+         * 4)고용보험 요율
+         */
+        MyAppSettings.Rates.nationalPension.set(4.5)
+        MyAppSettings.Rates.healthCare.set(3.06)
+        MyAppSettings.Rates.longTermCare.set(6.55)
+        MyAppSettings.Rates.employmentCare.set(0.65)
+        
+        
+        MyAppSettings.InputDefaults.family.set(1)
+        MyAppSettings.InputDefaults.child.set(0)
+        MyAppSettings.InputDefaults.taxfree.set(100000)
+        MyAppSettings.InputDefaults.includedSev.set(false)
+    }
     func initDisplay(){
         lbl_ResultDetail_NP.text = "0 원"
         lbl_ResultDetail_HC.text = "0 원"
@@ -127,10 +179,10 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     
     // 가족수 +-
     func stepperFamily_valueChanged(_ sender: UIStepper) {
-        lbl_Option_Family.text = String(format: "가족수 %d 명", Int(sender.value))
-        calculatorOptions.family = Int(sender.value)
+        updateCalcOption_Family()
         loadCalculation()
     }
+
     
     // 자녀수 +-
     func stepperChild_valueChanged(_ sender: UIStepper) {
@@ -166,11 +218,10 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     
     // 비과세 입력 시 메서드
     func textFieldTaxfree_didChanged(_ sender: UITextField){
-        guard let taxFree = Double((sender.text!)) else {
-            calculatorOptions.taxFree = 0
+        guard (Double((sender.text!)) != nil) else {
             return
         }
-        calculatorOptions.taxFree = taxFree
+        updateCalcOption_Taxfree()
         
         // 계산 호출
         loadCalculation()
@@ -180,6 +231,27 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         //print("Segmented 변경됨")
         calculatorOptions.isAnnualIncome  = (sender.selectedSegmentIndex == 0) ? true : false
         loadCalculation()
+    }
+    
+    func updateCalcOption_Family(){
+        let value = Int(in_Option_Stepper_Family.value)
+        
+        lbl_Option_Family.text = String(format: "가족수 %d 명", value)
+        calculatorOptions.family = value
+    }
+    
+    func updateCalcOption_Child(){
+        let value = Int(in_Option_Stepper_Child.value)
+        
+        lbl_Option_Child.text = String(format: "자녀수 %d 명", value)
+        calculatorOptions.child = value
+    }
+    
+    func updateCalcOption_Taxfree(){
+        guard let value = Double(in_Option_Taxfree.text!) else {
+            return
+        }
+        calculatorOptions.taxFree = value
     }
     
     /**

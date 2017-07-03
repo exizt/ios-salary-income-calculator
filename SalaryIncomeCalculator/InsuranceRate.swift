@@ -68,6 +68,11 @@ struct InsuranceRate {
             }
         }
     }
-    
+    mutating func initValues(){
+        self._nationalPension = 4.5
+        self._healthCare = 3.06
+        self._longTermCare = 6.55
+        self._employmentCare = 0.65
+    }
     
 }

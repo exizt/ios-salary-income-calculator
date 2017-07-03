@@ -7,32 +7,115 @@
 //
 
 import Foundation
+
+protocol UserAppSettingInterface {
+    var rawValue: String { get }
+    func getKey()->String
+    func prefix()->String
+    func getValue()->String
+    func set(_ _value: Any?)
+    func key()->String
+    func value()->String
+}
+
+extension UserAppSettingInterface {
+}
 struct MyAppSettings {
-    enum Rates : String {
+    enum Rates : String,UserAppSettingInterface {
         case nationalPension
         case healthCare
         case longTermCare
         case employmentCare
-        func get() -> String{
-            return getKey()
-        }
         func getKey() -> String {
             return prefix() + self.rawValue
         }
         func prefix()->String {
             return "settings-rate-"
         }
+        func getValue()->String {
+            return UserDefaults.standard.string(forKey: getKey())!
+        }
+        func set(_ _value: Any?){
+            if var value = _value as? Double{
+                if (value > 100.0) {
+                    value = 100.0
+                } else if (value < 0.0) {
+                    value = 0.0
+                }
+                UserDefaults.standard.set(value,forKey: getKey())
+            }
+        }
+        // aliases
+        func key()->String{
+            return getKey()
+        }
+        func value()->String{
+            return getValue()
+        }
     }
-    enum InputDefaults : String {
+    enum InputDefaults : String,UserAppSettingInterface {
         case family
         case child
         case taxfree
         case includedSev
+        case temp
         func getKey() -> String {
             return prefix() + self.rawValue
         }
         func prefix()->String {
             return "settings-inputdefault-"
+        }
+        func getValue()->String {
+            return UserDefaults.standard.string(forKey: getKey())!
+        }
+        func set(_ _value: Any?){
+            switch self {
+            case .family:
+                if var value = _value as? Int{
+                    if( value > 20){
+                        value = 20
+                    } else if(value<1){
+                        value = 1
+                    }
+                    UserDefaults.standard.set(value,forKey: getKey())
+                }
+                break
+            case .child:
+                if var value = _value as? Int{
+                    if( value > 20){
+                        value = 20
+                    } else if(value<0){
+                        value = 0
+                    }
+                    UserDefaults.standard.set(value,forKey: getKey())
+                }
+                break
+            case .taxfree:
+                if var value = _value as? Int{
+                    if( value > 100000){
+                        value = 100000
+                    } else if(value<0){
+                        value = 0
+                    }
+                    UserDefaults.standard.set(value,forKey: getKey())
+                }
+                break
+            case .includedSev:
+                if let value = _value as? Bool{
+                    UserDefaults.standard.set(value,forKey: getKey())
+                }
+                break
+            default:
+                UserDefaults.standard.set(_value,forKey: getKey())
+                break
+            }
+        }
+        // aliases
+        func key()->String{
+            return getKey()
+        }
+        func value()->String{
+            return getValue()
         }
     }
 }
