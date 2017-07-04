@@ -38,7 +38,7 @@ class SettingsTableViewController: UITableViewController {
         //print("[SH Debugger] Setti...oller viewWillAppear Family "+MyAppSettings.InputDefaults.family.value())
         
         presentSettingData()
-
+        //print(MyAppSettings.Rates.employmentCare.value())
     }
     
     // viewDidAppear
@@ -55,13 +55,25 @@ class SettingsTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func btnResetInputDefault_Touched(_ sender: UIButton) {
+        initInputDefaultValues()
+        presentSettingData()
+    }
+    
+    @IBAction func btnResetRates_Touched(_ sender: UIButton) {
+        initRates()
+        presentSettingData()
+    }
+    
     // 설정 값을 화면에 표현
     func presentSettingData(){
         // 입력 기본값 설정
         lbl_InputDefault_Family.text = MyAppSettings.InputDefaults.family.value() + " 명"
         lbl_InputDefault_Child.text = MyAppSettings.InputDefaults.child.value() + " 명"
         lbl_InputDefault_Taxfree.text = MyAppSettings.InputDefaults.taxfree.value() + " 원"
-        lbl_InputDefault_IncludedSev.text = MyAppSettings.InputDefaults.includedSev.value()
+        //lbl_InputDefault_IncludedSev.text = MyAppSettings.InputDefaults.includedSev.value()
+        
+        lbl_InputDefault_IncludedSev.text = (Bool((MyAppSettings.InputDefaults.includedSev.value() as NSString).boolValue)) ? "포함" : "비 포함"
         
         // 세율 설정
         lbl_Rate_NationalPension.text = MyAppSettings.Rates.nationalPension.value() + " %"
@@ -90,7 +102,7 @@ class SettingsTableViewController: UITableViewController {
     {
         MyAppSettings.InputDefaults.family.set(1)
         MyAppSettings.InputDefaults.child.set(0)
-        MyAppSettings.InputDefaults.taxfree.set(100000)
+        MyAppSettings.InputDefaults.taxfree.set(100000 as Double)
         MyAppSettings.InputDefaults.includedSev.set(false)
     }
     

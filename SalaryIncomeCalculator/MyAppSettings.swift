@@ -8,18 +8,6 @@
 
 import Foundation
 
-protocol UserAppSettingInterface {
-    var rawValue: String { get }
-    func getKey()->String
-    func prefix()->String
-    func getValue()->String
-    func set(_ _value: Any?)
-    func key()->String
-    func value()->String
-}
-
-extension UserAppSettingInterface {
-}
 struct MyAppSettings {
     enum Item : String {
         case family
@@ -31,7 +19,7 @@ struct MyAppSettings {
         case rate_ltc
         case rate_ec
     }
-    enum Rates : String,UserAppSettingInterface {
+    enum Rates : String {
         case nationalPension
         case healthCare
         case longTermCare
@@ -52,7 +40,7 @@ struct MyAppSettings {
                 } else if (value < 0.0) {
                     value = 0.0
                 }
-                UserDefaults.standard.set(value,forKey: getKey())
+                UserDefaults.standard.set(String(format:"%.2f",value),forKey: getKey())
             }
         }
         // aliases
@@ -63,7 +51,7 @@ struct MyAppSettings {
             return getValue()
         }
     }
-    enum InputDefaults : String,UserAppSettingInterface {
+    enum InputDefaults : String{
         case family
         case child
         case taxfree
@@ -78,7 +66,7 @@ struct MyAppSettings {
         func getValue()->String {
             return UserDefaults.standard.string(forKey: getKey())!
         }
-        func set(_ _value: Any?){
+        func set(_ _value: Any){
             switch self {
             case .family:
                 if var value = _value as? Int{
@@ -97,13 +85,13 @@ struct MyAppSettings {
                     } else if(value<0){
                         value = 0
                     }
-                    UserDefaults.standard.set(value,forKey: getKey())
+                    UserDefaults.standard.set(Int(value),forKey: getKey())
                 }
                 break
             case .taxfree:
-                if var value = _value as? Int{
-                    if( value > 100000){
-                        value = 100000
+                if var value = _value as? Double{
+                    if( value > 10000000){
+                        value = 10000000
                     } else if(value<0){
                         value = 0
                     }

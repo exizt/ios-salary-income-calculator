@@ -14,7 +14,7 @@ class SettingRates_ViewController: UIViewController {
     // 값 종류
     var receiveItem = MyAppSettings.Item.family
     // 설정 값과 연관된 struct enum
-    var userDefaultOption: UserAppSettingInterface = MyAppSettings.InputDefaults.family
+    var userDefaultOption: MyAppSettings.Rates = MyAppSettings.Rates.nationalPension
     
     @IBOutlet weak var lbl_depth1: UILabel!
     @IBOutlet weak var lbl_depth2: UILabel!
@@ -59,8 +59,9 @@ class SettingRates_ViewController: UIViewController {
         lbl_depth3.text = String(format:"%d",Int(stepper_depth3.value))
         
         
-        UserDefaults.standard.set(itemValue, forKey: userDefaultOption.getKey())
-        print(itemValue)
+        //UserDefaults.standard.set(itemValue, forKey: userDefaultOption.getKey())
+        userDefaultOption.set(itemValue)
+        //print(itemValue)
         
     }
     

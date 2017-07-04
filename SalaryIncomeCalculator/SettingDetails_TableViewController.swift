@@ -14,15 +14,16 @@ class SettingDetails_TableViewController: UITableViewController {
     // 값 종류
     var receiveItem = MyAppSettings.Item.family
     // 설정 값과 연관된 struct enum
-    var userDefaultOption: UserAppSettingInterface = MyAppSettings.InputDefaults.family
+    var userDefaultOption: MyAppSettings.InputDefaults = MyAppSettings.InputDefaults.family
+    enum ItemDataType {
+        case String
+        case Int
+        case Double
+        case Bool
+    }
+    var itemDataType = ItemDataType.String
    // 빠른 선택 목록
     var itemHelpList: [(String,String)] = []
-    // 특수한 설정 변경 유형 지정 (기본값은 string)
-    enum EditType : String {
-        case percentage
-        case string
-    }
-    var editType : EditType = EditType.string
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,14 +94,11 @@ class SettingDetails_TableViewController: UITableViewController {
             
             
             if let textCell = tableView.cellForRow(at: NSIndexPath(row: 0, section: 0) as IndexPath) {
+                // 라벨을 변경
                 (textCell as! TextFieldCell).textField.text = itemValue.1
                 
                 // 실제 설정 값을 변경
-                //optionValue = itemValue.0
-                //userDefaultOption.set(itemValue.0)
-                //UserDefaults.standard.set(itemValue.0, forKey: userDefaultOption.getKey())
                 updateOptionValue(itemValue.0)
-                //userDefaultOption?.set(itemValue.0)
             }
         }
     }
@@ -128,6 +126,7 @@ class SettingDetails_TableViewController: UITableViewController {
         switch receiveItem {
         case MyAppSettings.Item.family:
             userDefaultOption = MyAppSettings.InputDefaults.family
+            itemDataType = ItemDataType.Int
             itemHelpList = [
                 ("1","1 명"),
                 ("2","2 명"),
@@ -142,6 +141,7 @@ class SettingDetails_TableViewController: UITableViewController {
             break
         case MyAppSettings.Item.child:
             userDefaultOption = MyAppSettings.InputDefaults.child
+            itemDataType = ItemDataType.Int
             itemHelpList = [
                 ("0","0 명"),
                 ("1","1 명"),
@@ -157,9 +157,22 @@ class SettingDetails_TableViewController: UITableViewController {
             break
         case MyAppSettings.Item.taxfree:
             userDefaultOption = MyAppSettings.InputDefaults.taxfree
+            itemDataType = ItemDataType.Double
+            itemHelpList = [
+                ("0","0 원"),
+                ("10000","10,000 원"),
+                ("50000","50,000 원"),
+                ("100000","100,000 원"),
+                ("150000","150,000 원"),
+                ("200000","200,000 원")
+            ]
             break
         case MyAppSettings.Item.includedsev:
             userDefaultOption = MyAppSettings.InputDefaults.includedSev
+            itemHelpList = [
+                ("false","포함 안함"),
+                ("true","포함")
+            ]
             break
         default:
             break
@@ -169,63 +182,22 @@ class SettingDetails_TableViewController: UITableViewController {
     }
 
     //
-    func updateOptionValue(_ value:String){
-        itemValue = value
-        //lbl_Option_Family.text = String(format: "가족수 %d 명", value)
-        //calculatorOptions.family = value
+    func updateOptionValue(_ _value:String){
+        itemValue = _value
         
-        UserDefaults.standard.set(value, forKey: userDefaultOption.getKey())
+        //UserDefaults.standard.set(value, forKey: userDefaultOption.getKey())
+        if(itemDataType == ItemDataType.Int){
+            let num1: Int = Int((_value as NSString).intValue)
+            userDefaultOption.set(num1)
+        } else if (itemDataType == ItemDataType.Double){
+            let num1: Double = (_value as NSString).doubleValue
+            userDefaultOption.set(num1)
+        } else {
+            userDefaultOption.set(_value)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         //print("[SH Debugger] SettingDetails_TableViewController viewDidDisappear")
-        //let value = UserDefaults.standard.string(forKey: MyAppSettings.InputDefaults.family.getKey())
-        //print("[SH Debugger] SettingDetails_TableViewController viewDidDisappear : Value "+value!)
     }
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

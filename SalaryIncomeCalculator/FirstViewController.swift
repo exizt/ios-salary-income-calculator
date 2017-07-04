@@ -53,18 +53,15 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         // 선택 이벤트
         in_Option_Segmented_Annual.addTarget(self, action: #selector(self.iSegmentedAnnual_valueChanged), for: .valueChanged)
         
-        initDisplay()
-        getDefaultOptions()
+        //
+        initDisplayValues()
+        
+        //
+        setDefaultInputValues()
         
         
         // 옵션값 전부 확인
-        print(UserDefaults.standard.dictionaryRepresentation())
-        
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        scrollView.contentSize = CGSize(width: stackViewMaster.frame.width, height: stackViewMaster.frame.height)
+        //print(UserDefaults.standard.dictionaryRepresentation())
         
     }
 
@@ -73,8 +70,8 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // 화면이 드로잉 될때마다 호출됨
+    
+    // 화면이 드로잉 될때마다 호출됨 (매번 호출됨)
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -82,105 +79,10 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         // 물어보고 적용하는 방식이어야 할 듯
     }
     
-    func getDefaultOptions(){
-        //print("[SH Debugger] FirstViewController getDefaultOptions "+MyAppSettings.InputDefaults.family.getValue())
-        
-        in_Option_Stepper_Family.value = Double(MyAppSettings.InputDefaults.family.getValue())!
-        updateCalcOption_Family()
-        
-        in_Option_Stepper_Child.value = Double(MyAppSettings.InputDefaults.child.getValue())!
-        updateCalcOption_Child()
-        
-        in_Option_Taxfree.text = MyAppSettings.InputDefaults.taxfree.getValue()
-        updateCalcOption_Taxfree()
-        
-    }
-    
-    // 설정이 되어있지 않았을 때 최초 1회만 실행한다.
-    func registerDefaultOptions(){
-        /**
-         * 순서대로
-         * 1) 국민연금 요율
-         * 2)건강보험 요율
-         * 3)요양보험 요율
-         * 4)고용보험 요율
-         */
-        let defaults = [
-            MyAppSettings.Rates.nationalPension.getKey():4.5,
-            MyAppSettings.Rates.healthCare.getKey():3.06,
-            MyAppSettings.Rates.longTermCare.getKey():6.55,
-            MyAppSettings.Rates.employmentCare.getKey():0.65,
-            MyAppSettings.InputDefaults.family.getKey():1,
-            MyAppSettings.InputDefaults.child.getKey():0,
-            MyAppSettings.InputDefaults.taxfree.getKey():100000,
-            MyAppSettings.InputDefaults.includedSev.getKey():false
-            ] as [String : Any]
-        UserDefaults.standard.register(defaults: defaults)
-    }
-    func initDisplay(){
-        lbl_ResultDetail_NP.text = "0 원"
-        lbl_ResultDetail_HC.text = "0 원"
-        lbl_ResultDetail_LTC.text = "0 원"
-        lbl_ResultDetail_EC.text = "0 원"
-        lbl_ResultDetail_IncomeTax.text = "0 원"
-        lbl_ResultDetail_LocalTax.text = "0 원"
-    }
-    /**
-    * 계산 메서드. 이 메서드로 호출해주자.
-    */
-    func loadCalculation()
-    {
-        let incomeMoney = calculatorOptions.money
-
-        // 금액 입력이 10만원 이내면 계산안함
-        if(incomeMoney < 10 * 10000){
-            return
-        }
-        
-        if(!calculator.Options().equals(calculatorOptions)){
-            // 계산 메서드 호출
-            calculate(calculatorOptions)
-        }
-    }
-    
-    /**
-    * 계산 메서드.
-    * 가급적 바로 호출하지 마시고, loadCalculation 메서드로 호출해주세요.
-    * 테스트 할 시에만 직접 호출 하세요.
-    */
-    func calculate(_ _options : SalaryCalculatorOptions) {
-        //print(_options.toString())
-        
-        // 설정값 대입
-        calculator.Options().money = _options.money
-        calculator.Options().family = _options.family
-        calculator.Options().child = _options.child
-        calculator.Options().taxFree = _options.taxFree
-        calculator.Options().isAnnualIncome = _options.isAnnualIncome
-        calculator.Options().isIncludedSeverance = _options.isIncludedSeverance
-        calculator.calculate()
-        
-        /**
-        * 계산 결과 처리
-        */
-        //resultSummary.text = String(format:"%f",formatter.string(from:calculator.netSalary))
-        lbl_Result_NetSalary.text = formatCurrency(calculator.netSalary) + " 원"
-
-        
-        var insurance = Insurance()
-        insurance = calculator.getInsurance()
-        
-        var incomeTax = IncomeTax()
-        incomeTax = calculator.getIncomeTax()
-        
-        //resultDetail.text = String(format:"국민연금 : %@ 원 \r\n건강보험 : %@ 원 \r\n요양보험 : %@ 원 \r\n고용보험 : %@ 원 \r\n소득세 : %@ 원 \r\n지방세 : %@ 원",formatCurrency(insurance.nationalPension),formatCurrency(insurance.healthCare),formatCurrency(insurance.longTermCare),formatCurrency(insurance.employmentCare),formatCurrency(incomeTax.incomeTax),formatCurrency(incomeTax.localTax))
-        
-        lbl_ResultDetail_NP.text = formatCurrency(insurance.nationalPension) + " 원"
-        lbl_ResultDetail_HC.text = formatCurrency(insurance.healthCare) + " 원"
-        lbl_ResultDetail_LTC.text = formatCurrency(insurance.longTermCare) + " 원"
-        lbl_ResultDetail_EC.text = formatCurrency(insurance.employmentCare) + " 원"
-        lbl_ResultDetail_IncomeTax.text = formatCurrency(incomeTax.incomeTax) + " 원"
-        lbl_ResultDetail_LocalTax.text = formatCurrency(incomeTax.localTax) + " 원"
+    //
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        scrollView.contentSize = CGSize(width: stackViewMaster.frame.width, height: stackViewMaster.frame.height)
     }
     
     // 가족수 +-
@@ -189,7 +91,6 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         loadCalculation()
     }
 
-    
     // 자녀수 +-
     func stepperChild_valueChanged(_ sender: UIStepper) {
         lbl_Option_Child.text = String(format: "자녀수 %d 명", Int(sender.value))
@@ -233,10 +134,112 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         loadCalculation()
     }
     
+    //
     func iSegmentedAnnual_valueChanged(_ sender: UISegmentedControl){
         //print("Segmented 변경됨")
         calculatorOptions.isAnnualIncome  = (sender.selectedSegmentIndex == 0) ? true : false
         loadCalculation()
+    }
+    
+    //
+    func setDefaultInputValues(){
+        //print("[SH Debugger] FirstViewController getDefaultOptions "+MyAppSettings.InputDefaults.family.getValue())
+        
+        in_Option_Stepper_Family.value = Double(MyAppSettings.InputDefaults.family.getValue())!
+        updateCalcOption_Family()
+        
+        in_Option_Stepper_Child.value = Double(MyAppSettings.InputDefaults.child.getValue())!
+        updateCalcOption_Child()
+        
+        in_Option_Taxfree.text = MyAppSettings.InputDefaults.taxfree.getValue()
+        updateCalcOption_Taxfree()
+        
+    }
+    
+    // 설정이 되어있지 않았을 때 최초 1회만 실행한다.
+    func registerDefaultOptions(){
+        /**
+         * 순서대로
+         * 1) 국민연금 요율
+         * 2)건강보험 요율
+         * 3)요양보험 요율
+         * 4)고용보험 요율
+         */
+        let defaults = [
+            MyAppSettings.Rates.nationalPension.getKey():4.5,
+            MyAppSettings.Rates.healthCare.getKey():3.06,
+            MyAppSettings.Rates.longTermCare.getKey():6.55,
+            MyAppSettings.Rates.employmentCare.getKey():0.65,
+            MyAppSettings.InputDefaults.family.getKey():1,
+            MyAppSettings.InputDefaults.child.getKey():0,
+            MyAppSettings.InputDefaults.taxfree.getKey():100000,
+            MyAppSettings.InputDefaults.includedSev.getKey():false
+            ] as [String : Any]
+        UserDefaults.standard.register(defaults: defaults)
+    }
+    
+    //
+    func initDisplayValues(){
+        lbl_ResultDetail_NP.text = "0 원"
+        lbl_ResultDetail_HC.text = "0 원"
+        lbl_ResultDetail_LTC.text = "0 원"
+        lbl_ResultDetail_EC.text = "0 원"
+        lbl_ResultDetail_IncomeTax.text = "0 원"
+        lbl_ResultDetail_LocalTax.text = "0 원"
+    }
+    
+    // 계산 메서드. 이 메서드로 호출해주자.
+    func loadCalculation()
+    {
+        let incomeMoney = calculatorOptions.money
+        
+        // 금액 입력이 10만원 이내면 계산안함
+        if(incomeMoney < 10 * 10000){
+            return
+        }
+        
+        if(!calculator.Options().equals(calculatorOptions)){
+            // 계산 메서드 호출
+            calculate(calculatorOptions)
+        }
+    }
+    
+    // 계산 메서드.
+    // 가급적 바로 호출하지 마시고, loadCalculation 메서드로 호출해주세요.
+    // 테스트 할 시에만 직접 호출 하세요.
+    func calculate(_ _options : SalaryCalculatorOptions) {
+        //print(_options.toString())
+        
+        // 설정값 대입
+        calculator.Options().money = _options.money
+        calculator.Options().family = _options.family
+        calculator.Options().child = _options.child
+        calculator.Options().taxFree = _options.taxFree
+        calculator.Options().isAnnualIncome = _options.isAnnualIncome
+        calculator.Options().isIncludedSeverance = _options.isIncludedSeverance
+        calculator.calculate()
+        
+        /**
+         * 계산 결과 처리
+         */
+        //resultSummary.text = String(format:"%f",formatter.string(from:calculator.netSalary))
+        lbl_Result_NetSalary.text = formatCurrency(calculator.netSalary) + " 원"
+        
+        
+        var insurance = Insurance()
+        insurance = calculator.getInsurance()
+        
+        var incomeTax = IncomeTax()
+        incomeTax = calculator.getIncomeTax()
+        
+        //resultDetail.text = String(format:"국민연금 : %@ 원 \r\n건강보험 : %@ 원 \r\n요양보험 : %@ 원 \r\n고용보험 : %@ 원 \r\n소득세 : %@ 원 \r\n지방세 : %@ 원",formatCurrency(insurance.nationalPension),formatCurrency(insurance.healthCare),formatCurrency(insurance.longTermCare),formatCurrency(insurance.employmentCare),formatCurrency(incomeTax.incomeTax),formatCurrency(incomeTax.localTax))
+        
+        lbl_ResultDetail_NP.text = formatCurrency(insurance.nationalPension) + " 원"
+        lbl_ResultDetail_HC.text = formatCurrency(insurance.healthCare) + " 원"
+        lbl_ResultDetail_LTC.text = formatCurrency(insurance.longTermCare) + " 원"
+        lbl_ResultDetail_EC.text = formatCurrency(insurance.employmentCare) + " 원"
+        lbl_ResultDetail_IncomeTax.text = formatCurrency(incomeTax.incomeTax) + " 원"
+        lbl_ResultDetail_LocalTax.text = formatCurrency(incomeTax.localTax) + " 원"
     }
     
     func updateCalcOption_Family(){
