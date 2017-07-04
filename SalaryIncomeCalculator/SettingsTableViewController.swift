@@ -17,42 +17,58 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var lbl_Rate_HealthCare : UILabel!
     @IBOutlet weak var lbl_Rate_LongTerm : UILabel!
     @IBOutlet weak var lbl_Rate_Employment : UILabel!
+    @IBOutlet weak var tableview_Master: UITableView!
     
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.tableView.contentInset = UIEdgeInsets(top: 20,left: 0,bottom: 0,right: 0)
         
         // Uncomment the following line to preserve selection between presentations
         //self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         //self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    // viewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //print("[SH Debugger] SettingsTableViewController viewWillAppear")
         
-        //UserDefaults.standard.set(1, forKey: "Name")
-        
-        initRates()
-        initInputDefaultValues()
+        //print("[SH Debugger] Setti...oller viewWillAppear Family "+MyAppSettings.InputDefaults.family.value())
         
         presentSettingData()
+
+    }
+    
+    // viewDidAppear
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //
+        //print("[SH Debugger] SettingsTableViewController viewDidAppear")
+
+    }
+    
+    // didReceiveMemoryWarning
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
     // 설정 값을 화면에 표현
     func presentSettingData(){
-        let appSettings = UserDefaults.standard
-        
         // 입력 기본값 설정
-        lbl_InputDefault_Family.text = appSettings.string(forKey: MyAppSettings.InputDefaults.family.getKey())
-        lbl_InputDefault_Child.text = appSettings.string(forKey: MyAppSettings.InputDefaults.child.getKey())
-        lbl_InputDefault_Taxfree.text = appSettings.string(forKey: MyAppSettings.InputDefaults.taxfree.getKey())
-        lbl_InputDefault_IncludedSev.text = appSettings.string(forKey: MyAppSettings.InputDefaults.includedSev.getKey())
+        lbl_InputDefault_Family.text = MyAppSettings.InputDefaults.family.value() + " 명"
+        lbl_InputDefault_Child.text = MyAppSettings.InputDefaults.child.value() + " 명"
+        lbl_InputDefault_Taxfree.text = MyAppSettings.InputDefaults.taxfree.value() + " 원"
+        lbl_InputDefault_IncludedSev.text = MyAppSettings.InputDefaults.includedSev.value()
         
         // 세율 설정
-        lbl_Rate_NationalPension.text = String(appSettings.double(forKey: MyAppSettings.Rates.nationalPension.get()))
-        lbl_Rate_HealthCare.text = String(appSettings.double(forKey: MyAppSettings.Rates.healthCare.get()))
-        lbl_Rate_LongTerm.text = String(appSettings.double(forKey: MyAppSettings.Rates.longTermCare.get()))
-        lbl_Rate_Employment.text = String(appSettings.double(forKey: MyAppSettings.Rates.employmentCare.get()))
+        lbl_Rate_NationalPension.text = MyAppSettings.Rates.nationalPension.value() + " %"
+        lbl_Rate_HealthCare.text =  MyAppSettings.Rates.healthCare.value() + " %"
+        lbl_Rate_LongTerm.text = MyAppSettings.Rates.longTermCare.value() + " %"
+        lbl_Rate_Employment.text = MyAppSettings.Rates.employmentCare.value() + " %"
+        
     }
     
     func initRates()
@@ -64,21 +80,18 @@ class SettingsTableViewController: UITableViewController {
          * 3)요양보험 요율
          * 4)고용보험 요율
          */
-        let appSettings = UserDefaults.standard
-        appSettings.set(4.5, forKey: MyAppSettings.Rates.nationalPension.get())
-        appSettings.set(3.06, forKey: MyAppSettings.Rates.healthCare.get())
-        appSettings.set(6.55, forKey: MyAppSettings.Rates.longTermCare.get())
-        appSettings.set(0.65, forKey: MyAppSettings.Rates.employmentCare.get())
+        MyAppSettings.Rates.nationalPension.set(4.5)
+        MyAppSettings.Rates.healthCare.set(3.06)
+        MyAppSettings.Rates.longTermCare.set(6.55)
+        MyAppSettings.Rates.employmentCare.set(0.65)
     }
     
     func initInputDefaultValues()
     {
-        let appSettings = UserDefaults.standard
-        
-        appSettings.set(1, forKey: MyAppSettings.InputDefaults.family.getKey())
-        appSettings.set(0, forKey: MyAppSettings.InputDefaults.child.getKey())
-        appSettings.set(100000, forKey: MyAppSettings.InputDefaults.taxfree.getKey())
-        appSettings.set(false, forKey: MyAppSettings.InputDefaults.includedSev.getKey())
+        MyAppSettings.InputDefaults.family.set(1)
+        MyAppSettings.InputDefaults.child.set(0)
+        MyAppSettings.InputDefaults.taxfree.set(100000)
+        MyAppSettings.InputDefaults.includedSev.set(false)
     }
     
     // 초기화 버튼 눌렀을 때 동작할 내용.
@@ -89,11 +102,6 @@ class SettingsTableViewController: UITableViewController {
         presentSettingData()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: - Table view data source
 
     /*
@@ -163,5 +171,59 @@ class SettingsTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        //let indexPath = self.tableview_Master.indexPath(for: cell)
+        
+        var receive_id = MyAppSettings.Item.family
+        enum Class_Type {
+            case DetailTableView
+            case Rate
+        }
+        let classType : Class_Type?
+        
+        switch String(segue.identifier ?? "")! {
+        case "segue_family":
+            receive_id = MyAppSettings.Item.family
+            classType = Class_Type.DetailTableView
+        case "segue_child":
+            receive_id = MyAppSettings.Item.child
+            classType = Class_Type.DetailTableView
+        case "segue_taxfree":
+            receive_id = MyAppSettings.Item.taxfree
+            classType = Class_Type.DetailTableView
+        case "segue_includedsev":
+            receive_id = MyAppSettings.Item.includedsev
+            classType = Class_Type.DetailTableView
+        case "segue_rate_np":
+            receive_id = MyAppSettings.Item.rate_np
+            classType = Class_Type.Rate
+        case "segue_rate_hc":
+            receive_id = MyAppSettings.Item.rate_hc
+            classType = Class_Type.Rate
+        case "segue_rate_ltc":
+            receive_id = MyAppSettings.Item.rate_ltc
+            classType = Class_Type.Rate
+        case "segue_rate_ec":
+            receive_id = MyAppSettings.Item.rate_ec
+            classType = Class_Type.Rate
+        default:
+            receive_id = MyAppSettings.Item.family
+            classType = Class_Type.DetailTableView
+        }
+        
+        if(classType==Class_Type.DetailTableView){
+            
+            let view = segue.destination as! SettingDetails_TableViewController
+            view.title = ((cell.textLabel)?.text)!
+            view.receiveItem(receive_id)
+            
+        } else if(classType==Class_Type.Rate){
+            
+            let view = segue.destination as! SettingRates_ViewController
+            view.title = ((cell.textLabel)?.text)!
+            view.receiveItem(receive_id)
+        }
 
+    }
 }
