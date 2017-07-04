@@ -40,6 +40,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         //interstitial = createAndLoadInterstitial()
         
         viewDidLoad_keyboardDone()
+        registerDefaultOptions()
 
         // textfield 이벤트
         in_Option_Money.addTarget(self, action: #selector(self.textFieldMoney_didChanged), for: .editingChanged)
@@ -54,6 +55,10 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         
         initDisplay()
         getDefaultOptions()
+        
+        
+        // 옵션값 전부 확인
+        print(UserDefaults.standard.dictionaryRepresentation())
         
     }
     
@@ -78,7 +83,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     }
     
     func getDefaultOptions(){
-        print("[SH Debugger] FirstViewController getDefaultOptions "+MyAppSettings.InputDefaults.family.getValue())
+        //print("[SH Debugger] FirstViewController getDefaultOptions "+MyAppSettings.InputDefaults.family.getValue())
         
         in_Option_Stepper_Family.value = Double(MyAppSettings.InputDefaults.family.getValue())!
         updateCalcOption_Family()
@@ -92,7 +97,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     }
     
     // 설정이 되어있지 않았을 때 최초 1회만 실행한다.
-    func initDefaultOptions(){
+    func registerDefaultOptions(){
         /**
          * 순서대로
          * 1) 국민연금 요율
@@ -100,16 +105,17 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
          * 3)요양보험 요율
          * 4)고용보험 요율
          */
-        MyAppSettings.Rates.nationalPension.set(4.5)
-        MyAppSettings.Rates.healthCare.set(3.06)
-        MyAppSettings.Rates.longTermCare.set(6.55)
-        MyAppSettings.Rates.employmentCare.set(0.65)
-        
-        
-        MyAppSettings.InputDefaults.family.set(1)
-        MyAppSettings.InputDefaults.child.set(0)
-        MyAppSettings.InputDefaults.taxfree.set(100000)
-        MyAppSettings.InputDefaults.includedSev.set(false)
+        let defaults = [
+            MyAppSettings.Rates.nationalPension.getKey():4.5,
+            MyAppSettings.Rates.healthCare.getKey():3.06,
+            MyAppSettings.Rates.longTermCare.getKey():6.55,
+            MyAppSettings.Rates.employmentCare.getKey():0.65,
+            MyAppSettings.InputDefaults.family.getKey():1,
+            MyAppSettings.InputDefaults.child.getKey():0,
+            MyAppSettings.InputDefaults.taxfree.getKey():100000,
+            MyAppSettings.InputDefaults.includedSev.getKey():false
+            ] as [String : Any]
+        UserDefaults.standard.register(defaults: defaults)
     }
     func initDisplay(){
         lbl_ResultDetail_NP.text = "0 원"

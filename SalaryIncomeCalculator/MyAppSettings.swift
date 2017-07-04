@@ -21,6 +21,16 @@ protocol UserAppSettingInterface {
 extension UserAppSettingInterface {
 }
 struct MyAppSettings {
+    enum Item : String {
+        case family
+        case child
+        case taxfree
+        case includedsev
+        case rate_np
+        case rate_hc
+        case rate_ltc
+        case rate_ec
+    }
     enum Rates : String,UserAppSettingInterface {
         case nationalPension
         case healthCare
@@ -30,7 +40,7 @@ struct MyAppSettings {
             return prefix() + self.rawValue
         }
         func prefix()->String {
-            return "settings-rate-"
+            return "SHNUserSetting.Rate-"
         }
         func getValue()->String {
             return UserDefaults.standard.string(forKey: getKey())!
@@ -63,7 +73,7 @@ struct MyAppSettings {
             return prefix() + self.rawValue
         }
         func prefix()->String {
-            return "settings-inputdefault-"
+            return "SHNUserSetting.InputDefault-"
         }
         func getValue()->String {
             return UserDefaults.standard.string(forKey: getKey())!

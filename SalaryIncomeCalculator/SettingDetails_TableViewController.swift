@@ -9,27 +9,25 @@
 import UIKit
 
 class SettingDetails_TableViewController: UITableViewController {
-    var receiveItem = ""
-    var userDefaultOption = MyAppSettings.InputDefaults.family
-    var itemLabel: String = ""
+    // 설정 값
+    var itemValue: String = ""
+    // 값 종류
+    var receiveItem = MyAppSettings.Item.family
+    // 설정 값과 연관된 struct enum
+    var userDefaultOption: UserAppSettingInterface = MyAppSettings.InputDefaults.family
+   // 빠른 선택 목록
     var itemHelpList: [(String,String)] = []
+    // 특수한 설정 변경 유형 지정 (기본값은 string)
+    enum EditType : String {
+        case percentage
+        case string
+    }
+    var editType : EditType = EditType.string
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.title = itemLabel
-        
         //print("[SH Debugging] SettingDetails_TableViewController viewDidLoad")
-        
-        //segue_family
-        //segue_child
-        //segue_taxfree
-        //segue_includedsev
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,7 +44,6 @@ class SettingDetails_TableViewController: UITableViewController {
     // Row 개수. by Section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //let msg = String(format: "Section : %d", section)
-        //print(msg)
         switch section {
         case 1:
             return itemHelpList.count
@@ -61,12 +58,13 @@ class SettingDetails_TableViewController: UITableViewController {
        
         // Configure the cell...
         if(indexPath.section == 0){
+            
             identifier = "settingdetail_edit_value"
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! TextFieldCell
-            //cell.textField.text = itemValue
-            cell.textField.text = userDefaultOption.getValue()
+            cell.textField.text = itemValue
             return cell
         } else {
+            
             identifier = "settingdetail_choice_value"
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
             if((indexPath as NSIndexPath).row <= itemHelpList.count){
@@ -86,11 +84,41 @@ class SettingDetails_TableViewController: UITableViewController {
         }
     }
     
-    func setDetailTitle(_ label: String){
-        itemLabel = label
+    // 목록 에서 선택 하는 메서드
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if(indexPath.section == 1){
+            let selectedRow = (indexPath as NSIndexPath).row
+            let itemValue = itemHelpList[selectedRow]
+            
+            
+            if let textCell = tableView.cellForRow(at: NSIndexPath(row: 0, section: 0) as IndexPath) {
+                (textCell as! TextFieldCell).textField.text = itemValue.1
+                
+                // 실제 설정 값을 변경
+                //optionValue = itemValue.0
+                //userDefaultOption.set(itemValue.0)
+                //UserDefaults.standard.set(itemValue.0, forKey: userDefaultOption.getKey())
+                updateOptionValue(itemValue.0)
+                //userDefaultOption?.set(itemValue.0)
+            }
+        }
     }
     
-    func receiveItem(_ item: String){
+    // 셀 높이 지정
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        /*
+        if(editType == EditType.percentage){
+            if indexPath.row == 0 {
+                return 88.0
+            }
+        }
+        */
+        
+        return 44.0
+    }
+    
+    func receiveItem(_ item: MyAppSettings.Item){
         receiveItem = item
         receiveProcess()
     }
@@ -98,7 +126,7 @@ class SettingDetails_TableViewController: UITableViewController {
     func receiveProcess()
     {
         switch receiveItem {
-        case "family":
+        case MyAppSettings.Item.family:
             userDefaultOption = MyAppSettings.InputDefaults.family
             itemHelpList = [
                 ("1","1 명"),
@@ -112,7 +140,7 @@ class SettingDetails_TableViewController: UITableViewController {
                 ("9","9 명")
             ]
             break
-        case "child":
+        case MyAppSettings.Item.child:
             userDefaultOption = MyAppSettings.InputDefaults.child
             itemHelpList = [
                 ("0","0 명"),
@@ -127,49 +155,32 @@ class SettingDetails_TableViewController: UITableViewController {
                 ("9","9 명")
             ]
             break
-        case "taxfree":
+        case MyAppSettings.Item.taxfree:
             userDefaultOption = MyAppSettings.InputDefaults.taxfree
             break
-        case "includedsev":
+        case MyAppSettings.Item.includedsev:
             userDefaultOption = MyAppSettings.InputDefaults.includedSev
             break
-            
-        default: break
-            
+        default:
+            break
         }
-    }
-    
-    // 목록 에서 선택 하는 메서드
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if(indexPath.section == 1){
-            let selectedRow = (indexPath as NSIndexPath).row
-            let itemValue = itemHelpList[selectedRow]
-            
-            
-            if let textCell = tableView.cellForRow(at: NSIndexPath(row: 0, section: 0) as IndexPath) {
-                (textCell as! TextFieldCell).textField.text = itemValue.1
-                
-                // 실제 설정 값을 변경
-                //userDefaultOption.set(itemValue.0)
-                UserDefaults.standard.set(itemValue.0, forKey: userDefaultOption.getKey())
-                //userDefaultOption?.set(itemValue.0)
-                
-            }
-        }
+        itemValue = userDefaultOption.getValue()
+    }
+
+    //
+    func updateOptionValue(_ value:String){
+        itemValue = value
+        //lbl_Option_Family.text = String(format: "가족수 %d 명", value)
+        //calculatorOptions.family = value
+        
+        UserDefaults.standard.set(value, forKey: userDefaultOption.getKey())
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         //print("[SH Debugger] SettingDetails_TableViewController viewDidDisappear")
-        
-        let value = UserDefaults.standard.string(forKey: MyAppSettings.InputDefaults.family.getKey())
-        print("[SH Debugger] SettingDetails_TableViewController viewDidDisappear : Value "+value!)
-        
-    }
-    
-    // 변수를 유효범위 안에 담으려는 메서드
-    func validSettingValue(_ _value:String)->String{
-        return _value
+        //let value = UserDefaults.standard.string(forKey: MyAppSettings.InputDefaults.family.getKey())
+        //print("[SH Debugger] SettingDetails_TableViewController viewDidDisappear : Value "+value!)
     }
     
     /*

@@ -22,22 +22,12 @@ class SettingsTableViewController: UITableViewController {
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //self.tableView.contentInset = UIEdgeInsets(top: 20,left: 0,bottom: 0,right: 0)
         
         // Uncomment the following line to preserve selection between presentations
         //self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         //self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        //UserDefaults.standard.set(1, forKey: "Name")
-        //print("[SH Debugger] SettingsTableViewController viewDidLoad")
-        
-        initRates()
-        initInputDefaultValues()
-        
-        
     }
     
     // viewWillAppear
@@ -74,10 +64,10 @@ class SettingsTableViewController: UITableViewController {
         lbl_InputDefault_IncludedSev.text = MyAppSettings.InputDefaults.includedSev.value()
         
         // 세율 설정
-        lbl_Rate_NationalPension.text = MyAppSettings.Rates.nationalPension.value()
-        lbl_Rate_HealthCare.text =  MyAppSettings.Rates.healthCare.value()
-        lbl_Rate_LongTerm.text = MyAppSettings.Rates.longTermCare.value()
-        lbl_Rate_Employment.text = MyAppSettings.Rates.employmentCare.value()
+        lbl_Rate_NationalPension.text = MyAppSettings.Rates.nationalPension.value() + " %"
+        lbl_Rate_HealthCare.text =  MyAppSettings.Rates.healthCare.value() + " %"
+        lbl_Rate_LongTerm.text = MyAppSettings.Rates.longTermCare.value() + " %"
+        lbl_Rate_Employment.text = MyAppSettings.Rates.employmentCare.value() + " %"
         
     }
     
@@ -112,8 +102,6 @@ class SettingsTableViewController: UITableViewController {
         presentSettingData()
     }
     
-
-
     // MARK: - Table view data source
 
     /*
@@ -186,25 +174,56 @@ class SettingsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UITableViewCell
         //let indexPath = self.tableview_Master.indexPath(for: cell)
-        let itemLabel : String = ((cell.textLabel)?.text)!
-        //print(itemLabel)
         
-        if segue.identifier == "segue_famliy" {
-            let detailView = segue.destination as! SettingDetails_TableViewController
-            detailView.receiveItem("family")
-            detailView.setDetailTitle(itemLabel)
-        } else if segue.identifier == "segue_child" {
-            let detailView = segue.destination as! SettingDetails_TableViewController
-            detailView.receiveItem("child")
-            detailView.setDetailTitle(itemLabel)
-        } else if segue.identifier == "segue_taxfree" {
-            let detailView = segue.destination as! SettingDetails_TableViewController
-            detailView.receiveItem("taxfree")
-            detailView.setDetailTitle(itemLabel)
-        } else if segue.identifier == "segue_includedsev" {
-            let detailView = segue.destination as! SettingDetails_TableViewController
-            detailView.receiveItem("includedsev")
-            detailView.setDetailTitle(itemLabel)
+        var receive_id = MyAppSettings.Item.family
+        enum Class_Type {
+            case DetailTableView
+            case Rate
         }
+        let classType : Class_Type?
+        
+        switch String(segue.identifier ?? "")! {
+        case "segue_family":
+            receive_id = MyAppSettings.Item.family
+            classType = Class_Type.DetailTableView
+        case "segue_child":
+            receive_id = MyAppSettings.Item.child
+            classType = Class_Type.DetailTableView
+        case "segue_taxfree":
+            receive_id = MyAppSettings.Item.taxfree
+            classType = Class_Type.DetailTableView
+        case "segue_includedsev":
+            receive_id = MyAppSettings.Item.includedsev
+            classType = Class_Type.DetailTableView
+        case "segue_rate_np":
+            receive_id = MyAppSettings.Item.rate_np
+            classType = Class_Type.Rate
+        case "segue_rate_hc":
+            receive_id = MyAppSettings.Item.rate_hc
+            classType = Class_Type.Rate
+        case "segue_rate_ltc":
+            receive_id = MyAppSettings.Item.rate_ltc
+            classType = Class_Type.Rate
+        case "segue_rate_ec":
+            receive_id = MyAppSettings.Item.rate_ec
+            classType = Class_Type.Rate
+        default:
+            receive_id = MyAppSettings.Item.family
+            classType = Class_Type.DetailTableView
+        }
+        
+        if(classType==Class_Type.DetailTableView){
+            
+            let view = segue.destination as! SettingDetails_TableViewController
+            view.title = ((cell.textLabel)?.text)!
+            view.receiveItem(receive_id)
+            
+        } else if(classType==Class_Type.Rate){
+            
+            let view = segue.destination as! SettingRates_ViewController
+            view.title = ((cell.textLabel)?.text)!
+            view.receiveItem(receive_id)
+        }
+
     }
 }

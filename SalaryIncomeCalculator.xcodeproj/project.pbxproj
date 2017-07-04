@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		765BFD471F0AE189006BF10F /* SettingRates_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BFD461F0AE189006BF10F /* SettingRates_ViewController.swift */; };
 		767FF4F41EFB2920001329C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF4F31EFB2920001329C1 /* AppDelegate.swift */; };
 		767FF4F61EFB2920001329C1 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF4F51EFB2920001329C1 /* FirstViewController.swift */; };
 		767FF4F81EFB2920001329C1 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF4F71EFB2920001329C1 /* SecondViewController.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		765BFD461F0AE189006BF10F /* SettingRates_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingRates_ViewController.swift; sourceTree = "<group>"; };
 		767FF4F01EFB2920001329C1 /* SalaryIncomeCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalaryIncomeCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		767FF4F31EFB2920001329C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		767FF4F51EFB2920001329C1 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				768A041C1F083E44007A6460 /* SettingDetails_TableViewController.swift */,
 				768A041E1F087286007A6460 /* TextFieldCell.swift */,
 				768A04201F08902C007A6460 /* MyAppUserOptions.swift */,
+				765BFD461F0AE189006BF10F /* SettingRates_ViewController.swift */,
 			);
 			path = SalaryIncomeCalculator;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				767FF4F41EFB2920001329C1 /* AppDelegate.swift in Sources */,
 				76B5DBC81F05B1740056D499 /* MyAppSettings.swift in Sources */,
 				767FF5291EFBA178001329C1 /* Insurance.swift in Sources */,
+				765BFD471F0AE189006BF10F /* SettingRates_ViewController.swift in Sources */,
 				768A04211F08902C007A6460 /* MyAppUserOptions.swift in Sources */,
 				767FF52B1EFBAF80001329C1 /* IncomeTax.swift in Sources */,
 				767FF5271EFB41D8001329C1 /* InsuranceRate.swift in Sources */,
