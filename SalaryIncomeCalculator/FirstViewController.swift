@@ -9,10 +9,11 @@
 import UIKit
 import GoogleMobileAds
 
-class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitialDelegate {
+class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitialDelegate, GADBannerViewDelegate {
     let calculator : SalaryCalculator = SalaryCalculator()
     let calculatorOptions : SalaryCalculatorOptions = SalaryCalculatorOptions()
-    var interstitial : GADInterstitial!
+    var interstitialAD : GADInterstitial!
+    var bannerViewAD: GADBannerView!
 
     @IBOutlet weak var lbl_Result_NetSalary : UILabel!
     @IBOutlet weak var lbl_Option_Family : UILabel!
@@ -38,6 +39,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         //interstitial = createAndLoadInterstitial()
+        initAdmobBanner()
         
         viewDidLoad_keyboardDone()
         registerDefaultOptions()
@@ -59,9 +61,11 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         //
         setDefaultInputValues()
         
-        
         // 옵션값 전부 확인
         //print(UserDefaults.standard.dictionaryRepresentation())
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        
         
     }
 
@@ -321,20 +325,75 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     
     //Admob 전면광고
     func viewInterstitial(){
-        if interstitial.isReady {
-            interstitial.present(fromRootViewController: self)
+        // 준비가 완료되었다면 화면에 활성 present
+        if interstitialAD.isReady {
+            interstitialAD.present(fromRootViewController: self)
         } else {
-            print("Ad wasn't ready")
+            //print("Ad wasn't ready")
         }
     }
     
+    //로드가 완료되었을때 의 처리. 
+    // 화면에 보여주기
     func interstitialDidReceiveAd(_ ad: GADInterstitial) {
-        print("Interstitial loaded successfully")
+        //print("Interstitial loaded successfully")
         ad.present(fromRootViewController: self)
     }
     
+    //실패했을때의 처리
     func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
-        print("Fail to receive interstitial")
+        //print("Fail to receive interstitial")
+    }
+    
+    func initAdmobBanner(){
+        // 애드몹을 사용하려면, 콘텐츠 스크롤 하단부에 여백을 추가로 넣어줌
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
+        
+        
+        var testDevices : [Any] = []
+        testDevices += [kGADSimulatorID] // all simulators
+        testDevices += ["170edde56facd2e95aff519f068efaf0"] // SHiPhone7
+        
+        let request = GADRequest()
+        request.testDevices = testDevices
+        
+        bannerViewAD = GADBannerView(adSize: kGADAdSizeFullBanner)
+        bannerViewAD.adUnitID = "ca-app-pub-6702794513299112/8753530183"
+        bannerViewAD.rootViewController = self
+        bannerViewAD.delegate = self
+        bannerViewAD.load(request)
+        self.view.addSubview(bannerViewAD)
+        
+    }
+    func showBanner(_ banner: UIView){
+        UIView.beginAnimations("showBanner", context: nil)
+        //let rect = CGRect(x: view.frame.size.width/2 - banner.frame.size.width/2, y: view.frame.size.height - banner.frame.size.height, width: banner.frame.size.width, height: banner.frame.size.height)
+        let rect = CGRect(x: view.frame.size.width/2 - banner.frame.size.width/2, y: view.bounds.height - banner.frame.size.height - CGFloat((self.tabBarController?.tabBar.frame.height)!), width: banner.frame.size.width, height: banner.frame.size.height)
+        
+        banner.frame = rect
+        UIView.commitAnimations()
+        banner.isHidden = false
+    }
+    
+    func hideBanner(_ banner: UIView){
+        UIView.beginAnimations("showBanner", context: nil)
+        banner.frame = CGRect(x: view.frame.size.width/2 - banner.frame.size.width/2, y: view.frame.size.height - banner.frame.size.height, width: banner.frame.size.width, height: banner.frame.size.height)
+        UIView.commitAnimations()
+        banner.isHidden = true
+    }
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        //print("adViewDidReceiveAD")
+        showBanner(bannerViewAD)
+    }
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        //print("adViewDidReceiveAD failed!")
+        hideBanner(bannerViewAD)
+    }
+
+    func rotated(){
+        hideBanner(bannerViewAD)
+        showBanner(bannerViewAD)
+        
     }
 }
 
