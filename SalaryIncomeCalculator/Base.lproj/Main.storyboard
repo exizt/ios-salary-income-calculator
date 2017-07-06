@@ -26,10 +26,10 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="667"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="oMI-cK-MUl">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="627.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="678.33333333333337"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="OGF-j6-8ln">
-                                                <rect key="frame" x="15" y="10" width="384" height="301"/>
+                                                <rect key="frame" x="15" y="10" width="384" height="352"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="znx-hE-1Lt">
                                                         <rect key="frame" x="0.0" y="0.0" width="384" height="28"/>
@@ -131,11 +131,25 @@
                                                             </stepper>
                                                         </subviews>
                                                     </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OZQ-Mc-0NL">
+                                                        <rect key="frame" x="0.0" y="321" width="384" height="31"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="퇴직금 포함 여부" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1f-eY-DcP">
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="31"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Sg-R0-JNj">
+                                                                <rect key="frame" x="335" y="0.0" width="51" height="31"/>
+                                                            </switch>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                                 <variation key="heightClass=regular-widthClass=regular" spacing="60"/>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3Q3-s4-nY5">
-                                                <rect key="frame" x="15" y="341" width="384" height="278.33333333333337"/>
+                                                <rect key="frame" x="15" y="392.00000000000006" width="384" height="278.33333333333343"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vTu-ih-DOm">
                                                         <rect key="frame" x="8" y="8" width="368" height="20.333333333333314"/>
@@ -298,6 +312,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="실수령액 계산" image="tabbar_icon_calculator" id="acW-dT-cKf"/>
                     <connections>
+                        <outlet property="in_Option_IncSev" destination="5Sg-R0-JNj" id="9Bn-uH-70Q"/>
                         <outlet property="in_Option_Money" destination="to2-q2-9LH" id="v2M-kw-7ji"/>
                         <outlet property="in_Option_Segmented_Annual" destination="g1v-bf-IUT" id="7d9-ae-3xB"/>
                         <outlet property="in_Option_Stepper_Child" destination="Uss-ux-k2f" id="O8c-nC-lGM"/>
@@ -498,7 +513,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pwf-WX-c48">
-                                                    <rect key="frame" x="0.0" y="6" width="414" height="32"/>
+                                                    <rect key="frame" x="0.0" y="6" width="413" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="기본 입력값 설정 초기화"/>
                                                     <connections>
@@ -521,6 +536,9 @@
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kZd-kh-aST">
                                                     <rect key="frame" x="357" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="switchEnableRate_valueChanged:" destination="9pr-Qa-taY" eventType="valueChanged" id="Ef3-sW-wfY"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="세율 고급 설정 사용" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AsK-97-eot">
                                                     <rect key="frame" x="18" y="11" width="388" height="21"/>
@@ -654,7 +672,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcM-ae-WTZ">
-                                                    <rect key="frame" x="0.0" y="6" width="414" height="30"/>
+                                                    <rect key="frame" x="0.0" y="6" width="413" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="세율 설정값 초기화"/>
                                                     <connections>
@@ -674,6 +692,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="환경 설정" id="OqS-Qw-XB5"/>
                     <connections>
+                        <outlet property="in_switch_enableCustomRate" destination="kZd-kh-aST" id="Exh-EQ-fUD"/>
                         <outlet property="lbl_InputDefault_Child" destination="d1E-yH-xfS" id="jWR-Vg-R5S"/>
                         <outlet property="lbl_InputDefault_Family" destination="tnz-5m-QiI" id="A9f-LJ-i1j"/>
                         <outlet property="lbl_InputDefault_IncludedSev" destination="Uoj-cs-QnB" id="Agl-mR-GZ8"/>
@@ -698,7 +717,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingdetail_edit_value" id="r9d-bJ-qEn" customClass="TextFieldCell" customModule="SalaryIncomeCalculator" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="settingdetail_edit_value" id="r9d-bJ-qEn" customClass="TextFieldCell" customModule="SalaryIncomeCalculator" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r9d-bJ-qEn" id="jbp-eR-JCk">
@@ -710,7 +729,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         </textField>
                                     </subviews>
                                 </tableViewCellContentView>
@@ -725,7 +744,24 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5a4-QH-hos">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="값 선택" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5a4-QH-hos">
+                                            <rect key="frame" x="15" y="0.0" width="384" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="settingdetail_view_value" textLabel="NdG-Qc-kdz" style="IBUITableViewCellStyleDefault" id="DuX-SE-o0U">
+                                <rect key="frame" x="0.0" y="143" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DuX-SE-o0U" id="qn3-eG-Vix">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="설정된 값" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NdG-Qc-kdz">
                                             <rect key="frame" x="15" y="0.0" width="384" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>

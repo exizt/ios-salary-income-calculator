@@ -23,6 +23,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     @IBOutlet weak var in_Option_Stepper_Family: UIStepper!
     @IBOutlet weak var in_Option_Stepper_Child: UIStepper!
     @IBOutlet weak var in_Option_Segmented_Annual : UISegmentedControl!
+    @IBOutlet weak var in_Option_IncSev: UISwitch!
     @IBOutlet weak var resultDetail : UILabel!
     @IBOutlet weak var lbl_ResultDetail_NP: UILabel!
     @IBOutlet weak var lbl_ResultDetail_HC: UILabel!
@@ -45,15 +46,17 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         registerDefaultOptions()
 
         // textfield 이벤트
-        in_Option_Money.addTarget(self, action: #selector(self.textFieldMoney_didChanged), for: .editingChanged)
-        in_Option_Taxfree.addTarget(self, action: #selector(self.textFieldTaxfree_didChanged), for: .editingChanged)
+        in_Option_Money.addTarget(self, action: #selector(self.textFieldMoney_didChanged(_:)), for: .editingChanged)
+        in_Option_Taxfree.addTarget(self, action: #selector(self.textFieldTaxfree_didChanged(_:)), for: .editingChanged)
         
         // stepper 이벤트
-        in_Option_Stepper_Family.addTarget(self, action: #selector(self.stepperFamily_valueChanged), for: .valueChanged)
-        in_Option_Stepper_Child.addTarget(self, action: #selector(self.stepperChild_valueChanged), for: .valueChanged)
+        in_Option_Stepper_Family.addTarget(self, action: #selector(self.stepperFamily_valueChanged(_:)), for: .valueChanged)
+        in_Option_Stepper_Child.addTarget(self, action: #selector(self.stepperChild_valueChanged(_:)), for: .valueChanged)
         
         // 선택 이벤트
-        in_Option_Segmented_Annual.addTarget(self, action: #selector(self.iSegmentedAnnual_valueChanged), for: .valueChanged)
+        in_Option_Segmented_Annual.addTarget(self, action: #selector(self.iSegmentedAnnual_valueChanged(_:)), for: .valueChanged)
+        
+        in_Option_IncSev.addTarget(self, action: #selector(self.switchIncSev_valueChanged(_:)), for: .valueChanged)
         
         //
         initDisplayValues()
@@ -83,6 +86,10 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         // 물어보고 적용하는 방식이어야 할 듯
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        // 옵션에서 변경된 세율을 적용시키는 메서드
+        setInsuranceRateFromOption()
+    }
     //
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -145,19 +152,41 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         loadCalculation()
     }
     
-    //
+    func switchIncSev_valueChanged(_ sender: UISwitch) {
+        //calculatorOptions.isIncludedSeverance = sender.val
+        calculatorOptions.isIncludedSeverance = (sender.isOn) ? true: false
+        loadCalculation()
+    }
+    
+    // 환경설정에서 설정한 기본입력값을 셋팅
     func setDefaultInputValues(){
         //print("[SH Debugger] FirstViewController getDefaultOptions "+MyAppSettings.InputDefaults.family.getValue())
         
-        in_Option_Stepper_Family.value = Double(MyAppSettings.InputDefaults.family.getValue())!
+        in_Option_Stepper_Family.value = Double(SHNUserSettings.InputDefaults.family.getValue())!
         updateCalcOption_Family()
         
-        in_Option_Stepper_Child.value = Double(MyAppSettings.InputDefaults.child.getValue())!
+        in_Option_Stepper_Child.value = Double(SHNUserSettings.InputDefaults.child.getValue())!
         updateCalcOption_Child()
         
-        in_Option_Taxfree.text = MyAppSettings.InputDefaults.taxfree.getValue()
+        in_Option_Taxfree.text = SHNUserSettings.InputDefaults.taxfree.getValue()
         updateCalcOption_Taxfree()
         
+        in_Option_IncSev.setOn(SHNUserSettings.InputDefaults.includedSev.bool(), animated: true)
+        
+        
+    }
+    
+    // 옵션에서 지정한 세율을 적용한다.
+    func setInsuranceRateFromOption()
+    {
+        if(SHNUserSettings.Advanced.isEnableCustomRate.bool()){
+            let rates = InsuranceRate.init(_nationalPension: SHNUserSettings.Rates.nationalPension.double(), _healthCare: SHNUserSettings.Rates.healthCare.double(), _longTermCare: SHNUserSettings.Rates.longTermCare.double(), _employmentCare: SHNUserSettings.Rates.employmentCare.double())
+        
+            calculator.setInsuranceRate(rates)
+        } else {
+            let rates = InsuranceRate()
+            calculator.setInsuranceRate(rates)
+        }
     }
     
     // 설정이 되어있지 않았을 때 최초 1회만 실행한다.
@@ -170,14 +199,15 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
          * 4)고용보험 요율
          */
         let defaults = [
-            MyAppSettings.Rates.nationalPension.getKey():4.5,
-            MyAppSettings.Rates.healthCare.getKey():3.06,
-            MyAppSettings.Rates.longTermCare.getKey():6.55,
-            MyAppSettings.Rates.employmentCare.getKey():0.65,
-            MyAppSettings.InputDefaults.family.getKey():1,
-            MyAppSettings.InputDefaults.child.getKey():0,
-            MyAppSettings.InputDefaults.taxfree.getKey():100000,
-            MyAppSettings.InputDefaults.includedSev.getKey():false
+            SHNUserSettings.Rates.nationalPension.key():4.5,
+            SHNUserSettings.Rates.healthCare.key():3.06,
+            SHNUserSettings.Rates.longTermCare.key():6.55,
+            SHNUserSettings.Rates.employmentCare.key():0.65,
+            SHNUserSettings.InputDefaults.family.key():1,
+            SHNUserSettings.InputDefaults.child.key():0,
+            SHNUserSettings.InputDefaults.taxfree.key():100000,
+            SHNUserSettings.InputDefaults.includedSev.key():false,
+            SHNUserSettings.Advanced.isEnableCustomRate.key():false
             ] as [String : Any]
         UserDefaults.standard.register(defaults: defaults)
     }

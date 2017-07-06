@@ -12,9 +12,9 @@ class SettingRates_ViewController: UIViewController {
     // 설정 값
     var itemValue : Double = 0.0
     // 값 종류
-    var receiveItem = MyAppSettings.Item.family
+    var receiveItem = SHNUserSettings.Item.family
     // 설정 값과 연관된 struct enum
-    var userDefaultOption: MyAppSettings.Rates = MyAppSettings.Rates.nationalPension
+    var userDefaultOption: SHNUserSettings.Rates = SHNUserSettings.Rates.nationalPension
     
     @IBOutlet weak var lbl_depth1: UILabel!
     @IBOutlet weak var lbl_depth2: UILabel!
@@ -94,7 +94,7 @@ class SettingRates_ViewController: UIViewController {
         updateValue()
     }
     
-    func receiveItem(_ item: MyAppSettings.Item){
+    func receiveItem(_ item: SHNUserSettings.Item){
         receiveItem = item
         receiveProcess()
     }
@@ -102,17 +102,17 @@ class SettingRates_ViewController: UIViewController {
     func receiveProcess()
     {
         switch receiveItem {
-        case MyAppSettings.Item.rate_np:
-            userDefaultOption = MyAppSettings.Rates.nationalPension
+        case SHNUserSettings.Item.rate_np:
+            userDefaultOption = SHNUserSettings.Rates.nationalPension
             break
-        case MyAppSettings.Item.rate_hc:
-            userDefaultOption = MyAppSettings.Rates.healthCare
+        case SHNUserSettings.Item.rate_hc:
+            userDefaultOption = SHNUserSettings.Rates.healthCare
             break
-        case MyAppSettings.Item.rate_ltc:
-            userDefaultOption = MyAppSettings.Rates.longTermCare
+        case SHNUserSettings.Item.rate_ltc:
+            userDefaultOption = SHNUserSettings.Rates.longTermCare
             break
-        case MyAppSettings.Item.rate_ec:
-            userDefaultOption = MyAppSettings.Rates.employmentCare
+        case SHNUserSettings.Item.rate_ec:
+            userDefaultOption = SHNUserSettings.Rates.employmentCare
             break
         default:
             break

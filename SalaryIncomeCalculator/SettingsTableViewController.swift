@@ -18,6 +18,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var lbl_Rate_LongTerm : UILabel!
     @IBOutlet weak var lbl_Rate_Employment : UILabel!
     @IBOutlet weak var tableview_Master: UITableView!
+    @IBOutlet weak var in_switch_enableCustomRate: UISwitch!
     
     // viewDidLoad
     override func viewDidLoad() {
@@ -65,22 +66,32 @@ class SettingsTableViewController: UITableViewController {
         presentSettingData()
     }
     
+    @IBAction func switchEnableRate_valueChanged(_ sender: UISwitch) {
+        if(sender.isOn){
+            // 고급 설정 사용 일 때
+            SHNUserSettings.Advanced.isEnableCustomRate.set(true)
+        } else {
+            // 고급 설정 사용 안함 일 때
+            SHNUserSettings.Advanced.isEnableCustomRate.set(false)
+        }
+    }
     // 설정 값을 화면에 표현
     func presentSettingData(){
         // 입력 기본값 설정
-        lbl_InputDefault_Family.text = MyAppSettings.InputDefaults.family.value() + " 명"
-        lbl_InputDefault_Child.text = MyAppSettings.InputDefaults.child.value() + " 명"
-        lbl_InputDefault_Taxfree.text = MyAppSettings.InputDefaults.taxfree.value() + " 원"
+        lbl_InputDefault_Family.text = SHNUserSettings.InputDefaults.family.value() + " 명"
+        lbl_InputDefault_Child.text = SHNUserSettings.InputDefaults.child.value() + " 명"
+        lbl_InputDefault_Taxfree.text = SHNUserSettings.InputDefaults.taxfree.value() + " 원"
         //lbl_InputDefault_IncludedSev.text = MyAppSettings.InputDefaults.includedSev.value()
         
-        lbl_InputDefault_IncludedSev.text = (Bool((MyAppSettings.InputDefaults.includedSev.value() as NSString).boolValue)) ? "포함" : "비 포함"
+        lbl_InputDefault_IncludedSev.text = (Bool((SHNUserSettings.InputDefaults.includedSev.value() as NSString).boolValue)) ? "포함" : "포함 안함"
         
         // 세율 설정
-        lbl_Rate_NationalPension.text = MyAppSettings.Rates.nationalPension.value() + " %"
-        lbl_Rate_HealthCare.text =  MyAppSettings.Rates.healthCare.value() + " %"
-        lbl_Rate_LongTerm.text = MyAppSettings.Rates.longTermCare.value() + " %"
-        lbl_Rate_Employment.text = MyAppSettings.Rates.employmentCare.value() + " %"
+        lbl_Rate_NationalPension.text = SHNUserSettings.Rates.nationalPension.value() + " %"
+        lbl_Rate_HealthCare.text =  SHNUserSettings.Rates.healthCare.value() + " %"
+        lbl_Rate_LongTerm.text = SHNUserSettings.Rates.longTermCare.value() + " %"
+        lbl_Rate_Employment.text = SHNUserSettings.Rates.employmentCare.value() + " %"
         
+        in_switch_enableCustomRate.setOn(SHNUserSettings.Advanced.isEnableCustomRate.bool(), animated: true)
     }
     
     func initRates()
@@ -92,18 +103,18 @@ class SettingsTableViewController: UITableViewController {
          * 3)요양보험 요율
          * 4)고용보험 요율
          */
-        MyAppSettings.Rates.nationalPension.set(4.5)
-        MyAppSettings.Rates.healthCare.set(3.06)
-        MyAppSettings.Rates.longTermCare.set(6.55)
-        MyAppSettings.Rates.employmentCare.set(0.65)
+        SHNUserSettings.Rates.nationalPension.set(4.5)
+        SHNUserSettings.Rates.healthCare.set(3.06)
+        SHNUserSettings.Rates.longTermCare.set(6.55)
+        SHNUserSettings.Rates.employmentCare.set(0.65)
     }
     
     func initInputDefaultValues()
     {
-        MyAppSettings.InputDefaults.family.set(1)
-        MyAppSettings.InputDefaults.child.set(0)
-        MyAppSettings.InputDefaults.taxfree.set(100000 as Double)
-        MyAppSettings.InputDefaults.includedSev.set(false)
+        SHNUserSettings.InputDefaults.family.set(1)
+        SHNUserSettings.InputDefaults.child.set(0)
+        SHNUserSettings.InputDefaults.taxfree.set(100000 as Double)
+        SHNUserSettings.InputDefaults.includedSev.set(false)
     }
     
     // 초기화 버튼 눌렀을 때 동작할 내용.
@@ -187,7 +198,7 @@ class SettingsTableViewController: UITableViewController {
         let cell = sender as! UITableViewCell
         //let indexPath = self.tableview_Master.indexPath(for: cell)
         
-        var receive_id = MyAppSettings.Item.family
+        var receive_id = SHNUserSettings.Item.family
         enum Class_Type {
             case DetailTableView
             case Rate
@@ -196,31 +207,31 @@ class SettingsTableViewController: UITableViewController {
         
         switch String(segue.identifier ?? "")! {
         case "segue_family":
-            receive_id = MyAppSettings.Item.family
+            receive_id = SHNUserSettings.Item.family
             classType = Class_Type.DetailTableView
         case "segue_child":
-            receive_id = MyAppSettings.Item.child
+            receive_id = SHNUserSettings.Item.child
             classType = Class_Type.DetailTableView
         case "segue_taxfree":
-            receive_id = MyAppSettings.Item.taxfree
+            receive_id = SHNUserSettings.Item.taxfree
             classType = Class_Type.DetailTableView
         case "segue_includedsev":
-            receive_id = MyAppSettings.Item.includedsev
+            receive_id = SHNUserSettings.Item.includedsev
             classType = Class_Type.DetailTableView
         case "segue_rate_np":
-            receive_id = MyAppSettings.Item.rate_np
+            receive_id = SHNUserSettings.Item.rate_np
             classType = Class_Type.Rate
         case "segue_rate_hc":
-            receive_id = MyAppSettings.Item.rate_hc
+            receive_id = SHNUserSettings.Item.rate_hc
             classType = Class_Type.Rate
         case "segue_rate_ltc":
-            receive_id = MyAppSettings.Item.rate_ltc
+            receive_id = SHNUserSettings.Item.rate_ltc
             classType = Class_Type.Rate
         case "segue_rate_ec":
-            receive_id = MyAppSettings.Item.rate_ec
+            receive_id = SHNUserSettings.Item.rate_ec
             classType = Class_Type.Rate
         default:
-            receive_id = MyAppSettings.Item.family
+            receive_id = SHNUserSettings.Item.family
             classType = Class_Type.DetailTableView
         }
         

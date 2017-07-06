@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MyAppSettings {
+struct SHNUserSettings {
     enum Item : String {
         case family
         case child
@@ -32,6 +32,9 @@ struct MyAppSettings {
         }
         func getValue()->String {
             return UserDefaults.standard.string(forKey: getKey())!
+        }
+        func double()->Double {
+            return UserDefaults.standard.double(forKey: getKey())
         }
         func set(_ _value: Any?){
             if var value = _value as? Double{
@@ -65,6 +68,9 @@ struct MyAppSettings {
         }
         func getValue()->String {
             return UserDefaults.standard.string(forKey: getKey())!
+        }
+        func bool()->Bool {
+            return UserDefaults.standard.bool(forKey: getKey())
         }
         func set(_ _value: Any){
             switch self {
@@ -114,6 +120,35 @@ struct MyAppSettings {
         }
         func value()->String{
             return getValue()
+        }
+    }
+    enum Advanced : String {
+        case isEnableCustomRate
+        case temp
+        func key() -> String {
+            return prefix() + self.rawValue
+        }
+        func prefix()->String {
+            return "SHNUserSetting.Advanced-"
+        }
+        func value()->String {
+            return UserDefaults.standard.string(forKey: key())!
+        }
+        func bool()->Bool {
+            return UserDefaults.standard.bool(forKey: key())
+        }
+        func set(_ _value: Any){
+            switch self {
+            
+            case .isEnableCustomRate:
+                if let value = _value as? Bool{
+                    UserDefaults.standard.set(value,forKey: key())
+                }
+                break
+            default:
+                UserDefaults.standard.set(_value,forKey: key())
+                break
+            }
         }
     }
 }

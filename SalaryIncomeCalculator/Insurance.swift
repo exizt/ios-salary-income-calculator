@@ -71,6 +71,10 @@ class Insurance{
         employmentCare = roundDown(salary * rate.employmentCare, toNearest: 10)
     }
     
+    func getRate()->InsuranceRate {
+        return rate;
+    }
+    
     /**
     * 원 단위 절삭
     * 10 원 단위 절삭 roundDown(value,toNearest: 10)

@@ -8,6 +8,7 @@
 
 import Foundation
 class IncomeTax{
+    let isDebugMode : Bool = false
     var incomeTax : Double = 0
     var localTax : Double {
         get {
@@ -19,7 +20,6 @@ class IncomeTax{
             return incomeTax + localTax
         }
     }
-    let isDebugMode : Bool = false
     
     func calculate(_ salary: Double, family: Int, child: Int)
     {

@@ -41,6 +41,9 @@ class SalaryCalculator {
     func Options() -> SalaryCalculatorOptions{
         return options
     }
+    func setInsuranceRate(_ rates:InsuranceRate){
+        self.insurance.rate = rates
+    }
     func computeSalary() -> Double
     {
         let money = Options().money
