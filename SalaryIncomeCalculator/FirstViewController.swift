@@ -14,6 +14,8 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     let calculatorOptions : SalaryCalculatorOptions = SalaryCalculatorOptions()
     var interstitialAD : GADInterstitial!
     var bannerViewAD: GADBannerView!
+    let isEnabled_InterstitialAD: Bool = false
+    let isEnabled_BannerAD: Bool = false
 
     @IBOutlet weak var lbl_Result_NetSalary : UILabel!
     @IBOutlet weak var lbl_Option_Family : UILabel!
@@ -39,10 +41,12 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        //interstitial = createAndLoadInterstitial()
-        initAdmobBanner()
+        if(isEnabled_InterstitialAD) { interstitialAD = createAndLoadInterstitial() }
+        if(isEnabled_BannerAD) { initAdmobBanner() }
+      
+        initColor()
         
-        viewDidLoad_keyboardDone()
+        addDoneButtonOnKeyboard()
         registerDefaultOptions()
 
         // textfield 이벤트
@@ -69,9 +73,20 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
-        
+        in_Option_Money.delegate = self
+        in_Option_Taxfree.delegate = self
     }
 
+    func initColor(){
+        //view.backgroundColor = UIColor(red: 178/255, green: 178/255, blue: 178/255, alpha: 1.0)
+        //view.backgroundColor = UIColorFromRGBA(R: 78, G: 138, B: 199, alpha: 1.0)
+        //view.color
+        //view.tintColor = UIColorFromRGBA(R: 255, G: 255, B: 255, alpha: 1.0)
+        //view.tintColor = .red
+        //view.tintColor = .white
+        
+    }
+    
     // 메모리 워닝 관련 (기본 메서드)
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -300,19 +315,19 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     /**
      * 키보드 바로 위에 [Done] 추가하는 메서드
      */
-    func viewDidLoad_keyboardDone()
+    func addDoneButtonOnKeyboard()
     {
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
+        let doneToolbar = UIToolbar()
+        doneToolbar.sizeToFit()
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.keyboard_doneClicked))
         
-        toolBar.setItems([flexibleSpace, doneButton], animated: false)
+        doneToolbar.setItems([flexibleSpace, doneButton], animated: false)
         
         //textfield 가 필요하면 여기에 추가
-        in_Option_Money.inputAccessoryView = toolBar
-        in_Option_Taxfree.inputAccessoryView = toolBar
+        in_Option_Money.inputAccessoryView = doneToolbar
+        in_Option_Taxfree.inputAccessoryView = doneToolbar
     }
     
     
@@ -337,6 +352,8 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     
     // Admob 전면광고 생성 메서드
     func createAndLoadInterstitial() -> GADInterstitial?{
+        if(!isEnabled_InterstitialAD) { return nil }
+        
         var testDevices : [Any] = []
         testDevices += [kGADSimulatorID] // all simulators
         testDevices += ["d73c08aad93622d32f26c3522eb69135"] // SHiPhone7
@@ -355,6 +372,8 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     
     //Admob 전면광고
     func viewInterstitial(){
+        if(!isEnabled_InterstitialAD) { return }
+        
         // 준비가 완료되었다면 화면에 활성 present
         if interstitialAD.isReady {
             interstitialAD.present(fromRootViewController: self)
@@ -366,19 +385,24 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     //로드가 완료되었을때 의 처리. 
     // 화면에 보여주기
     func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+        if(!isEnabled_InterstitialAD) { return }
+        
         //print("Interstitial loaded successfully")
         ad.present(fromRootViewController: self)
     }
     
     //실패했을때의 처리
     func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
+        if(!isEnabled_InterstitialAD) { return }
+        
         //print("Fail to receive interstitial")
     }
     
     func initAdmobBanner(){
+        if(!isEnabled_BannerAD) { return }
+        
         // 애드몹을 사용하려면, 콘텐츠 스크롤 하단부에 여백을 추가로 넣어줌
         scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
-        
         
         var testDevices : [Any] = []
         testDevices += [kGADSimulatorID] // all simulators
@@ -395,7 +419,11 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         self.view.addSubview(bannerViewAD)
         
     }
-    func showBanner(_ banner: UIView){
+    func showBanner(){
+        if(!isEnabled_BannerAD) { return }
+        
+        let banner = bannerViewAD!
+        
         UIView.beginAnimations("showBanner", context: nil)
         //let rect = CGRect(x: view.frame.size.width/2 - banner.frame.size.width/2, y: view.frame.size.height - banner.frame.size.height, width: banner.frame.size.width, height: banner.frame.size.height)
         let rect = CGRect(x: view.frame.size.width/2 - banner.frame.size.width/2, y: view.bounds.height - banner.frame.size.height - CGFloat((self.tabBarController?.tabBar.frame.height)!), width: banner.frame.size.width, height: banner.frame.size.height)
@@ -405,25 +433,48 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         banner.isHidden = false
     }
     
-    func hideBanner(_ banner: UIView){
+    func hideBanner(){
+        if(!isEnabled_BannerAD) { return }
+        
+        let banner = bannerViewAD!
+        
         UIView.beginAnimations("showBanner", context: nil)
         banner.frame = CGRect(x: view.frame.size.width/2 - banner.frame.size.width/2, y: view.frame.size.height - banner.frame.size.height, width: banner.frame.size.width, height: banner.frame.size.height)
         UIView.commitAnimations()
         banner.isHidden = true
     }
+    
+    // 로딩이 되면 화면에 보여줌
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        if(!isEnabled_BannerAD) { return }
+        
         //print("adViewDidReceiveAD")
-        showBanner(bannerViewAD)
+        showBanner()
     }
+    
+    // 에러 발생시에 hide 시킴
     func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        if(!isEnabled_BannerAD) { return }
+        
         //print("adViewDidReceiveAD failed!")
-        hideBanner(bannerViewAD)
+        hideBanner()
     }
 
     func rotated(){
-        hideBanner(bannerViewAD)
-        showBanner(bannerViewAD)
+        hideBanner()
+        showBanner()
         
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        //print("count textfield")
+        guard let text = textField.text else { return true }
+        let newLength = text.characters.count + string.characters.count - range.length
+        return newLength <= 10
+    }
+    
+    func UIColorFromRGBA(R red:CGFloat, G green:CGFloat, B blue:CGFloat, alpha: CGFloat) -> UIColor{
+        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)
     }
 }
 

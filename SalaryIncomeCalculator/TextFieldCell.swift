@@ -11,10 +11,12 @@ import UIKit
 class TextFieldCell: UITableViewCell, UITextFieldDelegate {
     /// The text input field.
     @IBOutlet weak var textField: UITextField!
-
+    var maxLength = 10
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        textField.delegate = self
+        textField.inputAccessoryView = getDoneButtonToolbar()
         // Initialization code
     }
 
@@ -44,5 +46,32 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        //print("count textfield")
+        guard let text = textField.text else { return true }
+        let newLength = text.characters.count + string.characters.count - range.length
+        return newLength <= maxLength
+    }
+    
+    /**
+     * 키보드 바로 위에 [Done] 추가하는 메서드
+     */
+    func getDoneButtonToolbar() -> UIToolbar
+    {
+        let doneToolbar = UIToolbar()
+        doneToolbar.sizeToFit()
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        
+        doneToolbar.setItems([flexibleSpace, doneButton], animated: false)
+        
+        return doneToolbar
+    }
+    func doneClicked()
+    {
+        textField.resignFirstResponder()
     }
 }

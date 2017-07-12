@@ -33,9 +33,11 @@ class SettingDetails_TableViewController: UITableViewController {
     // 직접 입력을 사용할지 유무
     var isEnableEdit = false
     
+    /* ---------- override -------- */
     override func viewDidLoad() {
         super.viewDidLoad()
         //print("[SH Debugging] SettingDetails_TableViewController viewDidLoad")
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -107,12 +109,13 @@ class SettingDetails_TableViewController: UITableViewController {
         return cell
     }
     
-    // 직접 입력 셀
+    // 직접 입력 셀 textfield_didChanged
     func tableViewCell_editValue(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = "settingdetail_edit_value"
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! TextFieldCell
         cell.textField.text = itemValue
-
+        cell.textField.addTarget(self, action: #selector(self.textfield_didChanged(_:)), for: .editingChanged)
+        //cell.textField.inputAccessoryView = getDoneButtonToolbar()
         return cell
     }
     
@@ -169,6 +172,7 @@ class SettingDetails_TableViewController: UITableViewController {
         }
     }
     
+    
     // 셀 선택시 이벤트
     func tableView_selectRow_itemList(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let selectedRow = (indexPath as NSIndexPath).row
@@ -208,6 +212,15 @@ class SettingDetails_TableViewController: UITableViewController {
         return 44.0
     }
     
+    func textfield_didChanged(_ sender: UITextField){
+        var label = sender.text!
+        if(receiveItem == SHNUserSettings.Item.taxfree){
+            label = sender.text! + " 원"
+        }
+        updateOptionValue(sender.text!,label: label)
+        
+        changeItemValue()
+    }
     func receiveItem(_ item: SHNUserSettings.Item){
         receiveItem = item
         receiveProcess()
@@ -307,5 +320,32 @@ class SettingDetails_TableViewController: UITableViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         //print("[SH Debugger] SettingDetails_TableViewController viewDidDisappear")
+    }
+    
+    
+    /* ---------- 덜 중요 -------- */
+    /**
+     * 키보드 바로 위에 [Done] 추가하는 메서드
+     */
+    func getDoneButtonToolbar() -> UIToolbar
+    {
+        let doneToolbar = UIToolbar()
+        doneToolbar.sizeToFit()
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.keyboard_doneClicked))
+        
+        doneToolbar.setItems([flexibleSpace, doneButton], animated: false)
+        
+        return doneToolbar
+    }
+    
+    
+    /**
+     * 키보드 바로 위의 [Done] 클릭시 에 행동하는 메서드
+     */
+    func keyboard_doneClicked()
+    {
+        view.endEditing(true)
     }
 }
