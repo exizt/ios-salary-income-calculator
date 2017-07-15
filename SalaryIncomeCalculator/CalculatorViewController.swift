@@ -1,54 +1,49 @@
 //
-//  FirstViewController.swift
+//  CalculatorViewController.swift
 //  SalaryIncomeCalculator
 //
-//  Created by SH.Hong on 2017. 6. 22..
+//  Created by SH.Hong on 2017. 7. 15..
 //  Copyright © 2017년 SH.Hong. All rights reserved.
 //
 
 import UIKit
 import GoogleMobileAds
 
-class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitialDelegate, GADBannerViewDelegate {
+class CalculatorViewController: UITableViewController, GADInterstitialDelegate, GADBannerViewDelegate {
     let calculator : SalaryCalculator = SalaryCalculator()
     let calculatorOptions : SalaryCalculatorOptions = SalaryCalculatorOptions()
     var interstitialAD : GADInterstitial!
     var bannerViewAD: GADBannerView!
     let isEnabled_InterstitialAD: Bool = false
     let isEnabled_BannerAD: Bool = false
-
+    
+    // calculator option object
     @IBOutlet weak var in_Option_Money : UITextField!
     @IBOutlet weak var in_Option_Taxfree : UITextField!
     @IBOutlet weak var in_Option_Stepper_Family: UIStepper!
     @IBOutlet weak var in_Option_Stepper_Child: UIStepper!
     @IBOutlet weak var in_Option_Segmented_Annual : UISegmentedControl!
     @IBOutlet weak var in_Option_IncSev: UISwitch!
-    @IBOutlet weak var resultDetail : UILabel!
-    @IBOutlet weak var lbl_Result_NetSalary : UILabel!
+    // calculator label
     @IBOutlet weak var lbl_Option_Family : UILabel!
     @IBOutlet weak var lbl_Option_Child : UILabel!
-    @IBOutlet weak var lbl_ResultDetail_NP: UILabel!
-    @IBOutlet weak var lbl_ResultDetail_HC: UILabel!
-    @IBOutlet weak var lbl_ResultDetail_LTC : UILabel!
-    @IBOutlet weak var lbl_ResultDetail_EC: UILabel!
-    @IBOutlet weak var lbl_ResultDetail_IncomeTax : UILabel!
-    @IBOutlet weak var lbl_ResultDetail_LocalTax : UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var stackViewMaster: UIStackView!
-
+    // calculator result label
+    @IBOutlet weak var lbl_Result_NetSalary : UILabel!
+    @IBOutlet weak var btn_money_plus100: UIButton!
+    @IBOutlet weak var btn_money_plus1000: UIButton!
+    @IBOutlet weak var btn_money_reset: UIButton!
     
-    // 로드 된 직후 호출 (기본 메서드)
+    // load 와 관련된 메서드
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // admob
         if(isEnabled_InterstitialAD) { interstitialAD = createAndLoadInterstitial() }
         if(isEnabled_BannerAD) { initAdmobBanner() }
       
-        initColor()
+        // 키보드에 done 버튼 추가
+        registerDoneWithKeyboard()
         
-        addDoneButtonOnKeyboard()
-        registerDefaultOptions()
-
         // textfield 이벤트
         in_Option_Money.addTarget(self, action: #selector(self.textFieldMoney_didChanged(_:)), for: .editingChanged)
         in_Option_Taxfree.addTarget(self, action: #selector(self.textFieldTaxfree_didChanged(_:)), for: .editingChanged)
@@ -59,40 +54,60 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         
         // 선택 이벤트
         in_Option_Segmented_Annual.addTarget(self, action: #selector(self.iSegmentedAnnual_valueChanged(_:)), for: .valueChanged)
-        
         in_Option_IncSev.addTarget(self, action: #selector(self.switchIncSev_valueChanged(_:)), for: .valueChanged)
         
-        //
-        initDisplayValues()
+        // 금액 입력 도우미
+        btn_money_reset.addTarget(self, action: #selector(self.btnHandleMoney), for: .touchUpInside)
+        btn_money_plus100.addTarget(self, action: #selector(self.btnHandleMoney), for: .touchUpInside)
+        btn_money_plus1000.addTarget(self, action: #selector(self.btnHandleMoney), for: .touchUpInside)
         
-        //
-        setDefaultInputValues()
+        // 결과 초기화
+        resetCalculatorResult()
+        
+        // 설정
+        in_Option_Stepper_Family.maximumValue = 59
+        in_Option_Stepper_Family.minimumValue = 1
+        in_Option_Stepper_Child.maximumValue = 30
+        in_Option_Stepper_Child.minimumValue = 0
+        in_Option_Money.keyboardType = UIKeyboardType.numberPad
+        in_Option_Taxfree.keyboardType = UIKeyboardType.numberPad
+        
+        // 환경 설정 값 가져오기
+        getDefaultOptions()
         
         // 옵션값 전부 확인
         //print(UserDefaults.standard.dictionaryRepresentation())
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
-        in_Option_Money.delegate = self
-        in_Option_Taxfree.delegate = self
+        //in_Option_Money.delegate = self
+        //in_Option_Taxfree.delegate = self
     }
-
-    func initColor(){
-        //view.backgroundColor = UIColor(red: 178/255, green: 178/255, blue: 178/255, alpha: 1.0)
-        //view.backgroundColor = UIColorFromRGBA(R: 78, G: 138, B: 199, alpha: 1.0)
-        //view.color
-        //view.tintColor = UIColorFromRGBA(R: 255, G: 255, B: 255, alpha: 1.0)
-        //view.tintColor = .red
-        //view.tintColor = .white
+    func btnHandleMoney(_ sender: UIButton!){
+        guard var inMoney = Double((in_Option_Money.text!)) else {
+            //calculatorOptions.money = 0
+            return
+        }
         
+        if(sender.tag == 1000){
+            inMoney += 10000000.0
+        } else if (sender.tag == 100){
+            inMoney += 1000000.0
+        } else if (sender.tag == 0){
+            inMoney = 0.0
+            resetCalculatorResult()
+        }
+        calculatorOptions.money = inMoney
+        in_Option_Money.text = String(Int(inMoney))
+        
+        loadCalculation()
     }
     
     // 메모리 워닝 관련 (기본 메서드)
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
+
     // 화면이 드로잉 될때마다 호출됨 (매번 호출됨)
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -105,18 +120,13 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         // 옵션에서 변경된 세율을 적용시키는 메서드
         setInsuranceRateFromOption()
     }
-    //
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        scrollView.contentSize = CGSize(width: stackViewMaster.frame.width, height: stackViewMaster.frame.height)
-    }
     
     // 가족수 +-
     func stepperFamily_valueChanged(_ sender: UIStepper) {
         updateCalcOption_Family()
         loadCalculation()
     }
-
+    
     // 자녀수 +-
     func stepperChild_valueChanged(_ sender: UIStepper) {
         lbl_Option_Child.text = String(format: "자녀수 %d 명", Int(sender.value))
@@ -174,7 +184,10 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     }
     
     // 환경설정에서 설정한 기본입력값을 셋팅
-    func setDefaultInputValues(){
+    func getDefaultOptions(){
+        // 환경 설정이 안되어 있을 때 최초 1회 지정
+        registerDefaultOptions()
+        
         //print("[SH Debugger] FirstViewController getDefaultOptions "+MyAppSettings.InputDefaults.family.getValue())
         
         in_Option_Stepper_Family.value = Double(SHNUserSettings.InputDefaults.family.getValue())!
@@ -196,7 +209,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     {
         if(SHNUserSettings.Advanced.isEnableCustomRate.bool()){
             let rates = InsuranceRate.init(_nationalPension: SHNUserSettings.Rates.nationalPension.double(), _healthCare: SHNUserSettings.Rates.healthCare.double(), _longTermCare: SHNUserSettings.Rates.longTermCare.double(), _employmentCare: SHNUserSettings.Rates.employmentCare.double())
-        
+            
             calculator.setInsuranceRate(rates)
         } else {
             let rates = InsuranceRate()
@@ -227,15 +240,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         UserDefaults.standard.register(defaults: defaults)
     }
     
-    //
-    func initDisplayValues(){
-        lbl_ResultDetail_NP.text = "0 원"
-        lbl_ResultDetail_HC.text = "0 원"
-        lbl_ResultDetail_LTC.text = "0 원"
-        lbl_ResultDetail_EC.text = "0 원"
-        lbl_ResultDetail_IncomeTax.text = "0 원"
-        lbl_ResultDetail_LocalTax.text = "0 원"
-    }
+
     
     // 계산 메서드. 이 메서드로 호출해주자.
     func loadCalculation()
@@ -268,6 +273,11 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         calculator.Options().isIncludedSeverance = _options.isIncludedSeverance
         calculator.calculate()
         
+        calculate_result()
+    }
+    
+    // 결과 처리
+    func calculate_result(){
         /**
          * 계산 결과 처리
          */
@@ -283,12 +293,31 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         
         //resultDetail.text = String(format:"국민연금 : %@ 원 \r\n건강보험 : %@ 원 \r\n요양보험 : %@ 원 \r\n고용보험 : %@ 원 \r\n소득세 : %@ 원 \r\n지방세 : %@ 원",formatCurrency(insurance.nationalPension),formatCurrency(insurance.healthCare),formatCurrency(insurance.longTermCare),formatCurrency(insurance.employmentCare),formatCurrency(incomeTax.incomeTax),formatCurrency(incomeTax.localTax))
         
-        lbl_ResultDetail_NP.text = formatCurrency(insurance.nationalPension) + " 원"
-        lbl_ResultDetail_HC.text = formatCurrency(insurance.healthCare) + " 원"
-        lbl_ResultDetail_LTC.text = formatCurrency(insurance.longTermCare) + " 원"
-        lbl_ResultDetail_EC.text = formatCurrency(insurance.employmentCare) + " 원"
-        lbl_ResultDetail_IncomeTax.text = formatCurrency(incomeTax.incomeTax) + " 원"
-        lbl_ResultDetail_LocalTax.text = formatCurrency(incomeTax.localTax) + " 원"
+        //lbl_ResultDetail_NP.text = formatCurrency(insurance.nationalPension) + " 원"
+        //lbl_ResultDetail_HC.text = formatCurrency(insurance.healthCare) + " 원"
+        //lbl_ResultDetail_LTC.text = formatCurrency(insurance.longTermCare) + " 원"
+        //lbl_ResultDetail_EC.text = formatCurrency(insurance.employmentCare) + " 원"
+        //lbl_ResultDetail_IncomeTax.text = formatCurrency(incomeTax.incomeTax) + " 원"
+        //lbl_ResultDetail_LocalTax.text = formatCurrency(incomeTax.localTax) + " 원"
+    }
+    
+    // 입력값 및 결과 초기화
+    func resetCalculatorResult(){
+        // 실수령액 결과
+        lbl_Result_NetSalary.text = "0 원"
+        
+        // 입력값 초기화
+        in_Option_Money.text = "0"
+        
+        // 실수령액 상세 결과
+        //lbl_ResultDetail_NP.text = "0 원"
+        //lbl_ResultDetail_HC.text = "0 원"
+        //lbl_ResultDetail_LTC.text = "0 원"
+        //lbl_ResultDetail_EC.text = "0 원"
+        //lbl_ResultDetail_IncomeTax.text = "0 원"
+        //lbl_ResultDetail_LocalTax.text = "0 원"
+        
+        
     }
     
     func updateCalcOption_Family(){
@@ -315,7 +344,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     /**
      * 키보드 바로 위에 [Done] 추가하는 메서드
      */
-    func addDoneButtonOnKeyboard()
+    func registerDoneWithKeyboard()
     {
         let doneToolbar = UIToolbar()
         doneToolbar.sizeToFit()
@@ -357,7 +386,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         var testDevices : [Any] = []
         testDevices += [kGADSimulatorID] // all simulators
         testDevices += ["d73c08aad93622d32f26c3522eb69135"] // SHiPhone7
-
+        
         //Admob Unit ID
         let interstitialGAD = GADInterstitial(adUnitID: "ca-app-pub-6702794513299112/1093139381")
         interstitialGAD.delegate = self
@@ -382,7 +411,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         }
     }
     
-    //로드가 완료되었을때 의 처리. 
+    //로드가 완료되었을때 의 처리.
     // 화면에 보여주기
     func interstitialDidReceiveAd(_ ad: GADInterstitial) {
         if(!isEnabled_InterstitialAD) { return }
@@ -402,7 +431,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         if(!isEnabled_BannerAD) { return }
         
         // 애드몹을 사용하려면, 콘텐츠 스크롤 하단부에 여백을 추가로 넣어줌
-        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
+        //scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         
         var testDevices : [Any] = []
         testDevices += [kGADSimulatorID] // all simulators
@@ -459,22 +488,10 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         //print("adViewDidReceiveAD failed!")
         hideBanner()
     }
-
+    
     func rotated(){
         hideBanner()
         showBanner()
         
     }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        //print("count textfield")
-        guard let text = textField.text else { return true }
-        let newLength = text.characters.count + string.characters.count - range.length
-        return newLength <= 10
-    }
-    
-    func UIColorFromRGBA(R red:CGFloat, G green:CGFloat, B blue:CGFloat, alpha: CGFloat) -> UIColor{
-        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)
-    }
 }
-
