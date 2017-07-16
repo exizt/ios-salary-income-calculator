@@ -14,6 +14,7 @@ class SalaryCalculator {
     var options = SalaryCalculatorOptions()
     var money : Double = 0
     var netSalary : Double = 0
+    var success : Bool = false
     
     func setOptions(_ _options: SalaryCalculatorOptions)
     {
@@ -24,13 +25,22 @@ class SalaryCalculator {
     * 계산하기
     */
     func calculate(){
+        success = false
+        
+        // 월 단위 급여 계산
         let baseSalary : Double = computeSalary()
+        if(baseSalary < 0){
+            self.reset()
+            success = false
+            return
+        }
         
         insurance.calculate(baseSalary)
         incomeTax.calculate(baseSalary, family: options.family, child: options.child)
         
         netSalary = baseSalary - insurance.summary - incomeTax.summary + options.taxFree;
         
+        success = true
     }
     func getInsurance() -> Insurance{
         return insurance
@@ -58,5 +68,16 @@ class SalaryCalculator {
         }
         
         return grossSalary - Options().taxFree
+    }
+    
+    func reset(){
+        insurance.reset()
+        incomeTax.reset()
+        options.reset()
+        success = false
+    }
+    
+    func isSuccess() -> Bool {
+        return success
     }
 }

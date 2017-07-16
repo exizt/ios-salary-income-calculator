@@ -4,6 +4,8 @@
 //
 //  Created by SH.Hong on 2017. 7. 15..
 //  Copyright © 2017년 SH.Hong. All rights reserved.
+//  동작 과정 설명
+//  calculatorOptions 는 클래스인데, 입력을 받기 위한 오브젝트가 있고, salaryCalculator 내의 멤버변수로도 Option 객체가 있다. 같은 형태인데, 둘이 레퍼런스 참조가 되지 않도록, 값으로 넘겨주어야 한다. (반드시 주의) 객체로 넘기게 되면 레퍼런스 참조가 되면서 구현이 엉킬 수 있음.
 //
 
 import UIKit
@@ -16,6 +18,7 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
     var bannerViewAD: GADBannerView!
     let isEnabled_InterstitialAD: Bool = false
     let isEnabled_BannerAD: Bool = false
+    let isDebug = false
     
     // calculator option object
     @IBOutlet weak var in_Option_Money : UITextField!
@@ -27,11 +30,18 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
     // calculator label
     @IBOutlet weak var lbl_Option_Family : UILabel!
     @IBOutlet weak var lbl_Option_Child : UILabel!
-    // calculator result label
-    @IBOutlet weak var lbl_Result_NetSalary : UILabel!
+    // input money support button
     @IBOutlet weak var btn_money_plus100: UIButton!
     @IBOutlet weak var btn_money_plus1000: UIButton!
     @IBOutlet weak var btn_money_reset: UIButton!
+    // calculator reslut label
+    @IBOutlet weak var lbl_Result_NetSalary : UILabel!
+    @IBOutlet weak var lbl_ResultDetail_NP: UILabel!
+    @IBOutlet weak var lbl_ResultDetail_HC: UILabel!
+    @IBOutlet weak var lbl_ResultDetail_LTC : UILabel!
+    @IBOutlet weak var lbl_ResultDetail_EC: UILabel!
+    @IBOutlet weak var lbl_ResultDetail_IncomeTax : UILabel!
+    @IBOutlet weak var lbl_ResultDetail_LocalTax : UILabel!
     
     // load 와 관련된 메서드
     override func viewDidLoad() {
@@ -94,11 +104,14 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
         } else if (sender.tag == 100){
             inMoney += 1000000.0
         } else if (sender.tag == 0){
-            inMoney = 0.0
+            calculatorOptions.money = 0
+            in_Option_Money.text = "0"
             resetCalculatorResult()
+            return
         }
         calculatorOptions.money = inMoney
         in_Option_Money.text = String(Int(inMoney))
+        autoChangeAnnualyFromIncomeMoney(inMoney)
         
         loadCalculation()
     }
@@ -146,17 +159,22 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
             return
         }
         
+        // 금액 기준으로 연/월 급 선택 자동 변경
+        autoChangeAnnualyFromIncomeMoney(incomeMoney)
+        
+        // 계산 호출
+        loadCalculation()
+    }
+    
+    func autoChangeAnnualyFromIncomeMoney(_ money: Double){
         //1000만원 보다 크면 연봉으로 감안, 적으면 월급으로 감안
-        if(incomeMoney>=10000000){
+        if(money>=10000000){
             self.in_Option_Segmented_Annual.selectedSegmentIndex = 0
             calculatorOptions.isAnnualIncome  = true
         } else {
             self.in_Option_Segmented_Annual.selectedSegmentIndex = 1
             calculatorOptions.isAnnualIncome  = false
         }
-        
-        // 계산 호출
-        loadCalculation()
     }
     
     // 비과세 입력 시 메서드
@@ -245,6 +263,7 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
     // 계산 메서드. 이 메서드로 호출해주자.
     func loadCalculation()
     {
+        
         let incomeMoney = calculatorOptions.money
         
         // 금액 입력이 10만원 이내면 계산안함
@@ -252,7 +271,13 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
             return
         }
         
+        //debugPrint(String(format: "before calculator options [%f]", calculatorOptions.money))
+        //debugPrint(String(format: "after  inOptions Money [%f]", calculatorOptions.money))
+        
+        debugPrint("calculator Before Options "+calculator.Options().toString())
+        debugPrint("inOptions "+calculatorOptions.toString())
         if(!calculator.Options().equals(calculatorOptions)){
+            
             // 계산 메서드 호출
             calculate(calculatorOptions)
         }
@@ -262,7 +287,8 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
     // 가급적 바로 호출하지 마시고, loadCalculation 메서드로 호출해주세요.
     // 테스트 할 시에만 직접 호출 하세요.
     func calculate(_ _options : SalaryCalculatorOptions) {
-        //print(_options.toString())
+        debugPrint("calculate actived")
+        //debugPrint("inOptions "+_options.toString())
         
         // 설정값 대입
         calculator.Options().money = _options.money
@@ -271,6 +297,9 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
         calculator.Options().taxFree = _options.taxFree
         calculator.Options().isAnnualIncome = _options.isAnnualIncome
         calculator.Options().isIncludedSeverance = _options.isIncludedSeverance
+        
+        //debugPrint("calculator Options "+calculator.Options().toString())
+        
         calculator.calculate()
         
         calculate_result()
@@ -278,12 +307,15 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
     
     // 결과 처리
     func calculate_result(){
+        debugPrint("cacluate_result actived")
+        if(!calculator.isSuccess()){
+            resetCalculatorResult()
+            return
+        }
         /**
          * 계산 결과 처리
          */
-        //resultSummary.text = String(format:"%f",formatter.string(from:calculator.netSalary))
         lbl_Result_NetSalary.text = formatCurrency(calculator.netSalary) + " 원"
-        
         
         var insurance = Insurance()
         insurance = calculator.getInsurance()
@@ -291,33 +323,34 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
         var incomeTax = IncomeTax()
         incomeTax = calculator.getIncomeTax()
         
-        //resultDetail.text = String(format:"국민연금 : %@ 원 \r\n건강보험 : %@ 원 \r\n요양보험 : %@ 원 \r\n고용보험 : %@ 원 \r\n소득세 : %@ 원 \r\n지방세 : %@ 원",formatCurrency(insurance.nationalPension),formatCurrency(insurance.healthCare),formatCurrency(insurance.longTermCare),formatCurrency(insurance.employmentCare),formatCurrency(incomeTax.incomeTax),formatCurrency(incomeTax.localTax))
-        
-        //lbl_ResultDetail_NP.text = formatCurrency(insurance.nationalPension) + " 원"
-        //lbl_ResultDetail_HC.text = formatCurrency(insurance.healthCare) + " 원"
-        //lbl_ResultDetail_LTC.text = formatCurrency(insurance.longTermCare) + " 원"
-        //lbl_ResultDetail_EC.text = formatCurrency(insurance.employmentCare) + " 원"
-        //lbl_ResultDetail_IncomeTax.text = formatCurrency(incomeTax.incomeTax) + " 원"
-        //lbl_ResultDetail_LocalTax.text = formatCurrency(incomeTax.localTax) + " 원"
+        // 상세 결과 표현
+        lbl_ResultDetail_NP.text = formatCurrency(insurance.nationalPension) + " 원"
+        lbl_ResultDetail_HC.text = formatCurrency(insurance.healthCare) + " 원"
+        lbl_ResultDetail_LTC.text = formatCurrency(insurance.longTermCare) + " 원"
+        lbl_ResultDetail_EC.text = formatCurrency(insurance.employmentCare) + " 원"
+        lbl_ResultDetail_IncomeTax.text = formatCurrency(incomeTax.incomeTax) + " 원"
+        lbl_ResultDetail_LocalTax.text = formatCurrency(incomeTax.localTax) + " 원"
     }
+
     
-    // 입력값 및 결과 초기화
+    // 결과 초기화
     func resetCalculatorResult(){
+        debugPrint("resetCalculatorResult actived")
+        
         // 실수령액 결과
         lbl_Result_NetSalary.text = "0 원"
         
         // 입력값 초기화
-        in_Option_Money.text = "0"
+        //in_Option_Money.text = "0"
         
         // 실수령액 상세 결과
-        //lbl_ResultDetail_NP.text = "0 원"
-        //lbl_ResultDetail_HC.text = "0 원"
-        //lbl_ResultDetail_LTC.text = "0 원"
-        //lbl_ResultDetail_EC.text = "0 원"
-        //lbl_ResultDetail_IncomeTax.text = "0 원"
-        //lbl_ResultDetail_LocalTax.text = "0 원"
-        
-        
+        lbl_ResultDetail_NP.text = "0 원"
+        lbl_ResultDetail_HC.text = "0 원"
+        lbl_ResultDetail_LTC.text = "0 원"
+        lbl_ResultDetail_EC.text = "0 원"
+        lbl_ResultDetail_IncomeTax.text = "0 원"
+        lbl_ResultDetail_LocalTax.text = "0 원"
+
     }
     
     func updateCalcOption_Family(){
@@ -493,5 +526,11 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
         hideBanner()
         showBanner()
         
+    }
+    
+    func debugPrint(_ message:String){
+        if(isDebug){
+            print("[Calculator]"+message)
+        }
     }
 }

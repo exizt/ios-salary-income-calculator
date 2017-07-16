@@ -15,6 +15,16 @@ class SalaryCalculatorOptions {
     var isAnnualIncome : Bool = true
     var isIncludedSeverance : Bool = false
     
+    // 값 초기화
+    func reset(){
+        money = 0
+        family = 1
+        child = 0
+        taxFree = 10000
+        isAnnualIncome = true
+        isIncludedSeverance = false
+    }
+    
     func equals(_ opt: SalaryCalculatorOptions) -> Bool
     {
         return opt.money == money

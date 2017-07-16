@@ -18,6 +18,7 @@ class Insurance{
             return nationalPension + healthCare + longTermCare + employmentCare
         }
     }
+
     /**
     * 4대 보험 계산
     */
@@ -73,6 +74,13 @@ class Insurance{
     
     func getRate()->InsuranceRate {
         return rate;
+    }
+    
+    func reset(){
+        nationalPension = 0
+        healthCare = 0
+        longTermCare = 0
+        employmentCare = 0
     }
     
     /**

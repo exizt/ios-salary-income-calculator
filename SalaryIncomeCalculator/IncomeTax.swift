@@ -20,6 +20,7 @@ class IncomeTax{
             return incomeTax + localTax
         }
     }
+
     
     func calculate(_ salary: Double, family: Int, child: Int)
     {
@@ -318,8 +319,12 @@ class IncomeTax{
         }
         
         return tax
-        
-     }
+    }
+    
+    func reset()
+    {
+        incomeTax = 0
+    }
     
     /**
      * 원 단위 절삭
