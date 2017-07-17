@@ -11,13 +11,13 @@
 import UIKit
 import GoogleMobileAds
 
-class CalculatorViewController: UITableViewController, GADInterstitialDelegate, GADBannerViewDelegate {
+class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADInterstitialDelegate, GADBannerViewDelegate {
     let calculator : SalaryCalculator = SalaryCalculator()
     let calculatorOptions : SalaryCalculatorOptions = SalaryCalculatorOptions()
     var interstitialAD : GADInterstitial!
     var bannerViewAD: GADBannerView!
     let isEnabled_InterstitialAD: Bool = false
-    let isEnabled_BannerAD: Bool = false
+    let isEnabled_BannerAD: Bool = true
     let isDebug = false
     
     // calculator option object
@@ -90,8 +90,8 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
-        //in_Option_Money.delegate = self
-        //in_Option_Taxfree.delegate = self
+        in_Option_Money.delegate = self
+        in_Option_Taxfree.delegate = self
     }
     func btnHandleMoney(_ sender: UIButton!){
         guard var inMoney = Double((in_Option_Money.text!)) else {
@@ -392,7 +392,6 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
         in_Option_Taxfree.inputAccessoryView = doneToolbar
     }
     
-    
     /**
      * 키보드 바로 위의 [Done] 클릭시 에 행동하는 메서드
      */
@@ -468,7 +467,7 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
         
         var testDevices : [Any] = []
         testDevices += [kGADSimulatorID] // all simulators
-        testDevices += ["170edde56facd2e95aff519f068efaf0"] // SHiPhone7
+        //testDevices += ["170edde56facd2e95aff519f068efaf0"] // SHiPhone7
         
         let request = GADRequest()
         request.testDevices = testDevices
@@ -526,6 +525,14 @@ class CalculatorViewController: UITableViewController, GADInterstitialDelegate, 
         hideBanner()
         showBanner()
         
+    }
+    
+    // textfield 길이 제한을 하기 위한 메서드. TextfieldDelegate 를 필요로 한다.
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        //print("count textfield")
+        guard let text = textField.text else { return true }
+        let newLength = text.characters.count + string.characters.count - range.length
+        return newLength <= 10
     }
     
     func debugPrint(_ message:String){
