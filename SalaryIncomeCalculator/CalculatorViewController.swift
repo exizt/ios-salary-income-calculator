@@ -540,4 +540,40 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
             print("[Calculator]"+message)
         }
     }
+
+
+    // 네비게이션 컨트롤러를 통해서 하위 액티비티 를 부르기 전에 동작하는 메서드.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        let view = segue.destination as! CalculatorDetailViewController
+        let receiveItem: CalculatorDetailViewController_Receive
+        
+        switch String(segue.identifier ?? "")! {
+        case "seg_np":
+            receiveItem = CalculatorDetailViewController_Receive.np
+            break
+        case "seg_hc":
+            receiveItem = CalculatorDetailViewController_Receive.hc
+            break
+        case "seg_ltc":
+            receiveItem = CalculatorDetailViewController_Receive.ltc
+            break
+        case "seg_ec":
+            receiveItem = CalculatorDetailViewController_Receive.ec
+            break
+        case "seg_incomeTax":
+            receiveItem = CalculatorDetailViewController_Receive.incomeTax
+            break
+        case "seg_localTax":
+            receiveItem = CalculatorDetailViewController_Receive.localTax
+            break
+        default:
+            receiveItem = CalculatorDetailViewController_Receive.np
+            break
+        }
+        
+        view.title = ((cell.textLabel)?.text)!
+        view.receiveItem(receiveItem)
+        
+    }
 }
