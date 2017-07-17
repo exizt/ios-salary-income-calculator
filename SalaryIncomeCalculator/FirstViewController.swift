@@ -15,7 +15,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     var interstitialAD : GADInterstitial!
     var bannerViewAD: GADBannerView!
     let isEnabled_InterstitialAD: Bool = false
-    let isEnabled_BannerAD: Bool = false
+    let isEnabled_BannerAD: Bool = true
 
     @IBOutlet weak var in_Option_Money : UITextField!
     @IBOutlet weak var in_Option_Taxfree : UITextField!
@@ -406,7 +406,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         
         var testDevices : [Any] = []
         testDevices += [kGADSimulatorID] // all simulators
-        testDevices += ["170edde56facd2e95aff519f068efaf0"] // SHiPhone7
+        //testDevices += ["170edde56facd2e95aff519f068efaf0"] // SHiPhone7
         
         let request = GADRequest()
         request.testDevices = testDevices
@@ -444,7 +444,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         banner.isHidden = true
     }
     
-    // 로딩이 되면 화면에 보여줌
+    // [Admob Banner Type] 로딩이 되면 화면에 보여줌
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         if(!isEnabled_BannerAD) { return }
         
@@ -452,7 +452,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         showBanner()
     }
     
-    // 에러 발생시에 hide 시킴
+    // [Admob Banner Type] 에러 발생시에 hide 시킴
     func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
         if(!isEnabled_BannerAD) { return }
         

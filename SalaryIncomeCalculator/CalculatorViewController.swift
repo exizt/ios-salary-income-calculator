@@ -48,9 +48,9 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
         super.viewDidLoad()
         
         // admob
-        if(isEnabled_InterstitialAD) { interstitialAD = createAndLoadInterstitial() }
-        if(isEnabled_BannerAD) { initAdmobBanner() }
-      
+        if(isEnabled_InterstitialAD) { interstitialAD = createWithLoadInterstitialGAD() }
+        if(isEnabled_BannerAD) { bannerViewAD = createWithLoadBannerGAD() }
+        
         // 키보드에 done 버튼 추가
         registerDoneWithKeyboard()
         
@@ -92,6 +92,7 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
         
         in_Option_Money.delegate = self
         in_Option_Taxfree.delegate = self
+        
     }
     func btnHandleMoney(_ sender: UIButton!){
         guard var inMoney = Double((in_Option_Money.text!)) else {
@@ -120,7 +121,7 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     // 화면이 드로잉 될때마다 호출됨 (매번 호출됨)
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -258,7 +259,7 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
         UserDefaults.standard.register(defaults: defaults)
     }
     
-
+    
     
     // 계산 메서드. 이 메서드로 호출해주자.
     func loadCalculation()
@@ -331,7 +332,7 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
         lbl_ResultDetail_IncomeTax.text = formatCurrency(incomeTax.incomeTax) + " 원"
         lbl_ResultDetail_LocalTax.text = formatCurrency(incomeTax.localTax) + " 원"
     }
-
+    
     
     // 결과 초기화
     func resetCalculatorResult(){
@@ -350,7 +351,7 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
         lbl_ResultDetail_EC.text = "0 원"
         lbl_ResultDetail_IncomeTax.text = "0 원"
         lbl_ResultDetail_LocalTax.text = "0 원"
-
+        
     }
     
     func updateCalcOption_Family(){
@@ -412,7 +413,7 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
     }
     
     // Admob 전면광고 생성 메서드
-    func createAndLoadInterstitial() -> GADInterstitial?{
+    func createWithLoadInterstitialGAD() -> GADInterstitial?{
         if(!isEnabled_InterstitialAD) { return nil }
         
         var testDevices : [Any] = []
@@ -459,8 +460,17 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
         //print("Fail to receive interstitial")
     }
     
-    func initAdmobBanner(){
-        if(!isEnabled_BannerAD) { return }
+    func createWithLoadBannerGAD()->GADBannerView?
+    {
+        if(!isEnabled_BannerAD) { return nil }
+        
+        // 기본적인 셋팅
+        let bannerGAD = GADBannerView(adSize: kGADAdSizeFullBanner)
+        //bannerViewAD = GADBannerView(adSize: kGADAdSizeFullBanner)
+        bannerGAD.adUnitID = "ca-app-pub-6702794513299112/8753530183"
+        bannerGAD.delegate = self
+        bannerGAD.rootViewController = self
+        
         
         // 애드몹을 사용하려면, 콘텐츠 스크롤 하단부에 여백을 추가로 넣어줌
         //scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
@@ -472,26 +482,39 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
         let request = GADRequest()
         request.testDevices = testDevices
         
-        bannerViewAD = GADBannerView(adSize: kGADAdSizeFullBanner)
-        bannerViewAD.adUnitID = "ca-app-pub-6702794513299112/8753530183"
-        bannerViewAD.rootViewController = self
-        bannerViewAD.delegate = self
-        bannerViewAD.load(request)
-        self.view.addSubview(bannerViewAD)
+        
+        bannerGAD.load(request)
+        //self.tableView.tableFooterView?.addSubview(bannerViewAD)
+        //self.navigationController?.toolbar.addSubview(bannerViewAD)
+        //self.scrollview
+        //self.view.addSubview(bannerViewAD)
+        return bannerGAD
         
     }
-    func showBanner(){
+    func showBanner(_ bannerView: GADBannerView){
         if(!isEnabled_BannerAD) { return }
         
-        let banner = bannerViewAD!
+        let translateTransform = CGAffineTransform(translationX: 0, y: -bannerView.bounds.size.height)
+        bannerView.transform = translateTransform
         
-        UIView.beginAnimations("showBanner", context: nil)
+        UIView.animate(withDuration: 0.5) {
+            bannerView.transform = CGAffineTransform.identity
+        }
+        
+        //tableView.tableHeaderView?.frame = bannerView.frame
+        //tableView.tableHeaderView = bannerView
+        
+        //let banner = bannerViewAD!
+        //tableView.tableHeaderView?.frame = banner.frame
+        //tableView.tableHeaderView = banner
+        
+        //UIView.beginAnimations("showBanner", context: nil)
         //let rect = CGRect(x: view.frame.size.width/2 - banner.frame.size.width/2, y: view.frame.size.height - banner.frame.size.height, width: banner.frame.size.width, height: banner.frame.size.height)
-        let rect = CGRect(x: view.frame.size.width/2 - banner.frame.size.width/2, y: view.bounds.height - banner.frame.size.height - CGFloat((self.tabBarController?.tabBar.frame.height)!), width: banner.frame.size.width, height: banner.frame.size.height)
+        //let rect = CGRect(x: view.frame.size.width/2 - banner.frame.size.width/2, y: view.bounds.height - banner.frame.size.height - CGFloat((self.tabBarController?.tabBar.frame.height)!), width: banner.frame.size.width, height: banner.frame.size.height)
         
-        banner.frame = rect
-        UIView.commitAnimations()
-        banner.isHidden = false
+        //banner.frame = rect
+        //UIView.commitAnimations()
+        bannerView.isHidden = false
     }
     
     func hideBanner(){
@@ -505,25 +528,24 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
         banner.isHidden = true
     }
     
-    // 로딩이 되면 화면에 보여줌
+    
+    
+    
+    // [Admob Banner Type] 로딩이 되면 화면에 보여줌
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         if(!isEnabled_BannerAD) { return }
-        
-        //print("adViewDidReceiveAD")
-        showBanner()
+        showBanner(bannerView)
     }
     
-    // 에러 발생시에 hide 시킴
+    // [Admob Banner Type] 에러 발생시에 hide 시킴
     func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
         if(!isEnabled_BannerAD) { return }
-        
-        //print("adViewDidReceiveAD failed!")
         hideBanner()
     }
     
     func rotated(){
-        hideBanner()
-        showBanner()
+        //hideBanner()
+        //showBanner()
         
     }
     
@@ -540,8 +562,8 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
             print("[Calculator]"+message)
         }
     }
-
-
+    
+    
     // 네비게이션 컨트롤러를 통해서 하위 액티비티 를 부르기 전에 동작하는 메서드.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UITableViewCell
