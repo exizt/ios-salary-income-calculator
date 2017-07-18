@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AEXML
 
 enum CalculatorDetail_ViewController_Receive: Int {
     case np
@@ -20,15 +21,39 @@ enum CalculatorDetail_ViewController_Receive: Int {
 class CalculatorDetail_ViewController: UIViewController {
     var item : CalculatorDetail_ViewController_Receive?
     
+    @IBOutlet weak var lbl_test: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        guard let
+            xmlPath = Bundle.main.path(forResource: "dictionary", ofType: "xml"),
+            let data = try? Data(contentsOf: URL(fileURLWithPath: xmlPath))
+            else { return }
+        do {
+            let xmlDoc = try AEXMLDocument(xml: data)
+            
+            // prints the same XML structure as original
+            //print(xmlDoc.xml)
+            
+            // prints Optional("Tinna") (first element)
+            //print(xmlDoc.root["cats"]["cat"].value)
+            //print(xmlDoc.root["insurance-nationalpension"].xml)
+            print(xmlDoc.root["insurance-nationalpension"]["explanation"].string)
+            lbl_test.text = xmlDoc.root["insurance-nationalpension"]["explanation"].string
+        }
+        catch {
+            print("\(error)")
+        }
+        
+        /*
         if let filepath = Bundle.main.path(forResource: "dictionary", ofType: "xml"){
             do{
                 //let contents = try String(contentsOfFile: filepath)
                 //let xml = FileManager.default.contents(atPath: filepath)
                 
                 let xmlData = try NSData(contentsOfFile: filepath)
+                let xmlDoc = try AEXMLDocument(xml: xmlData)
                 
                 //print(contents)
                 
@@ -42,6 +67,7 @@ class CalculatorDetail_ViewController: UIViewController {
                 
             }
         }
+         */
     }
 
     override func didReceiveMemoryWarning() {

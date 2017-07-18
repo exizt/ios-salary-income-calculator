@@ -32,6 +32,8 @@
 		76B5DBC81F05B1740056D499 /* SHNUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DBC71F05B1740056D499 /* SHNUserSettings.swift */; };
 		76B5DBCA1F05CD130056D499 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 76B5DBC91F05CD130056D499 /* readme.md */; };
 		76E8B1F31F13A7B0000BEEFD /* CustomBaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E8B1F21F13A7B0000BEEFD /* CustomBaseLabel.swift */; };
+		76F2430C1F1E37F80075ADD4 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76F243071F1E218D0075ADD4 /* AEXML.framework */; };
+		76F2430D1F1E37F80075ADD4 /* AEXML.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76F243071F1E218D0075ADD4 /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,20 @@
 			remoteInfo = SalaryIncomeCalculator;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		76F2430E1F1E37F80075ADD4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				76F2430D1F1E37F80075ADD4 /* AEXML.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		760DE2BD1F1BA1C500FDB0DE /* dictionary.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dictionary.xml; sourceTree = "<group>"; };
@@ -83,6 +99,8 @@
 		76B5DBC71F05B1740056D499 /* SHNUserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHNUserSettings.swift; sourceTree = "<group>"; };
 		76B5DBC91F05CD130056D499 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		76E8B1F21F13A7B0000BEEFD /* CustomBaseLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBaseLabel.swift; sourceTree = "<group>"; };
+		76F243041F1E1C7F0075ADD4 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		76F243071F1E218D0075ADD4 /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AEXML.framework; path = Carthage/Build/iOS/AEXML.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76F2430C1F1E37F80075ADD4 /* AEXML.framework in Frameworks */,
 				76B5D9F11EFE6E61006D8476 /* GoogleMobileAds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -123,6 +142,7 @@
 		767FF4E71EFB2920001329C1 = {
 			isa = PBXGroup;
 			children = (
+				76F243041F1E1C7F0075ADD4 /* Cartfile */,
 				76B5DBC91F05CD130056D499 /* readme.md */,
 				767FF4F21EFB2920001329C1 /* SalaryIncomeCalculator */,
 				767FF5091EFB2923001329C1 /* SalaryIncomeCalculatorTests */,
@@ -199,6 +219,7 @@
 		76B5D9EF1EFE6E60006D8476 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				76F243071F1E218D0075ADD4 /* AEXML.framework */,
 				76B5D9F01EFE6E61006D8476 /* GoogleMobileAds.framework */,
 			);
 			name = Frameworks;
@@ -214,6 +235,7 @@
 				767FF4EC1EFB2920001329C1 /* Sources */,
 				767FF4ED1EFB2920001329C1 /* Frameworks */,
 				767FF4EE1EFB2920001329C1 /* Resources */,
+				76F2430E1F1E37F80075ADD4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -516,6 +538,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Libraries",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = SalaryIncomeCalculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -534,6 +557,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Libraries",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = SalaryIncomeCalculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
