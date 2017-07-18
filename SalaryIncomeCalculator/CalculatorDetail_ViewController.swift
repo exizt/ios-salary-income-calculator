@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum CalculatorDetailViewController_Receive: Int {
+enum CalculatorDetail_ViewController_Receive: Int {
     case np
     case hc
     case ltc
@@ -17,8 +17,8 @@ enum CalculatorDetailViewController_Receive: Int {
     case localTax
 }
 
-class CalculatorDetailViewController: UIViewController {
-    var item : CalculatorDetailViewController_Receive?
+class CalculatorDetail_ViewController: UIViewController {
+    var item : CalculatorDetail_ViewController_Receive?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +59,7 @@ class CalculatorDetailViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    func receiveItem(_ item: CalculatorDetailViewController_Receive){
+    func receiveItem(_ item: CalculatorDetail_ViewController_Receive){
         self.item = item
     }
 }

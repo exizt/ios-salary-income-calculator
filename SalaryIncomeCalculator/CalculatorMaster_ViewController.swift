@@ -9,15 +9,10 @@
 //
 
 import UIKit
-import GoogleMobileAds
 
-class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADInterstitialDelegate, GADBannerViewDelegate {
+class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegate{
     let calculator : SalaryCalculator = SalaryCalculator()
     let calculatorOptions : SalaryCalculatorOptions = SalaryCalculatorOptions()
-    var interstitialAD : GADInterstitial!
-    var bannerViewAD: GADBannerView!
-    let isEnabled_InterstitialAD: Bool = false
-    let isEnabled_BannerAD: Bool = true
     let isDebug = false
     
     // calculator option object
@@ -46,10 +41,6 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
     // load 와 관련된 메서드
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // admob
-        if(isEnabled_InterstitialAD) { interstitialAD = createWithLoadInterstitialGAD() }
-        if(isEnabled_BannerAD) { bannerViewAD = createWithLoadBannerGAD() }
         
         // 키보드에 done 버튼 추가
         registerDoneWithKeyboard()
@@ -87,8 +78,6 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
         
         // 옵션값 전부 확인
         //print(UserDefaults.standard.dictionaryRepresentation())
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
         in_Option_Money.delegate = self
         in_Option_Taxfree.delegate = self
@@ -412,143 +401,6 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
         return result!
     }
     
-    // Admob 전면광고 생성 메서드
-    func createWithLoadInterstitialGAD() -> GADInterstitial?{
-        if(!isEnabled_InterstitialAD) { return nil }
-        
-        var testDevices : [Any] = []
-        testDevices += [kGADSimulatorID] // all simulators
-        testDevices += ["d73c08aad93622d32f26c3522eb69135"] // SHiPhone7
-        
-        //Admob Unit ID
-        let interstitialGAD = GADInterstitial(adUnitID: "ca-app-pub-6702794513299112/1093139381")
-        interstitialGAD.delegate = self
-        
-        
-        let request = GADRequest()
-        request.testDevices = testDevices
-        interstitialGAD.load(request)
-        
-        return interstitialGAD
-    }
-    
-    //Admob 전면광고
-    func viewInterstitial(){
-        if(!isEnabled_InterstitialAD) { return }
-        
-        // 준비가 완료되었다면 화면에 활성 present
-        if interstitialAD.isReady {
-            interstitialAD.present(fromRootViewController: self)
-        } else {
-            //print("Ad wasn't ready")
-        }
-    }
-    
-    //로드가 완료되었을때 의 처리.
-    // 화면에 보여주기
-    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
-        if(!isEnabled_InterstitialAD) { return }
-        
-        //print("Interstitial loaded successfully")
-        ad.present(fromRootViewController: self)
-    }
-    
-    //실패했을때의 처리
-    func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
-        if(!isEnabled_InterstitialAD) { return }
-        
-        //print("Fail to receive interstitial")
-    }
-    
-    func createWithLoadBannerGAD()->GADBannerView?
-    {
-        if(!isEnabled_BannerAD) { return nil }
-        
-        // 기본적인 셋팅
-        let bannerGAD = GADBannerView(adSize: kGADAdSizeFullBanner)
-        //bannerViewAD = GADBannerView(adSize: kGADAdSizeFullBanner)
-        bannerGAD.adUnitID = "ca-app-pub-6702794513299112/8753530183"
-        bannerGAD.delegate = self
-        bannerGAD.rootViewController = self
-        
-        
-        // 애드몹을 사용하려면, 콘텐츠 스크롤 하단부에 여백을 추가로 넣어줌
-        //scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
-        
-        var testDevices : [Any] = []
-        testDevices += [kGADSimulatorID] // all simulators
-        //testDevices += ["170edde56facd2e95aff519f068efaf0"] // SHiPhone7
-        
-        let request = GADRequest()
-        request.testDevices = testDevices
-        
-        
-        bannerGAD.load(request)
-        //self.tableView.tableFooterView?.addSubview(bannerViewAD)
-        //self.navigationController?.toolbar.addSubview(bannerViewAD)
-        //self.scrollview
-        //self.view.addSubview(bannerViewAD)
-        return bannerGAD
-        
-    }
-    func showBanner(_ bannerView: GADBannerView){
-        if(!isEnabled_BannerAD) { return }
-        
-        let translateTransform = CGAffineTransform(translationX: 0, y: -bannerView.bounds.size.height)
-        bannerView.transform = translateTransform
-        
-        UIView.animate(withDuration: 0.5) {
-            bannerView.transform = CGAffineTransform.identity
-        }
-        
-        //tableView.tableHeaderView?.frame = bannerView.frame
-        //tableView.tableHeaderView = bannerView
-        
-        //let banner = bannerViewAD!
-        //tableView.tableHeaderView?.frame = banner.frame
-        //tableView.tableHeaderView = banner
-        
-        //UIView.beginAnimations("showBanner", context: nil)
-        //let rect = CGRect(x: view.frame.size.width/2 - banner.frame.size.width/2, y: view.frame.size.height - banner.frame.size.height, width: banner.frame.size.width, height: banner.frame.size.height)
-        //let rect = CGRect(x: view.frame.size.width/2 - banner.frame.size.width/2, y: view.bounds.height - banner.frame.size.height - CGFloat((self.tabBarController?.tabBar.frame.height)!), width: banner.frame.size.width, height: banner.frame.size.height)
-        
-        //banner.frame = rect
-        //UIView.commitAnimations()
-        bannerView.isHidden = false
-    }
-    
-    func hideBanner(){
-        if(!isEnabled_BannerAD) { return }
-        
-        let banner = bannerViewAD!
-        
-        UIView.beginAnimations("showBanner", context: nil)
-        banner.frame = CGRect(x: view.frame.size.width/2 - banner.frame.size.width/2, y: view.frame.size.height - banner.frame.size.height, width: banner.frame.size.width, height: banner.frame.size.height)
-        UIView.commitAnimations()
-        banner.isHidden = true
-    }
-    
-    
-    
-    
-    // [Admob Banner Type] 로딩이 되면 화면에 보여줌
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        if(!isEnabled_BannerAD) { return }
-        showBanner(bannerView)
-    }
-    
-    // [Admob Banner Type] 에러 발생시에 hide 시킴
-    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        if(!isEnabled_BannerAD) { return }
-        hideBanner()
-    }
-    
-    func rotated(){
-        //hideBanner()
-        //showBanner()
-        
-    }
-    
     // textfield 길이 제한을 하기 위한 메서드. TextfieldDelegate 를 필요로 한다.
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         //print("count textfield")
@@ -567,30 +419,30 @@ class CalculatorViewController: UITableViewController, UITextFieldDelegate, GADI
     // 네비게이션 컨트롤러를 통해서 하위 액티비티 를 부르기 전에 동작하는 메서드.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UITableViewCell
-        let view = segue.destination as! CalculatorDetailViewController
-        let receiveItem: CalculatorDetailViewController_Receive
+        let view = segue.destination as! CalculatorDetail_ViewController
+        let receiveItem: CalculatorDetail_ViewController_Receive
         
         switch String(segue.identifier ?? "")! {
         case "seg_np":
-            receiveItem = CalculatorDetailViewController_Receive.np
+            receiveItem = CalculatorDetail_ViewController_Receive.np
             break
         case "seg_hc":
-            receiveItem = CalculatorDetailViewController_Receive.hc
+            receiveItem = CalculatorDetail_ViewController_Receive.hc
             break
         case "seg_ltc":
-            receiveItem = CalculatorDetailViewController_Receive.ltc
+            receiveItem = CalculatorDetail_ViewController_Receive.ltc
             break
         case "seg_ec":
-            receiveItem = CalculatorDetailViewController_Receive.ec
+            receiveItem = CalculatorDetail_ViewController_Receive.ec
             break
         case "seg_incomeTax":
-            receiveItem = CalculatorDetailViewController_Receive.incomeTax
+            receiveItem = CalculatorDetail_ViewController_Receive.incomeTax
             break
         case "seg_localTax":
-            receiveItem = CalculatorDetailViewController_Receive.localTax
+            receiveItem = CalculatorDetail_ViewController_Receive.localTax
             break
         default:
-            receiveItem = CalculatorDetailViewController_Receive.np
+            receiveItem = CalculatorDetail_ViewController_Receive.np
             break
         }
         
