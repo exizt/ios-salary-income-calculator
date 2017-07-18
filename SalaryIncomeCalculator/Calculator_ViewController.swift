@@ -15,16 +15,18 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
     var bannerViewAD: GADBannerView!
     let isEnabled_InterstitialAD: Bool = false
     let isEnabled_BannerAD: Bool = true
+    let isDebugAdmob: Bool = false
+    @IBOutlet weak var containerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // admob
+        // Admob
         if(isEnabled_InterstitialAD) { interstitialAD = createWithLoadInterstitialGAD() }
         if(isEnabled_BannerAD) { bannerViewAD = createWithLoadBannerGAD() }
-        
         // rotate 될 때 동작
-        NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.rotatedAdmobBanner), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,12 +48,19 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         return request
     }
     
+    func debugPrint_Admob(_ msg: String){
+        if(isDebugAdmob){
+            print(msg)
+        }
+    }
+    
     // --------------------------
     // banner ads 관련
     // 배너형 광고.
     func createWithLoadBannerGAD()->GADBannerView?
     {
         if(!isEnabled_BannerAD) { return nil }
+        debugPrint_Admob("createWithLoadBannerGAD")
         
         // 기본적인 셋팅
         let bannerGAD = GADBannerView(adSize: kGADAdSizeFullBanner)
@@ -69,6 +78,7 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         //self.navigationController?.toolbar.addSubview(bannerViewAD)
         //self.scrollview
         self.view.addSubview(bannerGAD)
+        containerView.frame.size.height -= bannerGAD.frame.size.height
         return bannerGAD
         
     }
@@ -76,19 +86,20 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
     // [Admob Banner Type] 로딩이 되면 화면에 보여줌
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         if(!isEnabled_BannerAD) { return }
-        //print("loaded")
+        debugPrint_Admob("adViewDidReceiveAd")
         showBanner(bannerView)
     }
     
     // [Admob Banner Type] 에러 발생시에 hide 시킴
     func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
         if(!isEnabled_BannerAD) { return }
+        debugPrint_Admob("adView")
         hideBanner(bannerView)
     }
     
     func showBanner(_ bannerView: GADBannerView){
         if(!isEnabled_BannerAD) { return }
-        
+        debugPrint_Admob("showBanner")
         //let translateTransform = CGAffineTransform(translationX: 0, y: -bannerView.bounds.size.height)
         //bannerView.transform = translateTransform
         
@@ -99,6 +110,8 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         UIView.beginAnimations("showBanner", context: nil)
         let rect = CGRect(x: view.frame.size.width/2 - bannerView.frame.size.width/2, y: view.bounds.height - bannerView.frame.size.height - CGFloat((self.tabBarController?.tabBar.frame.height)!), width: bannerView.frame.size.width, height: bannerView.frame.size.height)
         
+
+        
         bannerView.frame = rect
         UIView.commitAnimations()
         bannerView.isHidden = false
@@ -106,11 +119,22 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
     
     func hideBanner(_ bannerView: GADBannerView){
         if(!isEnabled_BannerAD) { return }
+        debugPrint_Admob("hideBanner")
         
         UIView.beginAnimations("showBanner", context: nil)
         bannerView.frame = CGRect(x: view.frame.size.width/2 - bannerView.frame.size.width/2, y: view.frame.size.height - bannerView.frame.size.height, width: bannerView.frame.size.width, height: bannerView.frame.size.height)
+        
         UIView.commitAnimations()
         bannerView.isHidden = true
+    }
+    
+    
+    func rotatedAdmobBanner(){
+        if(!isEnabled_BannerAD) { return }
+        debugPrint_Admob("rotatedAdmobBanner")
+        hideBanner(bannerViewAD)
+        showBanner(bannerViewAD)
+        
     }
     
     // END of [[banner ads 관련]]
@@ -162,10 +186,5 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
 
     // End of [[Admob 전면광고 관련]]
     // --------------------------
-    
-    func rotated(){
-        hideBanner(bannerViewAD)
-        showBanner(bannerViewAD)
-        
-    }
+
 }
