@@ -42,7 +42,8 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         // testdevices 목록
         var testDevices : [Any] = []
         testDevices += [kGADSimulatorID] // all simulators
-        testDevices += ["d73c08aad93622d32f26c3522eb69135"] // SHiPhone7
+        //testDevices += ["d73c08aad93622d32f26c3522eb69135"] // SHiPhone7
+        //testDevices += ["4bac9987239aad2ff1b894917a15b4f3"] // SHiPhone7
         request.testDevices = testDevices
         
         return request
@@ -107,13 +108,11 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         //    bannerView.transform = CGAffineTransform.identity
         //}
         
-        UIView.beginAnimations("showBanner", context: nil)
+        //UIView.beginAnimations("showBanner", context: nil)
         let rect = CGRect(x: view.frame.size.width/2 - bannerView.frame.size.width/2, y: view.bounds.height - bannerView.frame.size.height - CGFloat((self.tabBarController?.tabBar.frame.height)!), width: bannerView.frame.size.width, height: bannerView.frame.size.height)
-        
 
-        
         bannerView.frame = rect
-        UIView.commitAnimations()
+        //UIView.commitAnimations()
         bannerView.isHidden = false
     }
     
@@ -121,10 +120,10 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         if(!isEnabled_BannerAD) { return }
         debugPrint_Admob("hideBanner")
         
-        UIView.beginAnimations("showBanner", context: nil)
-        bannerView.frame = CGRect(x: view.frame.size.width/2 - bannerView.frame.size.width/2, y: view.frame.size.height - bannerView.frame.size.height, width: bannerView.frame.size.width, height: bannerView.frame.size.height)
+        //UIView.beginAnimations("showBanner", context: nil)
+        //bannerView.frame = CGRect(x: view.frame.size.width/2 - bannerView.frame.size.width/2, y: view.frame.size.height - bannerView.frame.size.height, width: bannerView.frame.size.width, height: bannerView.frame.size.height)
         
-        UIView.commitAnimations()
+        //UIView.commitAnimations()
         bannerView.isHidden = true
     }
     

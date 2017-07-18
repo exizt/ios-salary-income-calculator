@@ -96,6 +96,7 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
         } else if (sender.tag == 0){
             calculatorOptions.money = 0
             in_Option_Money.text = "0"
+            calculator.Options().money = 0
             resetCalculatorResult()
             return
         }
@@ -419,7 +420,6 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
     // 네비게이션 컨트롤러를 통해서 하위 액티비티 를 부르기 전에 동작하는 메서드.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UITableViewCell
-        let view = segue.destination as! CalculatorDetail_ViewController
         let receiveItem: CalculatorDetail_ViewController_Receive
         
         switch String(segue.identifier ?? "")! {
@@ -446,6 +446,7 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
             break
         }
         
+        let view = segue.destination as! CalculatorDetail_ViewController
         view.title = ((cell.textLabel)?.text)!
         view.receiveItem(receiveItem)
         

@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qeb-I6-jy9">
-                                <rect key="frame" x="0.0" y="28" width="414" height="667"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="716"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="oMI-cK-MUl">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="662.33333333333337"/>
@@ -332,7 +332,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="748" y="-1212"/>
+            <point key="canvasLocation" x="3280" y="2099"/>
         </scene>
         <!--실수령액 계산하기-->
         <scene sceneID="UA1-MF-zTz">
@@ -384,7 +384,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="월 실수령액" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0q-vt-3XC">
-                                                    <rect key="frame" x="21" y="10" width="120" height="30.333333333333332"/>
+                                                    <rect key="frame" x="21" y="10" width="120" height="30.333333333333336"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -637,11 +637,11 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="결과 상세 정보" id="k68-Ed-PCz">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="JyR-Z6-LND" detailTextLabel="ERQ-ud-IAK" style="IBUITableViewCellStyleValue1" id="vcB-2y-jqq">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="JyR-Z6-LND" detailTextLabel="ERQ-ud-IAK" style="IBUITableViewCellStyleValue1" id="vcB-2y-jqq">
                                         <rect key="frame" x="0.0" y="428" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vcB-2y-jqq" id="cd2-QD-Kau">
-                                            <rect key="frame" x="0.0" y="0.0" width="347" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="국민연금" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JyR-Z6-LND">
@@ -652,7 +652,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ERQ-ud-IAK">
-                                                    <rect key="frame" x="317.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
+                                                    <rect key="frame" x="369.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -664,11 +664,11 @@
                                             <segue destination="Nrl-0m-xrI" kind="show" identifier="seg_detail_np" trigger="accessoryAction" id="j4R-by-bYd"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="7eK-9m-oWu" detailTextLabel="Rsa-ho-QG8" style="IBUITableViewCellStyleValue1" id="cJX-Vh-ybr">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="7eK-9m-oWu" detailTextLabel="Rsa-ho-QG8" style="IBUITableViewCellStyleValue1" id="cJX-Vh-ybr">
                                         <rect key="frame" x="0.0" y="472" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cJX-Vh-ybr" id="AaY-Gn-RDi">
-                                            <rect key="frame" x="0.0" y="0.0" width="347" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="건강보험" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7eK-9m-oWu">
@@ -679,7 +679,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rsa-ho-QG8">
-                                                    <rect key="frame" x="317.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
+                                                    <rect key="frame" x="369.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -691,11 +691,11 @@
                                             <segue destination="Nrl-0m-xrI" kind="show" identifier="seg_detail_hc" trigger="accessoryAction" id="OPb-HC-Fkx"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="LdY-8C-He9" detailTextLabel="eCt-8e-xCz" style="IBUITableViewCellStyleValue1" id="NwE-8U-snK">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="LdY-8C-He9" detailTextLabel="eCt-8e-xCz" style="IBUITableViewCellStyleValue1" id="NwE-8U-snK">
                                         <rect key="frame" x="0.0" y="516" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NwE-8U-snK" id="meC-Rk-pTm">
-                                            <rect key="frame" x="0.0" y="0.0" width="347" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="요양보험" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LdY-8C-He9">
@@ -706,7 +706,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eCt-8e-xCz">
-                                                    <rect key="frame" x="317.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
+                                                    <rect key="frame" x="369.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -718,11 +718,11 @@
                                             <segue destination="Nrl-0m-xrI" kind="show" identifier="seg_detail_ltc" trigger="accessoryAction" id="RyU-Gx-Tbh"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="nzb-ks-Z4S" detailTextLabel="ds1-kF-Hwb" style="IBUITableViewCellStyleValue1" id="VVd-kX-tV3">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="nzb-ks-Z4S" detailTextLabel="ds1-kF-Hwb" style="IBUITableViewCellStyleValue1" id="VVd-kX-tV3">
                                         <rect key="frame" x="0.0" y="560" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VVd-kX-tV3" id="BP7-Ky-1ka">
-                                            <rect key="frame" x="0.0" y="0.0" width="347" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="고용보험" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nzb-ks-Z4S">
@@ -733,7 +733,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ds1-kF-Hwb">
-                                                    <rect key="frame" x="317.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
+                                                    <rect key="frame" x="369.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -745,11 +745,11 @@
                                             <segue destination="Nrl-0m-xrI" kind="show" identifier="seg_detail_ec" trigger="accessoryAction" id="F4F-eV-pet"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="fWi-uN-hUp" detailTextLabel="vi3-Do-uok" style="IBUITableViewCellStyleValue1" id="clz-ya-S9g">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="fWi-uN-hUp" detailTextLabel="vi3-Do-uok" style="IBUITableViewCellStyleValue1" id="clz-ya-S9g">
                                         <rect key="frame" x="0.0" y="604" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="clz-ya-S9g" id="f4N-4V-BEN">
-                                            <rect key="frame" x="0.0" y="0.0" width="347" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="소득세" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fWi-uN-hUp">
@@ -760,7 +760,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vi3-Do-uok">
-                                                    <rect key="frame" x="317.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
+                                                    <rect key="frame" x="369.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -772,11 +772,11 @@
                                             <segue destination="Nrl-0m-xrI" kind="show" identifier="seg_detail_incomeTax" id="y6W-ol-shr"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="pN5-bl-u9L" detailTextLabel="UOE-VG-foY" style="IBUITableViewCellStyleValue1" id="x70-Hg-aSR">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="pN5-bl-u9L" detailTextLabel="UOE-VG-foY" style="IBUITableViewCellStyleValue1" id="x70-Hg-aSR">
                                         <rect key="frame" x="0.0" y="648" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x70-Hg-aSR" id="Dhu-3d-ILc">
-                                            <rect key="frame" x="0.0" y="0.0" width="347" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="지방세" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pN5-bl-u9L">
@@ -787,7 +787,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UOE-VG-foY">
-                                                    <rect key="frame" x="317.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
+                                                    <rect key="frame" x="369.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -831,12 +831,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Xu-mh-Ur6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1678" y="210"/>
+            <point key="canvasLocation" x="748" y="268"/>
         </scene>
         <!--Calculator Detail View Controller-->
         <scene sceneID="Uig-i6-y9h">
             <objects>
-                <viewController id="Nrl-0m-xrI" customClass="CalculatorDetail_ViewController" sceneMemberID="viewController">
+                <viewController id="Nrl-0m-xrI" customClass="CalculatorDetail_ViewController" customModule="SalaryIncomeCalculator" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9xC-jC-Vgu"/>
                         <viewControllerLayoutGuide type="bottom" id="22j-tA-v69"/>
@@ -858,7 +858,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3CV-Vf-qgV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2619" y="210"/>
+            <point key="canvasLocation" x="1677" y="267"/>
         </scene>
         <!--About-->
         <scene sceneID="wg7-f3-ORb">
@@ -904,7 +904,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2945" y="1078"/>
+            <point key="canvasLocation" x="2278" y="2082"/>
         </scene>
         <!--환경 설정-->
         <scene sceneID="jSs-0S-ZuC">
@@ -1408,7 +1408,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="TEG-cj-Bza" kind="relationship" relationship="viewControllers" id="owj-8L-JIf"/>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="Obk-Ug-CE9" kind="relationship" relationship="viewControllers" id="vnT-7f-fP9"/>
                     </connections>
                 </tabBarController>
@@ -1461,8 +1460,8 @@
         <image name="tabbar_icon_settings" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9j1-zL-wVG"/>
-        <segue reference="j4R-by-bYd"/>
         <segue reference="cV7-Xy-5ed"/>
+        <segue reference="9j1-zL-wVG"/>
+        <segue reference="0du-d3-MGO"/>
     </inferredMetricsTieBreakers>
 </document>
