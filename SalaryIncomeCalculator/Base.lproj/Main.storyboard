@@ -664,11 +664,11 @@
                                             <segue destination="Nrl-0m-xrI" kind="show" identifier="seg_detail_np" trigger="accessoryAction" id="j4R-by-bYd"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="7eK-9m-oWu" detailTextLabel="Rsa-ho-QG8" style="IBUITableViewCellStyleValue1" id="cJX-Vh-ybr">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="7eK-9m-oWu" detailTextLabel="Rsa-ho-QG8" style="IBUITableViewCellStyleValue1" id="cJX-Vh-ybr">
                                         <rect key="frame" x="0.0" y="472" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cJX-Vh-ybr" id="AaY-Gn-RDi">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="347" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="건강보험" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7eK-9m-oWu">
@@ -679,7 +679,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rsa-ho-QG8">
-                                                    <rect key="frame" x="369.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
+                                                    <rect key="frame" x="317.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -691,11 +691,11 @@
                                             <segue destination="Nrl-0m-xrI" kind="show" identifier="seg_detail_hc" trigger="accessoryAction" id="OPb-HC-Fkx"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="LdY-8C-He9" detailTextLabel="eCt-8e-xCz" style="IBUITableViewCellStyleValue1" id="NwE-8U-snK">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="LdY-8C-He9" detailTextLabel="eCt-8e-xCz" style="IBUITableViewCellStyleValue1" id="NwE-8U-snK">
                                         <rect key="frame" x="0.0" y="516" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NwE-8U-snK" id="meC-Rk-pTm">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="347" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="요양보험" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LdY-8C-He9">
@@ -706,7 +706,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eCt-8e-xCz">
-                                                    <rect key="frame" x="369.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
+                                                    <rect key="frame" x="317.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -718,11 +718,11 @@
                                             <segue destination="Nrl-0m-xrI" kind="show" identifier="seg_detail_ltc" trigger="accessoryAction" id="RyU-Gx-Tbh"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="nzb-ks-Z4S" detailTextLabel="ds1-kF-Hwb" style="IBUITableViewCellStyleValue1" id="VVd-kX-tV3">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="nzb-ks-Z4S" detailTextLabel="ds1-kF-Hwb" style="IBUITableViewCellStyleValue1" id="VVd-kX-tV3">
                                         <rect key="frame" x="0.0" y="560" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VVd-kX-tV3" id="BP7-Ky-1ka">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="347" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="고용보험" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nzb-ks-Z4S">
@@ -733,7 +733,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ds1-kF-Hwb">
-                                                    <rect key="frame" x="369.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
+                                                    <rect key="frame" x="317.33333333333331" y="11.999999999999998" width="29.666666666666668" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -845,18 +845,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TEST" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4a-J1-KLf">
-                                <rect key="frame" x="0.0" y="67" width="414" height="301"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Waf-pU-avs">
+                                <rect key="frame" x="0.0" y="51" width="414" height="665"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mbc-Yx-EFT">
+                                <rect key="frame" x="146.66666666666669" y="15" width="121.00000000000006" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="121" id="ovu-qt-g7S"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="이해하기"/>
+                                    <segment title="세율 기록"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Waf-pU-avs" firstAttribute="top" secondItem="Mbc-Yx-EFT" secondAttribute="bottom" constant="8" id="Ata-bL-mNT"/>
+                            <constraint firstItem="Mbc-Yx-EFT" firstAttribute="top" secondItem="9xC-jC-Vgu" secondAttribute="bottom" constant="15" id="Mgu-Tj-dLz"/>
+                            <constraint firstAttribute="bottom" secondItem="Waf-pU-avs" secondAttribute="bottom" constant="20" symbolic="YES" id="ND9-Hh-lSd"/>
+                            <constraint firstItem="Waf-pU-avs" firstAttribute="leading" secondItem="pz3-ld-xfL" secondAttribute="leading" id="Sd3-PP-rgD"/>
+                            <constraint firstItem="Waf-pU-avs" firstAttribute="top" secondItem="Mbc-Yx-EFT" secondAttribute="bottom" constant="8" symbolic="YES" id="di9-zf-DrH"/>
+                            <constraint firstItem="Mbc-Yx-EFT" firstAttribute="centerX" secondItem="Waf-pU-avs" secondAttribute="centerX" id="oaA-TS-Cfv"/>
+                            <constraint firstItem="Mbc-Yx-EFT" firstAttribute="centerX" secondItem="pz3-ld-xfL" secondAttribute="centerX" id="v8P-JA-6Jq"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="lbl_test" destination="J4a-J1-KLf" id="aIw-Sm-wOh"/>
+                        <outlet property="segcontrol_master" destination="Mbc-Yx-EFT" id="Qcp-wC-rKK"/>
+                        <outlet property="txview_description" destination="Waf-pU-avs" id="fqa-7E-aTF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3CV-Vf-qgV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1463,8 +1483,8 @@
         <image name="tabbar_icon_settings" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cV7-Xy-5ed"/>
         <segue reference="9j1-zL-wVG"/>
-        <segue reference="0du-d3-MGO"/>
+        <segue reference="cV7-Xy-5ed"/>
+        <segue reference="y6W-ol-shr"/>
     </inferredMetricsTieBreakers>
 </document>

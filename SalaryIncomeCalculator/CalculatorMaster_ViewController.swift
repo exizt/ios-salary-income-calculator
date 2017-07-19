@@ -423,22 +423,22 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
         let receiveItem: CalculatorDetail_ViewController_Receive
         
         switch String(segue.identifier ?? "")! {
-        case "seg_np":
+        case "seg_detail_np":
             receiveItem = CalculatorDetail_ViewController_Receive.np
             break
-        case "seg_hc":
+        case "seg_detail_hc":
             receiveItem = CalculatorDetail_ViewController_Receive.hc
             break
-        case "seg_ltc":
+        case "seg_detail_ltc":
             receiveItem = CalculatorDetail_ViewController_Receive.ltc
             break
-        case "seg_ec":
+        case "seg_detail_ec":
             receiveItem = CalculatorDetail_ViewController_Receive.ec
             break
-        case "seg_incomeTax":
+        case "seg_detail_incomeTax":
             receiveItem = CalculatorDetail_ViewController_Receive.incomeTax
             break
-        case "seg_localTax":
+        case "seg_detail_localTax":
             receiveItem = CalculatorDetail_ViewController_Receive.localTax
             break
         default:
