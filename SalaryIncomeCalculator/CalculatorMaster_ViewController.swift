@@ -29,6 +29,7 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
     @IBOutlet weak var btn_money_plus100: UIButton!
     @IBOutlet weak var btn_money_plus1000: UIButton!
     @IBOutlet weak var btn_money_reset: UIButton!
+    @IBOutlet weak var btn_money_plus10: UIButton!
     // calculator reslut label
     @IBOutlet weak var lbl_Result_NetSalary : UILabel!
     @IBOutlet weak var lbl_ResultDetail_NP: UILabel!
@@ -59,6 +60,7 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
         
         // 금액 입력 도우미
         btn_money_reset.addTarget(self, action: #selector(self.btnHandleMoney), for: .touchUpInside)
+        btn_money_plus10.addTarget(self, action: #selector(self.btnHandleMoney), for: .touchUpInside)
         btn_money_plus100.addTarget(self, action: #selector(self.btnHandleMoney), for: .touchUpInside)
         btn_money_plus1000.addTarget(self, action: #selector(self.btnHandleMoney), for: .touchUpInside)
         
@@ -89,10 +91,12 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
             return
         }
         
-        if(sender.tag == 1000){
-            inMoney += 10000000.0
-        } else if (sender.tag == 100){
+        if(sender.tag == 10){
+            inMoney += 100000.0
+        } else if(sender.tag == 100){
             inMoney += 1000000.0
+        } else if (sender.tag == 1000){
+            inMoney += 10000000.0
         } else if (sender.tag == 0){
             calculatorOptions.money = 0
             in_Option_Money.text = "0"
