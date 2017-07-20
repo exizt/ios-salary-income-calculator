@@ -46,6 +46,8 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
         // 키보드에 done 버튼 추가
         registerDoneWithKeyboard()
         
+        self.tableView.allowsSelection = true
+        
         // textfield 이벤트
         in_Option_Money.addTarget(self, action: #selector(self.textFieldMoney_didChanged(_:)), for: .editingChanged)
         in_Option_Taxfree.addTarget(self, action: #selector(self.textFieldTaxfree_didChanged(_:)), for: .editingChanged)
@@ -423,36 +425,47 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
     
     // 네비게이션 컨트롤러를 통해서 하위 액티비티 를 부르기 전에 동작하는 메서드.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //debugPrint("CalculatorMaster prepare")
         let cell = sender as! UITableViewCell
-        let receiveItem: CalculatorDetail_ViewController_Receive
+        //let receiveItem: CalculatorDetail_ViewController_Receive
         
         switch String(segue.identifier ?? "")! {
-        case "seg_detail_np":
-            receiveItem = CalculatorDetail_ViewController_Receive.np
+        case "segue_detail_np":
+            prepare_detailView(cell,destination: segue.destination,receiveItem:CalculatorDetail_ViewController_Receive.np)
             break
-        case "seg_detail_hc":
-            receiveItem = CalculatorDetail_ViewController_Receive.hc
+        case "segue_detail_hc":
+            prepare_detailView(cell,destination: segue.destination,receiveItem:CalculatorDetail_ViewController_Receive.hc)
             break
-        case "seg_detail_ltc":
-            receiveItem = CalculatorDetail_ViewController_Receive.ltc
+        case "segue_detail_ltc":
+            prepare_detailView(cell,destination: segue.destination,receiveItem:CalculatorDetail_ViewController_Receive.ltc)
             break
-        case "seg_detail_ec":
-            receiveItem = CalculatorDetail_ViewController_Receive.ec
+        case "segue_detail_ec":
+            prepare_detailView(cell,destination: segue.destination,receiveItem:CalculatorDetail_ViewController_Receive.ec)
             break
-        case "seg_detail_incomeTax":
-            receiveItem = CalculatorDetail_ViewController_Receive.incomeTax
+        case "segue_detail_incomeTax":
+            //prepare_detailView(cell,destination: segue.destination,receiveItem:CalculatorDetail_ViewController_Receive.incomeTax)
             break
-        case "seg_detail_localTax":
-            receiveItem = CalculatorDetail_ViewController_Receive.localTax
+        case "segue_detail_localTax":
+            //prepare_detailView(cell,destination: segue.destination,receiveItem:CalculatorDetail_ViewController_Receive.localTax)
+            break
+        case "segue_select_np":
+            debugPrint("국민연금 셀 선택")
+            //prepare_detailView(cell,destination: segue.destination,receiveItem:CalculatorDetail_ViewController_Receive.localTax)
             break
         default:
-            receiveItem = CalculatorDetail_ViewController_Receive.np
+            //receiveItem = CalculatorDetail_ViewController_Receive.np
+            debugPrint(String(segue.identifier ?? "")!)
             break
         }
         
-        let view = segue.destination as! CalculatorDetail_ViewController
+        //let view = segue.destination as! CalculatorDetail_ViewController
+        //view.title = ((cell.textLabel)?.text)!
+        //view.receiveItem(receiveItem)
+        
+    }
+    func prepare_detailView(_ cell: UITableViewCell, destination: Any, receiveItem: CalculatorDetail_ViewController_Receive){
+        let view = destination as! CalculatorDetail_ViewController
         view.title = ((cell.textLabel)?.text)!
         view.receiveItem(receiveItem)
-        
     }
 }

@@ -119,8 +119,8 @@ class CalculatorDetail_ViewController: UIViewController {
     
 
     func segcontrol_master_valueChanged(_ sender: UISegmentedControl){
-        print("segcontrol_master_valueChanged ")
-        print(sender.selectedSegmentIndex)
+        //print("segcontrol_master_valueChanged ")
+        //print(sender.selectedSegmentIndex)
         switch sender.selectedSegmentIndex {
         case 0:
             txview_description.attributedText = str_explanation

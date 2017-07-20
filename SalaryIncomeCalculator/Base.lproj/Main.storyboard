@@ -412,7 +412,7 @@
                             </tableViewSection>
                             <tableViewSection id="6Ld-zO-oKO">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="80" id="v6F-9N-GoO">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="80" id="v6F-9N-GoO">
                                         <rect key="frame" x="0.0" y="100" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v6F-9N-GoO" id="mK6-kq-2FZ">
@@ -482,7 +482,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wH1-cB-V1X">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wH1-cB-V1X">
                                         <rect key="frame" x="0.0" y="180" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wH1-cB-V1X" id="lrd-jL-vL4">
@@ -511,7 +511,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="PFN-5X-mSK">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="PFN-5X-mSK">
                                         <rect key="frame" x="0.0" y="224" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PFN-5X-mSK" id="h9f-RO-Zt2">
@@ -553,7 +553,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tyn-cz-J9C">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tyn-cz-J9C">
                                         <rect key="frame" x="0.0" y="268" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tyn-cz-J9C" id="wnj-LS-ryn">
@@ -581,7 +581,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="TwT-SY-b25">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="TwT-SY-b25">
                                         <rect key="frame" x="0.0" y="312" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TwT-SY-b25" id="vdr-7S-JIy">
@@ -609,7 +609,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="M6i-rw-4Th">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="M6i-rw-4Th">
                                         <rect key="frame" x="0.0" y="356" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M6i-rw-4Th" id="a1C-sr-ccU">
@@ -666,7 +666,8 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Nrl-0m-xrI" kind="show" identifier="seg_detail_np" trigger="accessoryAction" id="j4R-by-bYd"/>
+                                            <segue destination="Nrl-0m-xrI" kind="show" identifier="segue_detail_np" trigger="accessoryAction" id="j4R-by-bYd"/>
+                                            <segue destination="lKZ-Ab-9wg" kind="show" identifier="segue_select_np" id="vDb-wi-P2U"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="7eK-9m-oWu" detailTextLabel="Rsa-ho-QG8" style="IBUITableViewCellStyleValue1" id="cJX-Vh-ybr">
@@ -693,7 +694,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Nrl-0m-xrI" kind="show" identifier="seg_detail_hc" trigger="accessoryAction" id="OPb-HC-Fkx"/>
+                                            <segue destination="Nrl-0m-xrI" kind="show" identifier="segue_detail_hc" trigger="accessoryAction" id="OPb-HC-Fkx"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="LdY-8C-He9" detailTextLabel="eCt-8e-xCz" style="IBUITableViewCellStyleValue1" id="NwE-8U-snK">
@@ -720,7 +721,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Nrl-0m-xrI" kind="show" identifier="seg_detail_ltc" trigger="accessoryAction" id="RyU-Gx-Tbh"/>
+                                            <segue destination="Nrl-0m-xrI" kind="show" identifier="segue_detail_ltc" trigger="accessoryAction" id="RyU-Gx-Tbh"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="nzb-ks-Z4S" detailTextLabel="ds1-kF-Hwb" style="IBUITableViewCellStyleValue1" id="VVd-kX-tV3">
@@ -747,7 +748,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Nrl-0m-xrI" kind="show" identifier="seg_detail_ec" trigger="accessoryAction" id="F4F-eV-pet"/>
+                                            <segue destination="Nrl-0m-xrI" kind="show" identifier="segue_detail_ec" trigger="accessoryAction" id="F4F-eV-pet"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="fWi-uN-hUp" detailTextLabel="vi3-Do-uok" style="IBUITableViewCellStyleValue1" id="clz-ya-S9g">
@@ -774,7 +775,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Nrl-0m-xrI" kind="show" identifier="seg_detail_incomeTax" id="y6W-ol-shr"/>
+                                            <segue destination="Nrl-0m-xrI" kind="show" identifier="segue_detail_incomeTax" id="y6W-ol-shr"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="pN5-bl-u9L" detailTextLabel="UOE-VG-foY" style="IBUITableViewCellStyleValue1" id="x70-Hg-aSR">
@@ -801,7 +802,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Nrl-0m-xrI" kind="show" identifier="seg_detail_localTax" trigger="accessoryAction" id="0du-d3-MGO"/>
+                                            <segue destination="Nrl-0m-xrI" kind="show" identifier="segue_detail_localTax" trigger="accessoryAction" id="0du-d3-MGO"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -837,7 +838,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Xu-mh-Ur6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="748" y="268"/>
+            <point key="canvasLocation" x="2528" y="-492"/>
         </scene>
         <!--Calculator Detail View Controller-->
         <scene sceneID="Uig-i6-y9h">
@@ -886,7 +887,34 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3CV-Vf-qgV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1676.8115942028987" y="266.57608695652175"/>
+            <point key="canvasLocation" x="3404" y="-492"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Qr9-8a-pwg">
+            <objects>
+                <viewController id="lKZ-Ab-9wg" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wI2-fp-BlO"/>
+                        <viewControllerLayoutGuide type="bottom" id="Tbc-Ao-LgO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Z3D-SM-Goj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbC-ee-fUa">
+                                <rect key="frame" x="111" y="223" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="utI-GR-eao" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2528" y="223"/>
         </scene>
         <!--About-->
         <scene sceneID="wg7-f3-ORb">
@@ -1488,8 +1516,8 @@
         <image name="tabbar_icon_settings" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9j1-zL-wVG"/>
         <segue reference="cV7-Xy-5ed"/>
-        <segue reference="y6W-ol-shr"/>
+        <segue reference="9j1-zL-wVG"/>
+        <segue reference="j4R-by-bYd"/>
     </inferredMetricsTieBreakers>
 </document>
