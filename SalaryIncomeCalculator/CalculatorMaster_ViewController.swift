@@ -450,12 +450,9 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
             //receiveItem = CalculatorDetail_ViewController_Receive.np
             debugPrint(String(segue.identifier ?? "")!)
         }
-        
-        //let view = segue.destination as! CalculatorDetail_ViewController
-        //view.title = ((cell.textLabel)?.text)!
-        //view.receiveItem(receiveItem)
-        
     }
+    
+    // calculatrDetail_viewController 호출 준비
     func prepare_detailView(_ cell: UITableViewCell, destination: Any, receiveItem: CalculatorDetail_ViewController.ReceiveItem){
         let view = destination as! CalculatorDetail_ViewController
         view.title = ((cell.textLabel)?.text)!

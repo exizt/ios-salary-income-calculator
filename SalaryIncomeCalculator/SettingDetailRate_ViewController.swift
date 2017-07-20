@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingRates_ViewController: UIViewController {
+class SettingDetailRate_ViewController: UIViewController {
     enum ReceiveItem: Int{
         case nationalPension
         case healthCare
@@ -16,7 +16,7 @@ class SettingRates_ViewController: UIViewController {
         case employmentCare
     }
     // 값 종류
-    var receiveItem: ReceiveItem = .nationalPension
+    var receivedItem: ReceiveItem = .nationalPension
     
     // 설정 값
     var itemValue : Double = 0.0
@@ -108,7 +108,7 @@ class SettingRates_ViewController: UIViewController {
 
     func receiveProcess(_ receiveItem: ReceiveItem)
     {
-        self.receiveItem = receiveItem
+        self.receivedItem = receiveItem
         
         switch receiveItem {
         case .nationalPension:
@@ -121,5 +121,6 @@ class SettingRates_ViewController: UIViewController {
             userDefaultOption = SHNUserSettings.Rates.employmentCare
         }
         itemValue = Double(userDefaultOption.getValue())!
+        
     }
 }

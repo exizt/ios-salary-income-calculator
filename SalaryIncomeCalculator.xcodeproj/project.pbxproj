@@ -10,7 +10,7 @@
 		760DE2BE1F1BA1C500FDB0DE /* dictionary.xml in Resources */ = {isa = PBXBuildFile; fileRef = 760DE2BD1F1BA1C500FDB0DE /* dictionary.xml */; };
 		7611BCF11F1B862E0038D219 /* CalculatorDetail_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7611BCF01F1B862E0038D219 /* CalculatorDetail_ViewController.swift */; };
 		761D92931F1A306700E97C5E /* CalculatorMaster_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761D92921F1A306700E97C5E /* CalculatorMaster_ViewController.swift */; };
-		765BFD471F0AE189006BF10F /* SettingRates_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BFD461F0AE189006BF10F /* SettingRates_ViewController.swift */; };
+		765BFD471F0AE189006BF10F /* SettingDetailRate_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BFD461F0AE189006BF10F /* SettingDetailRate_ViewController.swift */; };
 		767D1DF21F1DD529005EA6C8 /* Calculator_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D1DF11F1DD529005EA6C8 /* Calculator_ViewController.swift */; };
 		767FF4F41EFB2920001329C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF4F31EFB2920001329C1 /* AppDelegate.swift */; };
 		767FF4F61EFB2920001329C1 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF4F51EFB2920001329C1 /* FirstViewController.swift */; };
@@ -25,9 +25,9 @@
 		767FF5291EFBA178001329C1 /* Insurance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5281EFBA178001329C1 /* Insurance.swift */; };
 		767FF52B1EFBAF80001329C1 /* IncomeTax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF52A1EFBAF80001329C1 /* IncomeTax.swift */; };
 		767FF52D1EFC1D57001329C1 /* SalaryCalculatorOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF52C1EFC1D57001329C1 /* SalaryCalculatorOption.swift */; };
-		768A041D1F083E44007A6460 /* SettingDetails_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768A041C1F083E44007A6460 /* SettingDetails_TableViewController.swift */; };
+		768A041D1F083E44007A6460 /* SettingDetail_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768A041C1F083E44007A6460 /* SettingDetail_ViewController.swift */; };
 		768A041F1F087286007A6460 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768A041E1F087286007A6460 /* TextFieldCell.swift */; };
-		768FDEC91F02F3B800DF0BA9 /* Settings_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768FDEC81F02F3B800DF0BA9 /* Settings_ViewController.swift */; };
+		768FDEC91F02F3B800DF0BA9 /* SettingMaster_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768FDEC81F02F3B800DF0BA9 /* SettingMaster_ViewController.swift */; };
 		76B5D9F11EFE6E61006D8476 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B5D9F01EFE6E61006D8476 /* GoogleMobileAds.framework */; };
 		76B5DBC81F05B1740056D499 /* SHNUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DBC71F05B1740056D499 /* SHNUserSettings.swift */; };
 		76B5DBCA1F05CD130056D499 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 76B5DBC91F05CD130056D499 /* readme.md */; };
@@ -71,7 +71,7 @@
 		760DE2BD1F1BA1C500FDB0DE /* dictionary.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dictionary.xml; sourceTree = "<group>"; };
 		7611BCF01F1B862E0038D219 /* CalculatorDetail_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorDetail_ViewController.swift; sourceTree = "<group>"; };
 		761D92921F1A306700E97C5E /* CalculatorMaster_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorMaster_ViewController.swift; sourceTree = "<group>"; };
-		765BFD461F0AE189006BF10F /* SettingRates_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingRates_ViewController.swift; sourceTree = "<group>"; };
+		765BFD461F0AE189006BF10F /* SettingDetailRate_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingDetailRate_ViewController.swift; sourceTree = "<group>"; };
 		767D1DF11F1DD529005EA6C8 /* Calculator_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculator_ViewController.swift; sourceTree = "<group>"; };
 		767FF4F01EFB2920001329C1 /* SalaryIncomeCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalaryIncomeCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		767FF4F31EFB2920001329C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,9 +92,9 @@
 		767FF5281EFBA178001329C1 /* Insurance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Insurance.swift; sourceTree = "<group>"; };
 		767FF52A1EFBAF80001329C1 /* IncomeTax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeTax.swift; sourceTree = "<group>"; };
 		767FF52C1EFC1D57001329C1 /* SalaryCalculatorOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalaryCalculatorOption.swift; sourceTree = "<group>"; };
-		768A041C1F083E44007A6460 /* SettingDetails_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingDetails_TableViewController.swift; sourceTree = "<group>"; };
+		768A041C1F083E44007A6460 /* SettingDetail_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingDetail_ViewController.swift; sourceTree = "<group>"; };
 		768A041E1F087286007A6460 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
-		768FDEC81F02F3B800DF0BA9 /* Settings_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings_ViewController.swift; sourceTree = "<group>"; };
+		768FDEC81F02F3B800DF0BA9 /* SettingMaster_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingMaster_ViewController.swift; sourceTree = "<group>"; };
 		76B5D9F01EFE6E61006D8476 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Libraries/GoogleMobileAds.framework; sourceTree = "<group>"; };
 		76B5DBC71F05B1740056D499 /* SHNUserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHNUserSettings.swift; sourceTree = "<group>"; };
 		76B5DBC91F05CD130056D499 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
@@ -165,19 +165,18 @@
 		767FF4F21EFB2920001329C1 /* SalaryIncomeCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				76921C741F20F68F000E0D54 /* deprecated */,
 				7611BCF21F1B88FC0038D219 /* UIUnits */,
 				767FF5231EFB3799001329C1 /* salary_calculator */,
 				767FF4F31EFB2920001329C1 /* AppDelegate.swift */,
 				76B5DBC71F05B1740056D499 /* SHNUserSettings.swift */,
-				767FF4F51EFB2920001329C1 /* FirstViewController.swift */,
-				767FF4F71EFB2920001329C1 /* SecondViewController.swift */,
 				767FF4F91EFB2920001329C1 /* Main.storyboard */,
 				767FF4FC1EFB2922001329C1 /* Assets.xcassets */,
 				767FF4FE1EFB2923001329C1 /* LaunchScreen.storyboard */,
 				767FF5011EFB2923001329C1 /* Info.plist */,
-				768FDEC81F02F3B800DF0BA9 /* Settings_ViewController.swift */,
-				768A041C1F083E44007A6460 /* SettingDetails_TableViewController.swift */,
-				765BFD461F0AE189006BF10F /* SettingRates_ViewController.swift */,
+				768FDEC81F02F3B800DF0BA9 /* SettingMaster_ViewController.swift */,
+				768A041C1F083E44007A6460 /* SettingDetail_ViewController.swift */,
+				765BFD461F0AE189006BF10F /* SettingDetailRate_ViewController.swift */,
 				767D1DF11F1DD529005EA6C8 /* Calculator_ViewController.swift */,
 				761D92921F1A306700E97C5E /* CalculatorMaster_ViewController.swift */,
 				7611BCF01F1B862E0038D219 /* CalculatorDetail_ViewController.swift */,
@@ -214,6 +213,15 @@
 				767FF52C1EFC1D57001329C1 /* SalaryCalculatorOption.swift */,
 			);
 			name = salary_calculator;
+			sourceTree = "<group>";
+		};
+		76921C741F20F68F000E0D54 /* deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				767FF4F51EFB2920001329C1 /* FirstViewController.swift */,
+				767FF4F71EFB2920001329C1 /* SecondViewController.swift */,
+			);
+			name = deprecated;
 			sourceTree = "<group>";
 		};
 		76B5D9EF1EFE6E60006D8476 /* Frameworks */ = {
@@ -364,11 +372,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				767FF4F81EFB2920001329C1 /* SecondViewController.swift in Sources */,
-				768A041D1F083E44007A6460 /* SettingDetails_TableViewController.swift in Sources */,
+				768A041D1F083E44007A6460 /* SettingDetail_ViewController.swift in Sources */,
 				767FF4F41EFB2920001329C1 /* AppDelegate.swift in Sources */,
 				76B5DBC81F05B1740056D499 /* SHNUserSettings.swift in Sources */,
 				767FF5291EFBA178001329C1 /* Insurance.swift in Sources */,
-				765BFD471F0AE189006BF10F /* SettingRates_ViewController.swift in Sources */,
+				765BFD471F0AE189006BF10F /* SettingDetailRate_ViewController.swift in Sources */,
 				767FF52B1EFBAF80001329C1 /* IncomeTax.swift in Sources */,
 				767FF5271EFB41D8001329C1 /* InsuranceRate.swift in Sources */,
 				76E8B1F31F13A7B0000BEEFD /* CustomBaseLabel.swift in Sources */,
@@ -379,7 +387,7 @@
 				767FF4F61EFB2920001329C1 /* FirstViewController.swift in Sources */,
 				767FF52D1EFC1D57001329C1 /* SalaryCalculatorOption.swift in Sources */,
 				767FF5251EFB385D001329C1 /* SalaryCalculator.swift in Sources */,
-				768FDEC91F02F3B800DF0BA9 /* Settings_ViewController.swift in Sources */,
+				768FDEC91F02F3B800DF0BA9 /* SettingMaster_ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

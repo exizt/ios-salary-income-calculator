@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingDetails_TableViewController: UITableViewController {
+class SettingDetail_ViewController: UITableViewController {
     enum ReceiveItem: Int{
         case family
         case child
@@ -27,7 +27,7 @@ class SettingDetails_TableViewController: UITableViewController {
     var itemValueLabel: String = ""
     
     // 설정값 구분
-    var receiveItem: ReceiveItem = .family
+    var receivedItem: ReceiveItem = .family
     
     // 설정 값과 연관된 struct enum (변경되어 사용되어질 값)
     var userDefaultOption: SHNUserSettings.InputDefaults = SHNUserSettings.InputDefaults.family
@@ -220,7 +220,7 @@ class SettingDetails_TableViewController: UITableViewController {
     
     func textfield_didChanged(_ sender: UITextField){
         var label = sender.text!
-        if(receiveItem == .taxfree){
+        if(receivedItem == .taxfree){
             label = sender.text! + " 원"
         }
         updateOptionValue(sender.text!,label: label)
@@ -233,7 +233,7 @@ class SettingDetails_TableViewController: UITableViewController {
     
     func receiveProcess(_ receiveItem: ReceiveItem)
     {
-        self.receiveItem = receiveItem
+        self.receivedItem = receiveItem
         
         // 아이템에 따른 분기
         switch receiveItem {

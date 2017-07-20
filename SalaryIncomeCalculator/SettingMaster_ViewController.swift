@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Settings_ViewController: UITableViewController {
+class SettingMaster_ViewController: UITableViewController {
     @IBOutlet weak var lbl_InputDefault_Family : UILabel!
     @IBOutlet weak var lbl_InputDefault_Child : UILabel!
     @IBOutlet weak var lbl_InputDefault_Taxfree : UILabel!
@@ -214,16 +214,16 @@ class Settings_ViewController: UITableViewController {
     }
     
     // SettingDetail_ViewController
-    func prepare_detailView(_ cell: UITableViewCell, destination: Any, receiveItem: SettingDetails_TableViewController.ReceiveItem){
-        let view = destination as! SettingDetails_TableViewController
+    func prepare_detailView(_ cell: UITableViewCell, destination: Any, receiveItem: SettingDetail_ViewController.ReceiveItem){
+        let view = destination as! SettingDetail_ViewController
         view.title = ((cell.textLabel)?.text)!
         view.receiveItem(receiveItem)
     }
     
     // SettingDetailRate_ViewController
-    func prepare_detailRateView(_ cell: UITableViewCell, destination: Any, receiveItem: SettingRates_ViewController.ReceiveItem){
-        let view = destination as! SettingRates_ViewController
+    func prepare_detailRateView(_ cell: UITableViewCell, destination: Any, receiveItem: SettingDetailRate_ViewController.ReceiveItem){
+        let view = destination as! SettingDetailRate_ViewController
         view.title = ((cell.textLabel)?.text)!
-        //view.receiveItem(receiveItem)
+        view.receiveItem(receiveItem)
     }
 }
