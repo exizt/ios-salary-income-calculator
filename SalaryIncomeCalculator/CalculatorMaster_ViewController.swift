@@ -427,21 +427,16 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //debugPrint("CalculatorMaster prepare")
         let cell = sender as! UITableViewCell
-        //let receiveItem: CalculatorDetail_ViewController_Receive
         
         switch String(segue.identifier ?? "")! {
         case "segue_detail_np":
-            prepare_detailView(cell,destination: segue.destination,receiveItem:CalculatorDetail_ViewController_Receive.np)
-            break
+            prepare_detailView(cell,destination: segue.destination,receiveItem:.np)
         case "segue_detail_hc":
-            prepare_detailView(cell,destination: segue.destination,receiveItem:CalculatorDetail_ViewController_Receive.hc)
-            break
+            prepare_detailView(cell,destination: segue.destination,receiveItem:.hc)
         case "segue_detail_ltc":
-            prepare_detailView(cell,destination: segue.destination,receiveItem:CalculatorDetail_ViewController_Receive.ltc)
-            break
+            prepare_detailView(cell,destination: segue.destination,receiveItem:.ltc)
         case "segue_detail_ec":
-            prepare_detailView(cell,destination: segue.destination,receiveItem:CalculatorDetail_ViewController_Receive.ec)
-            break
+            prepare_detailView(cell,destination: segue.destination,receiveItem:.ec)
         case "segue_detail_incomeTax":
             //prepare_detailView(cell,destination: segue.destination,receiveItem:CalculatorDetail_ViewController_Receive.incomeTax)
             break
@@ -451,11 +446,9 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
         case "segue_select_np":
             debugPrint("국민연금 셀 선택")
             //prepare_detailView(cell,destination: segue.destination,receiveItem:CalculatorDetail_ViewController_Receive.localTax)
-            break
         default:
             //receiveItem = CalculatorDetail_ViewController_Receive.np
             debugPrint(String(segue.identifier ?? "")!)
-            break
         }
         
         //let view = segue.destination as! CalculatorDetail_ViewController
@@ -463,7 +456,7 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
         //view.receiveItem(receiveItem)
         
     }
-    func prepare_detailView(_ cell: UITableViewCell, destination: Any, receiveItem: CalculatorDetail_ViewController_Receive){
+    func prepare_detailView(_ cell: UITableViewCell, destination: Any, receiveItem: CalculatorDetail_ViewController.ReceiveItem){
         let view = destination as! CalculatorDetail_ViewController
         view.title = ((cell.textLabel)?.text)!
         view.receiveItem(receiveItem)

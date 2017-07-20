@@ -9,17 +9,17 @@
 import UIKit
 import AEXML
 
-enum CalculatorDetail_ViewController_Receive: Int {
-    case np
-    case hc
-    case ltc
-    case ec
-    case incomeTax
-    case localTax
-}
 
 class CalculatorDetail_ViewController: UIViewController {
-    var item : CalculatorDetail_ViewController_Receive?
+    enum ReceiveItem : Int {
+        case np
+        case hc
+        case ltc
+        case ec
+        case incomeTax
+        case localTax
+    }
+    var receivedItem: ReceiveItem = .np
     var str_explanation: NSAttributedString = NSAttributedString()
     var str_rateHistory: NSAttributedString = NSAttributedString()
     let isDebug = false
@@ -52,17 +52,14 @@ class CalculatorDetail_ViewController: UIViewController {
             
             var key: String = ""
             
-            let receivedItem : CalculatorDetail_ViewController_Receive = item!
             switch receivedItem {
-            case CalculatorDetail_ViewController_Receive.np :
-                //print("nationalpension")
+            case .np :
                 key = "insurance-nationalpension"
-            case CalculatorDetail_ViewController_Receive.hc :
-                //print("healthcare")
+            case .hc :
                 key = "insurance-healthcare"
-            case CalculatorDetail_ViewController_Receive.ltc :
+            case .ltc :
                 key = "insurance-longtermcare"
-            case CalculatorDetail_ViewController_Receive.ec :
+            case .ec :
                 key = "insurance-employmentcare"
             default:
                 key = ""
@@ -136,8 +133,8 @@ class CalculatorDetail_ViewController: UIViewController {
         }
     }
 
-    func receiveItem(_ item: CalculatorDetail_ViewController_Receive){
-        self.item = item
+    func receiveItem(_ item: ReceiveItem){
+        self.receivedItem = item
     }
     
     
