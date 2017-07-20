@@ -9,6 +9,12 @@
 import UIKit
 
 class SettingDetails_TableViewController: UITableViewController {
+    enum ReceiveItem: Int{
+        case family
+        case child
+        case taxfree
+        case includedsev
+    }
     enum ItemDataType {
         case String
         case Int
@@ -21,7 +27,7 @@ class SettingDetails_TableViewController: UITableViewController {
     var itemValueLabel: String = ""
     
     // 설정값 구분
-    var receiveItem = SHNUserSettings.Item.family
+    var receiveItem: ReceiveItem = .family
     
     // 설정 값과 연관된 struct enum (변경되어 사용되어질 값)
     var userDefaultOption: SHNUserSettings.InputDefaults = SHNUserSettings.InputDefaults.family
@@ -214,22 +220,24 @@ class SettingDetails_TableViewController: UITableViewController {
     
     func textfield_didChanged(_ sender: UITextField){
         var label = sender.text!
-        if(receiveItem == SHNUserSettings.Item.taxfree){
+        if(receiveItem == .taxfree){
             label = sender.text! + " 원"
         }
         updateOptionValue(sender.text!,label: label)
         
         changeItemValue()
     }
-    func receiveItem(_ item: SHNUserSettings.Item){
-        receiveItem = item
-        receiveProcess()
+    func receiveItem(_ receiveItem: ReceiveItem){
+        receiveProcess(receiveItem)
     }
     
-    func receiveProcess()
+    func receiveProcess(_ receiveItem: ReceiveItem)
     {
+        self.receiveItem = receiveItem
+        
+        // 아이템에 따른 분기
         switch receiveItem {
-        case SHNUserSettings.Item.family:
+        case .family:
             userDefaultOption = SHNUserSettings.InputDefaults.family
             itemDataType = ItemDataType.Int
             itemValue = userDefaultOption.getValue()
@@ -245,8 +253,7 @@ class SettingDetails_TableViewController: UITableViewController {
                 ("8","8 명"),
                 ("9","9 명")
             ]
-            break
-        case SHNUserSettings.Item.child:
+        case .child:
             userDefaultOption = SHNUserSettings.InputDefaults.child
             itemDataType = ItemDataType.Int
             itemValue = userDefaultOption.getValue()
@@ -263,8 +270,7 @@ class SettingDetails_TableViewController: UITableViewController {
                 ("8","8 명"),
                 ("9","9 명")
             ]
-            break
-        case SHNUserSettings.Item.taxfree:
+        case .taxfree:
             userDefaultOption = SHNUserSettings.InputDefaults.taxfree
             itemDataType = ItemDataType.Double
             itemValue = userDefaultOption.getValue()
@@ -278,8 +284,7 @@ class SettingDetails_TableViewController: UITableViewController {
                 ("150000","150,000 원"),
                 ("200000","200,000 원")
             ]
-            break
-        case SHNUserSettings.Item.includedsev:
+        case .includedsev:
             userDefaultOption = SHNUserSettings.InputDefaults.includedSev
             itemDataType = ItemDataType.Bool
             itemValue = userDefaultOption.getValue()
@@ -288,9 +293,6 @@ class SettingDetails_TableViewController: UITableViewController {
                 ("false","포함 안함 (기본)"),
                 ("true","포함")
             ]
-            break
-        default:
-            break
         }
     }
 

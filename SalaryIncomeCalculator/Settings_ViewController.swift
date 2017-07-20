@@ -185,68 +185,45 @@ class Settings_ViewController: UITableViewController {
     }
     */
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    // 네비게이션 컨트롤러 를 이용해서 하위 뷰와 연결하는 메서드.
+    // 정확히는 segue 를 통하기 직전에 호출되는 메서드.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UITableViewCell
-        //let indexPath = self.tableview_Master.indexPath(for: cell)
-        
-        var receive_id = SHNUserSettings.Item.family
-        enum Class_Type {
-            case DetailTableView
-            case Rate
-        }
-        let classType : Class_Type?
-        
+
+        // segue id 에 따른 분기
         switch String(segue.identifier ?? "")! {
         case "segue_family":
-            receive_id = SHNUserSettings.Item.family
-            classType = Class_Type.DetailTableView
+            prepare_detailView(cell, destination: segue.destination, receiveItem: .family)
         case "segue_child":
-            receive_id = SHNUserSettings.Item.child
-            classType = Class_Type.DetailTableView
+            prepare_detailView(cell, destination: segue.destination, receiveItem: .child)
         case "segue_taxfree":
-            receive_id = SHNUserSettings.Item.taxfree
-            classType = Class_Type.DetailTableView
+            prepare_detailView(cell, destination: segue.destination, receiveItem: .taxfree)
         case "segue_includedsev":
-            receive_id = SHNUserSettings.Item.includedsev
-            classType = Class_Type.DetailTableView
+            prepare_detailView(cell, destination: segue.destination, receiveItem: .includedsev)
         case "segue_rate_np":
-            receive_id = SHNUserSettings.Item.rate_np
-            classType = Class_Type.Rate
+            prepare_detailRateView(cell, destination: segue.destination, receiveItem: .nationalPension)
         case "segue_rate_hc":
-            receive_id = SHNUserSettings.Item.rate_hc
-            classType = Class_Type.Rate
+            prepare_detailRateView(cell, destination: segue.destination, receiveItem: .healthCare)
         case "segue_rate_ltc":
-            receive_id = SHNUserSettings.Item.rate_ltc
-            classType = Class_Type.Rate
+            prepare_detailRateView(cell, destination: segue.destination, receiveItem: .longtermCare)
         case "segue_rate_ec":
-            receive_id = SHNUserSettings.Item.rate_ec
-            classType = Class_Type.Rate
+            prepare_detailRateView(cell, destination: segue.destination, receiveItem: .employmentCare)
         default:
-            receive_id = SHNUserSettings.Item.family
-            classType = Class_Type.DetailTableView
+            break
         }
-        
-        if(classType==Class_Type.DetailTableView){
-            
-            let view = segue.destination as! SettingDetails_TableViewController
-            view.title = ((cell.textLabel)?.text)!
-            view.receiveItem(receive_id)
-            
-        } else if(classType==Class_Type.Rate){
-            
-            let view = segue.destination as! SettingRates_ViewController
-            view.title = ((cell.textLabel)?.text)!
-            view.receiveItem(receive_id)
-        }
-
+    }
+    
+    // SettingDetail_ViewController
+    func prepare_detailView(_ cell: UITableViewCell, destination: Any, receiveItem: SettingDetails_TableViewController.ReceiveItem){
+        let view = destination as! SettingDetails_TableViewController
+        view.title = ((cell.textLabel)?.text)!
+        view.receiveItem(receiveItem)
+    }
+    
+    // SettingDetailRate_ViewController
+    func prepare_detailRateView(_ cell: UITableViewCell, destination: Any, receiveItem: SettingRates_ViewController.ReceiveItem){
+        let view = destination as! SettingRates_ViewController
+        view.title = ((cell.textLabel)?.text)!
+        //view.receiveItem(receiveItem)
     }
 }

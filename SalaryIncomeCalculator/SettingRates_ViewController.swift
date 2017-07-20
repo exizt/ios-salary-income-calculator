@@ -9,10 +9,18 @@
 import UIKit
 
 class SettingRates_ViewController: UIViewController {
+    enum ReceiveItem: Int{
+        case nationalPension
+        case healthCare
+        case longtermCare
+        case employmentCare
+    }
+    // 값 종류
+    var receiveItem: ReceiveItem = .nationalPension
+    
     // 설정 값
     var itemValue : Double = 0.0
-    // 값 종류
-    var receiveItem = SHNUserSettings.Item.family
+    
     // 설정 값과 연관된 struct enum
     var userDefaultOption: SHNUserSettings.Rates = SHNUserSettings.Rates.nationalPension
     
@@ -94,41 +102,24 @@ class SettingRates_ViewController: UIViewController {
         updateValue()
     }
     
-    func receiveItem(_ item: SHNUserSettings.Item){
-        receiveItem = item
-        receiveProcess()
+    func receiveItem(_ receiveItem: ReceiveItem){
+        receiveProcess(receiveItem)
     }
 
-    func receiveProcess()
+    func receiveProcess(_ receiveItem: ReceiveItem)
     {
-        switch receiveItem {
-        case SHNUserSettings.Item.rate_np:
-            userDefaultOption = SHNUserSettings.Rates.nationalPension
-            break
-        case SHNUserSettings.Item.rate_hc:
-            userDefaultOption = SHNUserSettings.Rates.healthCare
-            break
-        case SHNUserSettings.Item.rate_ltc:
-            userDefaultOption = SHNUserSettings.Rates.longTermCare
-            break
-        case SHNUserSettings.Item.rate_ec:
-            userDefaultOption = SHNUserSettings.Rates.employmentCare
-            break
-        default:
-            break
-        }
+        self.receiveItem = receiveItem
         
+        switch receiveItem {
+        case .nationalPension:
+            userDefaultOption = SHNUserSettings.Rates.nationalPension
+        case .healthCare:
+            userDefaultOption = SHNUserSettings.Rates.healthCare
+        case .longtermCare:
+            userDefaultOption = SHNUserSettings.Rates.longTermCare
+        case .employmentCare:
+            userDefaultOption = SHNUserSettings.Rates.employmentCare
+        }
         itemValue = Double(userDefaultOption.getValue())!
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
