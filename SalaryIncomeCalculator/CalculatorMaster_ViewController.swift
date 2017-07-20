@@ -46,7 +46,7 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
         // 키보드에 done 버튼 추가
         registerDoneWithKeyboard()
         
-        self.tableView.allowsSelection = true
+        self.tableView.allowsSelection = false
         
         // textfield 이벤트
         in_Option_Money.addTarget(self, action: #selector(self.textFieldMoney_didChanged(_:)), for: .editingChanged)

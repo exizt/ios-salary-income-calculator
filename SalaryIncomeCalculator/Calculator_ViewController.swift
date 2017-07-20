@@ -11,11 +11,16 @@ import UIKit
 import GoogleMobileAds
 
 class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADBannerViewDelegate {
+    let isDebug: Bool = false
+    let isDebugAdmob: Bool = false
     var interstitialAD : GADInterstitial!
     var bannerViewAD: GADBannerView!
     let isEnabled_InterstitialAD: Bool = false
     let isEnabled_BannerAD: Bool = true
-    let isDebugAdmob: Bool = false
+    var isLandscape = false
+    var isRotatedAsHiddenStatus = false
+    var isDisappear = false
+    
     @IBOutlet weak var containerView: UIView!
     
     override func viewDidLoad() {
@@ -24,6 +29,7 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         // Admob
         if(isEnabled_InterstitialAD) { interstitialAD = createWithLoadInterstitialGAD() }
         if(isEnabled_BannerAD) { bannerViewAD = createWithLoadBannerGAD() }
+        
         // rotate 될 때 동작
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotatedAdmobBanner), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
 
@@ -31,6 +37,21 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        isDisappear = false
+        debugPrint("viewDidAppear")
+
+        if(isRotatedAsHiddenStatus){
+            rotatedAdmobBanner()
+            isRotatedAsHiddenStatus = false
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        //debugPrint("viewDidDisappear")
+        isDisappear = true
     }
     
     // --------------------------
@@ -48,12 +69,7 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         
         return request
     }
-    
-    func debugPrint_Admob(_ msg: String){
-        if(isDebugAdmob){
-            print(msg)
-        }
-    }
+
     
     // --------------------------
     // banner ads 관련
@@ -131,9 +147,20 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
     func rotatedAdmobBanner(){
         if(!isEnabled_BannerAD) { return }
         debugPrint_Admob("rotatedAdmobBanner")
-        hideBanner(bannerViewAD)
-        showBanner(bannerViewAD)
+        //debugPrint(String(isLandscape))
         
+        // 사용안하는 상태에서 landscape 변경이 있을 시, 기록해두고, didappear 에서 가로세로 전환해줌
+        if(isDisappear){
+            isRotatedAsHiddenStatus = true
+        } else {
+            if(UIApplication.shared.statusBarOrientation.isLandscape != isLandscape){
+                isLandscape = UIApplication.shared.statusBarOrientation.isLandscape
+                //rotatedAdmobBanner()
+                debugPrint_Admob("rotatedAdmobBanner changed")
+                hideBanner(bannerViewAD)
+                showBanner(bannerViewAD)
+            }
+        }
     }
     
     // END of [[banner ads 관련]]
@@ -186,4 +213,16 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
     // End of [[Admob 전면광고 관련]]
     // --------------------------
 
+    func debugPrint(_ message:String){
+        if(isDebug){
+            print("[CalculatorView]"+message)
+        }
+    }
+    
+    
+    func debugPrint_Admob(_ message: String){
+        if(isDebugAdmob){
+            print("[CalculatorView][Admob]"+message)
+        }
+    }
 }
