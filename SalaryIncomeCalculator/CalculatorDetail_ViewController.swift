@@ -22,7 +22,7 @@ class CalculatorDetail_ViewController: UIViewController {
     var item : CalculatorDetail_ViewController_Receive?
     var str_explanation: NSAttributedString = NSAttributedString()
     var str_rateHistory: NSAttributedString = NSAttributedString()
-    
+    let isDebug = false
     
     @IBOutlet weak var txview_description: UITextView!
     @IBOutlet weak var segcontrol_master: UISegmentedControl!
@@ -121,6 +121,7 @@ class CalculatorDetail_ViewController: UIViewController {
     func segcontrol_master_valueChanged(_ sender: UISegmentedControl){
         //print("segcontrol_master_valueChanged ")
         //print(sender.selectedSegmentIndex)
+        debugPrint("segmentedControl Changed")
         switch sender.selectedSegmentIndex {
         case 0:
             txview_description.attributedText = str_explanation
@@ -137,5 +138,12 @@ class CalculatorDetail_ViewController: UIViewController {
 
     func receiveItem(_ item: CalculatorDetail_ViewController_Receive){
         self.item = item
+    }
+    
+    
+    func debugPrint(_ message:String){
+        if(isDebug){
+            print("[CalculatorDetails]"+message)
+        }
     }
 }
