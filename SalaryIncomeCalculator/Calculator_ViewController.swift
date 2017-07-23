@@ -123,6 +123,11 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         //UIView.animate(withDuration: 0.5) {
         //    bannerView.transform = CGAffineTransform.identity
         //}
+        if UIDevice.current.orientation.isLandscape {
+            bannerView.adSize = kGADAdSizeSmartBannerLandscape
+        } else {
+            bannerView.adSize = kGADAdSizeSmartBannerPortrait
+        }
         
         //UIView.beginAnimations("showBanner", context: nil)
         let rect = CGRect(x: view.frame.size.width/2 - bannerView.frame.size.width/2, y: view.bounds.height - bannerView.frame.size.height - CGFloat((self.tabBarController?.tabBar.frame.height)!), width: bannerView.frame.size.width, height: bannerView.frame.size.height)
