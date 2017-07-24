@@ -17,7 +17,7 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
     var bannerViewAD: GADBannerView!
     let isEnabled_InterstitialAD: Bool = false
     let isEnabled_BannerAD: Bool = true
-    var isLandscape = false
+    var isLandscapeBefore = false
     var isRotatedAsHiddenStatus = false
     var isDisappear = false
     
@@ -158,9 +158,8 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         if(isDisappear){
             isRotatedAsHiddenStatus = true
         } else {
-            if(UIApplication.shared.statusBarOrientation.isLandscape != isLandscape){
-                isLandscape = UIApplication.shared.statusBarOrientation.isLandscape
-                //rotatedAdmobBanner()
+            if(UIApplication.shared.statusBarOrientation.isLandscape != isLandscapeBefore){
+                isLandscapeBefore = UIApplication.shared.statusBarOrientation.isLandscape
                 debugPrint_Admob("rotatedAdmobBanner changed")
                 hideBanner(bannerViewAD)
                 showBanner(bannerViewAD)

@@ -88,8 +88,18 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
         
     }
     func btnHandleMoney(_ sender: UIButton!){
+        // reset 버튼 을 눌렀을 때
+        if (sender.tag == 0){
+            calculatorOptions.money = 0
+            in_Option_Money.text = "0"
+            calculator.Options().money = 0
+            resetCalculatorResult()
+            return
+        }
+        
         guard var inMoney = Double((in_Option_Money.text!)) else {
-            //calculatorOptions.money = 0
+            //var inMoney = 0
+            in_Option_Money.text = "0"
             return
         }
         
@@ -99,12 +109,6 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
             inMoney += 1000000.0
         } else if (sender.tag == 1000){
             inMoney += 10000000.0
-        } else if (sender.tag == 0){
-            calculatorOptions.money = 0
-            in_Option_Money.text = "0"
-            calculator.Options().money = 0
-            resetCalculatorResult()
-            return
         }
         calculatorOptions.money = inMoney
         in_Option_Money.text = String(Int(inMoney))
