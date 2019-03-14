@@ -4,8 +4,6 @@ Thumbs.db
 
 
 ## Xcode Private Settings 
-xcuserdata/
-
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -14,10 +12,12 @@ xcuserdata/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+xcuserdata/
 
 
 ## Carthage
-Carthage/
+Carthage/Build
+
 
 
 ## Swift Package Manager
