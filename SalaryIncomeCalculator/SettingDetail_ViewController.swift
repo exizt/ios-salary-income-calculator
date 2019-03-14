@@ -218,7 +218,7 @@ class SettingDetail_ViewController: UITableViewController {
         return 44.0
     }
     
-    func textfield_didChanged(_ sender: UITextField){
+    @objc func textfield_didChanged(_ sender: UITextField){
         var label = sender.text!
         if(receivedItem == .taxfree){
             label = sender.text! + " 원"
@@ -346,7 +346,7 @@ class SettingDetail_ViewController: UITableViewController {
     /**
      * 키보드 바로 위의 [Done] 클릭시 에 행동하는 메서드
      */
-    func keyboard_doneClicked()
+    @objc func keyboard_doneClicked()
     {
         view.endEditing(true)
     }

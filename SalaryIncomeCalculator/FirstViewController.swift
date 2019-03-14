@@ -112,20 +112,20 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     }
     
     // 가족수 +-
-    func stepperFamily_valueChanged(_ sender: UIStepper) {
+    @objc func stepperFamily_valueChanged(_ sender: UIStepper) {
         updateCalcOption_Family()
         loadCalculation()
     }
 
     // 자녀수 +-
-    func stepperChild_valueChanged(_ sender: UIStepper) {
+    @objc func stepperChild_valueChanged(_ sender: UIStepper) {
         lbl_Option_Child.text = String(format: "자녀수 %d 명", Int(sender.value))
         calculatorOptions.child = Int(sender.value)
         loadCalculation()
     }
     
     // 금액 입력 시 메서드
-    func textFieldMoney_didChanged(_ sender: UITextField) {
+    @objc func textFieldMoney_didChanged(_ sender: UITextField) {
         guard let incomeMoney = Double((sender.text!)) else {
             calculatorOptions.money = 0
             return
@@ -150,7 +150,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     }
     
     // 비과세 입력 시 메서드
-    func textFieldTaxfree_didChanged(_ sender: UITextField){
+    @objc func textFieldTaxfree_didChanged(_ sender: UITextField){
         guard (Double((sender.text!)) != nil) else {
             return
         }
@@ -161,13 +161,13 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     }
     
     //
-    func iSegmentedAnnual_valueChanged(_ sender: UISegmentedControl){
+    @objc func iSegmentedAnnual_valueChanged(_ sender: UISegmentedControl){
         //print("Segmented 변경됨")
         calculatorOptions.isAnnualIncome  = (sender.selectedSegmentIndex == 0) ? true : false
         loadCalculation()
     }
     
-    func switchIncSev_valueChanged(_ sender: UISwitch) {
+    @objc func switchIncSev_valueChanged(_ sender: UISwitch) {
         //calculatorOptions.isIncludedSeverance = sender.val
         calculatorOptions.isIncludedSeverance = (sender.isOn) ? true: false
         loadCalculation()
@@ -334,7 +334,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     /**
      * 키보드 바로 위의 [Done] 클릭시 에 행동하는 메서드
      */
-    func keyboard_doneClicked()
+    @objc func keyboard_doneClicked()
     {
         view.endEditing(true)
     }
@@ -460,7 +460,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         hideBanner()
     }
 
-    func rotated(){
+    @objc func rotated(){
         hideBanner()
         showBanner()
         
@@ -469,7 +469,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         //print("count textfield")
         guard let text = textField.text else { return true }
-        let newLength = text.characters.count + string.characters.count - range.length
+        let newLength = text.count + string.count - range.length
         return newLength <= 10
     }
     

@@ -87,7 +87,7 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
         in_Option_Taxfree.delegate = self
         
     }
-    func btnHandleMoney(_ sender: UIButton!){
+    @objc func btnHandleMoney(_ sender: UIButton!){
         // reset 버튼 을 눌렀을 때
         if (sender.tag == 0){
             calculatorOptions.money = 0
@@ -136,20 +136,20 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
     }
     
     // 가족수 +-
-    func stepperFamily_valueChanged(_ sender: UIStepper) {
+    @objc func stepperFamily_valueChanged(_ sender: UIStepper) {
         updateCalcOption_Family()
         loadCalculation()
     }
     
     // 자녀수 +-
-    func stepperChild_valueChanged(_ sender: UIStepper) {
+    @objc func stepperChild_valueChanged(_ sender: UIStepper) {
         lbl_Option_Child.text = String(format: "자녀수 %d 명", Int(sender.value))
         calculatorOptions.child = Int(sender.value)
         loadCalculation()
     }
     
     // 금액 입력 시 메서드
-    func textFieldMoney_didChanged(_ sender: UITextField) {
+    @objc func textFieldMoney_didChanged(_ sender: UITextField) {
         guard let incomeMoney = Double((sender.text!)) else {
             calculatorOptions.money = 0
             return
@@ -179,7 +179,7 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
     }
     
     // 비과세 입력 시 메서드
-    func textFieldTaxfree_didChanged(_ sender: UITextField){
+    @objc func textFieldTaxfree_didChanged(_ sender: UITextField){
         guard (Double((sender.text!)) != nil) else {
             return
         }
@@ -190,13 +190,13 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
     }
     
     //
-    func iSegmentedAnnual_valueChanged(_ sender: UISegmentedControl){
+    @objc func iSegmentedAnnual_valueChanged(_ sender: UISegmentedControl){
         //print("Segmented 변경됨")
         calculatorOptions.isAnnualIncome  = (sender.selectedSegmentIndex == 0) ? true : false
         loadCalculation()
     }
     
-    func switchIncSev_valueChanged(_ sender: UISwitch) {
+    @objc func switchIncSev_valueChanged(_ sender: UISwitch) {
         //calculatorOptions.isIncludedSeverance = sender.val
         calculatorOptions.isIncludedSeverance = (sender.isOn) ? true: false
         loadCalculation()
@@ -396,7 +396,7 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
     /**
      * 키보드 바로 위의 [Done] 클릭시 에 행동하는 메서드
      */
-    func keyboard_doneClicked()
+    @objc func keyboard_doneClicked()
     {
         view.endEditing(true)
     }
@@ -416,7 +416,7 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         //print("count textfield")
         guard let text = textField.text else { return true }
-        let newLength = text.characters.count + string.characters.count - range.length
+        let newLength = text.count + string.count - range.length
         return newLength <= 10
     }
     
@@ -432,7 +432,7 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
         //debugPrint("CalculatorMaster prepare")
         let cell = sender as! UITableViewCell
         
-        switch String(segue.identifier ?? "")! {
+        switch segue.identifier! {
         case "segue_detail_np":
             prepare_detailView(cell,destination: segue.destination,receiveItem:.np)
         case "segue_detail_hc":
@@ -452,7 +452,7 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
             //prepare_detailView(cell,destination: segue.destination,receiveItem:CalculatorDetail_ViewController_Receive.localTax)
         default:
             //receiveItem = CalculatorDetail_ViewController_Receive.np
-            debugPrint(String(segue.identifier ?? "")!)
+            debugPrint(segue.identifier!)
         }
     }
     

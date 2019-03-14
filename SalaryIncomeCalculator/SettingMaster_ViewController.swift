@@ -191,7 +191,7 @@ class SettingMaster_ViewController: UITableViewController {
         let cell = sender as! UITableViewCell
 
         // segue id 에 따른 분기
-        switch String(segue.identifier ?? "")! {
+        switch segue.identifier! {
         case "segue_family":
             prepare_detailView(cell, destination: segue.destination, receiveItem: .family)
         case "segue_child":

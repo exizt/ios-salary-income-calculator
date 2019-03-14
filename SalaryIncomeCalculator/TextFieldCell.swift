@@ -31,7 +31,7 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
     
     
     /// The block to call when the value of the text field changes.
-    var valueChanged: ((Void) -> Void)?
+    var valueChanged: (() -> Void)?
     
     // MARK: UITextFieldDelegate
     
@@ -51,7 +51,8 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         //print("count textfield")
         guard let text = textField.text else { return true }
-        let newLength = text.characters.count + string.characters.count - range.length
+        let newLength = text.count + string.count - range.length
+        
         return newLength <= maxLength
     }
     
@@ -70,7 +71,7 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
         
         return doneToolbar
     }
-    func doneClicked()
+    @objc func doneClicked()
     {
         textField.resignFirstResponder()
     }

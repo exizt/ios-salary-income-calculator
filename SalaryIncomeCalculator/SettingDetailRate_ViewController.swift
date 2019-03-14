@@ -82,7 +82,7 @@ class SettingDetailRate_ViewController: UIViewController {
         }
         stepper_depth1.value = major
         
-        let minor = Array(separated[1].characters)
+        let minor = Array(separated[1])
         if minor.count >= 1 {
             if let minor_1 = Double(String(minor[0])) {
                 stepper_depth2.value = minor_1

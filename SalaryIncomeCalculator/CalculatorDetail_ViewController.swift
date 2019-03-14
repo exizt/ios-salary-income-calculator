@@ -33,7 +33,12 @@ class CalculatorDetail_ViewController: UIViewController {
         segcontrol_master.addTarget(self, action: #selector(self.segcontrol_master_valueChanged(_:)), for: .valueChanged)
         txview_description.textContainerInset = UIEdgeInsetsMake(0, 20, 0, 20)
         //print("CalculatorDetail viewDidLoad")
-        self.automaticallyAdjustsScrollViewInsets = false
+        if #available(iOS 11.0, *){
+            //self.view
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
+        
         
         guard let
             xmlPath = Bundle.main.path(forResource: "dictionary", ofType: "xml"),
@@ -70,9 +75,9 @@ class CalculatorDetail_ViewController: UIViewController {
             let rateHistory = xmlDoc.root[key]["history"].string
                 
             do {
-                str_explanation = try NSAttributedString(data: explanation.data(using: String.Encoding.unicode, allowLossyConversion: true)!, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
+                str_explanation = try NSAttributedString(data: explanation.data(using: String.Encoding.unicode, allowLossyConversion: true)!, options: [.documentType : NSAttributedString.DocumentType.html], documentAttributes: nil)
                     
-                str_rateHistory = try NSAttributedString(data: rateHistory.data(using: String.Encoding.unicode, allowLossyConversion: true)!, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
+                str_rateHistory = try NSAttributedString(data: rateHistory.data(using: String.Encoding.unicode, allowLossyConversion: true)!, options: [.documentType : NSAttributedString.DocumentType.html], documentAttributes: nil)
                     
                 txview_description.attributedText = str_explanation
             } catch {
@@ -115,7 +120,7 @@ class CalculatorDetail_ViewController: UIViewController {
     }
     
 
-    func segcontrol_master_valueChanged(_ sender: UISegmentedControl){
+    @objc func segcontrol_master_valueChanged(_ sender: UISegmentedControl){
         //print("segcontrol_master_valueChanged ")
         //print(sender.selectedSegmentIndex)
         debugPrint("segmentedControl Changed")

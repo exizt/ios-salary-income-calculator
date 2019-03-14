@@ -149,7 +149,7 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
     }
     
     
-    func rotatedAdmobBanner(){
+    @objc func rotatedAdmobBanner(){
         if(!isEnabled_BannerAD) { return }
         debugPrint_Admob("rotatedAdmobBanner")
         //debugPrint(String(isLandscape))
