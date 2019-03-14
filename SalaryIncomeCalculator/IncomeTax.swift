@@ -170,10 +170,10 @@ class IncomeTax{
     func getPensionDeduction(_ income:Double) -> Double
     {
         var base : Double = 0
-        if(income <= 25 * 10000){
-            base = 25 * 10000
-        } else if(income >= 398 * 10000){
-            base = 398 * 10000
+        if(income <= 29 * 10000){
+            base = 29 * 10000
+        } else if(income >= 449 * 10000){
+            base = 449 * 10000
         } else {
             base = roundDown(income, toNearest: 1000)
         }
@@ -236,7 +236,7 @@ class IncomeTax{
     }
     
     /**
-     * 산출세엑 계산 (소득세 최종 산출세엑, 세액공제 바로 전)
+     * 산출세액 계산 (소득세 최종 산출세엑, 세액공제 바로 전)
      *
      * 절삭 정책 : 원 단위 절삭 (이었다가 지금은 없어진 듯? 소수점만 절삭)
      * incomeYearly : 연간 과세표준 금액
@@ -253,10 +253,12 @@ class IncomeTax{
             tax = 582 * 10000 + (incomeYearly - 4600 * 10000) * 0.24;
         } else if (incomeYearly <= 15000 * 10000) {
             tax = 1590 * 10000 + (incomeYearly - 8800 * 10000) * 0.35;
-        } else if (incomeYearly <= 5 * 10000 * 10000) {
+        } else if (incomeYearly <= 3 * 10000 * 10000) {
             tax = 3760 * 10000 + (incomeYearly - 15000 * 10000) * 0.38;
+        } else if (incomeYearly <= 5 * 10000 * 10000) {
+            tax = 9460 * 10000 + (incomeYearly - 30000 * 10000) * 0.40;
         } else {
-            tax = 17060 * 10000 + (incomeYearly - 50000 * 10000) * 0.40;
+            tax = 17460 * 10000 + (incomeYearly - 50000 * 10000) * 0.42;
         }
         return roundDown(tax, toNearest: 1);
     }

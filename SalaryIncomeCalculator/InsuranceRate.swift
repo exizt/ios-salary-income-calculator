@@ -23,7 +23,7 @@ struct InsuranceRate {
             }
         }
     }
-    var _healthCare : Double = 3.06
+    var _healthCare : Double = 3.23
     var healthCare : Double {
         get {
             return _healthCare * 0.01
@@ -38,7 +38,7 @@ struct InsuranceRate {
             }
         }
     }
-    var _longTermCare : Double = 6.55
+    var _longTermCare : Double = 8.51
     var longTermCare : Double {
         get {
             return _longTermCare * 0.01
@@ -70,8 +70,8 @@ struct InsuranceRate {
     }
     mutating func initValues(){
         self._nationalPension = 4.5
-        self._healthCare = 3.06
-        self._longTermCare = 6.55
+        self._healthCare = 3.23
+        self._longTermCare = 8.51
         self._employmentCare = 0.65
     }
     
