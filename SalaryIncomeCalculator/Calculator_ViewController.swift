@@ -84,7 +84,6 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         // testdevices 목록
         //var testDevices : [Any] = []
         //testDevices += [kGADSimulatorID] // all simulators
-        //testDevices += ["d73c08aad93622d32f26c3522eb69135"] // SHiPhone7
         //testDevices += ["4bac9987239aad2ff1b894917a15b4f3"] // SHiPhone7
         //request.testDevices = testDevices
         
