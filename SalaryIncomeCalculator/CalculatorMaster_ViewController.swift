@@ -4,16 +4,16 @@
 //
 //  Created by SH.Hong on 2017. 7. 15..
 //  Copyright © 2017년 SH.Hong. All rights reserved.
-//  동작 과정 설명
-//  calculatorOptions 는 클래스인데, 입력을 받기 위한 오브젝트가 있고, salaryCalculator 내의 멤버변수로도 Option 객체가 있다. 같은 형태인데, 둘이 레퍼런스 참조가 되지 않도록, 값으로 넘겨주어야 한다. (반드시 주의) 객체로 넘기게 되면 레퍼런스 참조가 되면서 구현이 엉킬 수 있음.
-//
 
 import UIKit
 
+/// 계산하는 화면을 보여주는 뷰컨트롤러
+/// 가장 중요한 클래스이다. 여기서 입력값을 받고 Calculator 를 호출하고, 다 한다.
 class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegate{
     let calculator : SalaryCalculator = SalaryCalculator()
     let calculatorOptions : SalaryCalculatorOptions = SalaryCalculatorOptions()
     let isDebug = false
+    let debugTag = "[EXIZT][CalculatorMaster]"
     
     // calculator option object
     @IBOutlet weak var in_Option_Money : UITextField!
@@ -272,21 +272,26 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
             return
         }
         
-        //debugPrint(String(format: "before calculator options [%f]", calculatorOptions.money))
-        //debugPrint(String(format: "after  inOptions Money [%f]", calculatorOptions.money))
+        // 옵션 확인
+        debugCalcOptions("calculator Before Options ",options:calculator.Options())
+        debugCalcOptions("inOptions ",options:calculatorOptions)
         
-        debugPrint("calculator Before Options "+calculator.Options().toString())
-        debugPrint("inOptions "+calculatorOptions.toString())
+        // 옵션에 변경사항이 있으면 계산 메서드 호출
         if(!calculator.Options().equals(calculatorOptions)){
-            
             // 계산 메서드 호출
             calculate(calculatorOptions)
         }
     }
     
-    // 계산 메서드.
-    // 가급적 바로 호출하지 마시고, loadCalculation 메서드로 호출해주세요.
-    // 테스트 할 시에만 직접 호출 하세요.
+    
+    /// 계산 메서드
+    ///
+    /// 가급적 바로 호출하지는 말고, loadCalculation 을 통해서 호출할 것.
+    /// 테스트 시에는 바로 호출하면서 테스트해본다.
+    /// 넘겨받은 Options 의 클래스와, Calculator 내의 클래스는 동일한 클래스이나,
+    /// 값으로 비교를 받아야하기 때문에, 레퍼런스로 넘겨주지 않고, 값을 하나씩 넣어주도록 한다.
+    /// 향후에도 Object 가 Options 의 하위에 묶이지 않도록 주의해야 한다. (만약 그러면 레퍼런스 난리남)
+    /// - Parameter _options: 계산 옵션 개체
     func calculate(_ _options : SalaryCalculatorOptions) {
         debugPrint("calculate actived")
         //debugPrint("inOptions "+_options.toString())
@@ -298,10 +303,10 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
         calculator.Options().taxFree = _options.taxFree
         calculator.Options().isAnnualIncome = _options.isAnnualIncome
         calculator.Options().isIncludedSeverance = _options.isIncludedSeverance
-        
         //debugPrint("calculator Options "+calculator.Options().toString())
         
         calculator.calculate()
+        
         
         calculate_result()
     }
@@ -313,6 +318,7 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
             resetCalculatorResult()
             return
         }
+        
         /**
          * 계산 결과 처리
          */
@@ -422,10 +428,15 @@ class CalculatorMaster_ViewController: UITableViewController, UITextFieldDelegat
     
     func debugPrint(_ message:String){
         if(isDebug){
-            print("[Calculator]"+message)
+            print(debugTag+message)
         }
     }
     
+    func debugCalcOptions(_ tag:String, options: SalaryCalculatorOptions){
+        if(isDebug){
+            print(debugTag+tag+options.toString())
+        }
+    }
     
     // 네비게이션 컨트롤러를 통해서 하위 액티비티 를 부르기 전에 동작하는 메서드.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

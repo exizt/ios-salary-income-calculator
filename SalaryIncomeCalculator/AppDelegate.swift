@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-6702794513299112~8616406186")
-        
+        //GADMobileAds.configure(withApplicationID: "ca-app-pub-6702794513299112~8616406186")
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         //UITabBar.appearance().tintColor = .black
         ///UITabBar.appearance().color
         //UITabBar.appearance().backgroundColor = .blue

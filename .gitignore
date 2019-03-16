@@ -3,6 +3,11 @@
 Thumbs.db
 
 
+## Build generated
+build/
+DerivedData/
+
+
 ## Xcode Private Settings 
 *.pbxuser
 !default.pbxuser
@@ -17,7 +22,6 @@ xcuserdata/
 
 ## Carthage
 Carthage/Build
-
 
 
 ## Swift Package Manager
