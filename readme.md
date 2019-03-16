@@ -14,3 +14,18 @@
 
 ### Bug 목록 ###
 1. 이따금 '결과 상세보기' 에서 segmented control 을 체인지 했을 때, 글이 안 나오는 경우가 있음 : 원인 분석 중
+
+
+
+# 사용된 라이브러리
+    1. (필수) AEXML : XML 파싱 목적 / https://github.com/tadija/AEXML
+    2. 구글 애드몹 광고 (용량이 70MB 정도함)
+        - GoogleAppMeasurement
+        - Google-Mobile-Ads-SDK
+        - GoogleUtilities
+        - nanopb
+
+
+# Git 관련
+    - 용량을 줄이기 위해서, 애드몹 코드는 제외시키기로 함.
+    - AEXML 은 용량이 작은데다가 필수적이므로 두기로 함.

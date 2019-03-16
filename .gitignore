@@ -28,3 +28,9 @@ Carthage/Build
 .build/
 
 
+##
+Pods/GoogleAppMeasurement
+Pods/Google-Mobile-Ads-SDK
+Pods/GoogleUtilities
+Pods/nanopb
+ 
