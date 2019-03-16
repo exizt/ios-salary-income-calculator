@@ -31,7 +31,7 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         if(isEnabled_BannerAD) { bannerViewAD = createWithLoadBannerGAD() }
         
         // rotate 될 때 동작
-        NotificationCenter.default.addObserver(self, selector: #selector(self.rotatedAdmobBanner), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.rotatedAdmobBanner), name: UIDevice.orientationDidChangeNotification, object: nil)
 
     }
 

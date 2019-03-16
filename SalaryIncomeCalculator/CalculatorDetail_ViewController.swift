@@ -31,7 +31,7 @@ class CalculatorDetail_ViewController: UIViewController {
         super.viewDidLoad()
 
         segcontrol_master.addTarget(self, action: #selector(self.segcontrol_master_valueChanged(_:)), for: .valueChanged)
-        txview_description.textContainerInset = UIEdgeInsetsMake(0, 20, 0, 20)
+        txview_description.textContainerInset = UIEdgeInsets(top:0, left:20, bottom:0, right:20)
         //print("CalculatorDetail viewDidLoad")
         if #available(iOS 11.0, *){
             //self.view

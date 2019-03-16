@@ -71,7 +71,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         // 옵션값 전부 확인
         //print(UserDefaults.standard.dictionaryRepresentation())
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         
         in_Option_Money.delegate = self
         in_Option_Taxfree.delegate = self
@@ -320,8 +320,8 @@ class FirstViewController: UIViewController, UITextFieldDelegate, GADInterstitia
         let doneToolbar = UIToolbar()
         doneToolbar.sizeToFit()
         
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.keyboard_doneClicked))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(self.keyboard_doneClicked))
         
         doneToolbar.setItems([flexibleSpace, doneButton], animated: false)
         

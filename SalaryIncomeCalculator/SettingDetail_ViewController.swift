@@ -334,8 +334,8 @@ class SettingDetail_ViewController: UITableViewController {
         let doneToolbar = UIToolbar()
         doneToolbar.sizeToFit()
         
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.keyboard_doneClicked))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(self.keyboard_doneClicked))
         
         doneToolbar.setItems([flexibleSpace, doneButton], animated: false)
         
