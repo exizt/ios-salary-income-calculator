@@ -18,6 +18,9 @@ class Insurance{
             return nationalPension + healthCare + longTermCare + employmentCare
         }
     }
+    let np_lower_limit = Double(300000)
+    let np_upper_limit = Double(4680000)
+    let hc_upper_pay_limit = Double(3182760)
 
     /**
     * 4대 보험 계산
@@ -30,15 +33,16 @@ class Insurance{
         calculateLongTermCare(salary)
         
     }
+    
     /**
     * 국민연금 요금 계산
     */
     private func calculateNationalPension(_ _salary: Double) {
         var salary : Double = 0
-        if(_salary < 250000){
-            salary = 250000
-        } else if (_salary > 3980000){
-            salary = 3980000
+        if(_salary < np_lower_limit){
+            salary = np_lower_limit
+        } else if (_salary > np_upper_limit){
+            salary = np_upper_limit
         } else {
             salary = _salary
         }
@@ -47,12 +51,18 @@ class Insurance{
         
         nationalPension = roundDown(salary * rate.nationalPension,toNearest:10)
     }
+    
     /**
     * 건강보험 요금 계산
     */
     private func calculateHealthCare(_ salary : Double) {
         healthCare = roundDown(salary * rate.healthCare, toNearest: 10)
+        
+        if(healthCare > hc_upper_pay_limit){
+            healthCare = hc_upper_pay_limit
+        }
     }
+    
     /**
     * 장기요양 보험 요금 계산
     * 건강보험 (healthCare) 가 먼저 계산되어져 있어야 한다.
@@ -65,6 +75,7 @@ class Insurance{
         longTermCare = roundDown(healthCare * rate.longTermCare, toNearest: 10)
         
     }
+    
     /**
     * 고용보험 요금 계산
     */
