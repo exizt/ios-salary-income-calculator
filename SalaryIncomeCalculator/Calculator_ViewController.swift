@@ -82,10 +82,10 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         let request = GADRequest()
         
         // testdevices 목록
-        //var testDevices : [Any] = []
-        //testDevices += [kGADSimulatorID] // all simulators
+        var testDevices : [Any] = []
+        testDevices += [kGADSimulatorID] // all simulators
         //testDevices += ["4bac9987239aad2ff1b894917a15b4f3"] // SHiPhone7
-        //request.testDevices = testDevices
+        request.testDevices = testDevices
         
         return request
     }
