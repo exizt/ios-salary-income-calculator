@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,13 +12,14 @@
 		7611BCF11F1B862E0038D219 /* CalculatorDetail_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7611BCF01F1B862E0038D219 /* CalculatorDetail_ViewController.swift */; };
 		761D92931F1A306700E97C5E /* CalculatorMaster_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761D92921F1A306700E97C5E /* CalculatorMaster_ViewController.swift */; };
 		765BFD471F0AE189006BF10F /* SettingDetailRate_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BFD461F0AE189006BF10F /* SettingDetailRate_ViewController.swift */; };
+		7668B553259380B000523288 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7668B552259380B000523288 /* AEXML.framework */; };
 		767D1DF21F1DD529005EA6C8 /* Calculator_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D1DF11F1DD529005EA6C8 /* Calculator_ViewController.swift */; };
 		767FF4F41EFB2920001329C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF4F31EFB2920001329C1 /* AppDelegate.swift */; };
 		767FF4FB1EFB2920001329C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 767FF4F91EFB2920001329C1 /* Main.storyboard */; };
 		767FF4FD1EFB2922001329C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 767FF4FC1EFB2922001329C1 /* Assets.xcassets */; };
 		767FF5001EFB2923001329C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 767FF4FE1EFB2923001329C1 /* LaunchScreen.storyboard */; };
-		767FF50B1EFB2924001329C1 /* SalaryIncomeCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF50A1EFB2924001329C1 /* SalaryIncomeCalculatorTests.swift */; };
-		767FF5161EFB2926001329C1 /* SalaryIncomeCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5151EFB2926001329C1 /* SalaryIncomeCalculatorUITests.swift */; };
+		767FF50B1EFB2924001329C1 /* SalaryIncomeCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF50A1EFB2924001329C1 /* SalaryIncomeCalculatorTests.swift */; platformFilter = ios; };
+		767FF5161EFB2926001329C1 /* SalaryIncomeCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5151EFB2926001329C1 /* SalaryIncomeCalculatorUITests.swift */; platformFilter = ios; };
 		767FF5251EFB385D001329C1 /* SalaryCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5241EFB385D001329C1 /* SalaryCalculator.swift */; };
 		767FF5271EFB41D8001329C1 /* InsuranceRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5261EFB41D8001329C1 /* InsuranceRate.swift */; };
 		767FF5291EFBA178001329C1 /* Insurance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767FF5281EFBA178001329C1 /* Insurance.swift */; };
@@ -27,7 +28,6 @@
 		768A041D1F083E44007A6460 /* SettingDetail_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768A041C1F083E44007A6460 /* SettingDetail_ViewController.swift */; };
 		768A041F1F087286007A6460 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768A041E1F087286007A6460 /* TextFieldCell.swift */; };
 		768FDEC91F02F3B800DF0BA9 /* SettingMaster_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768FDEC81F02F3B800DF0BA9 /* SettingMaster_ViewController.swift */; };
-		76921C8B1F211948000E0D54 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76F243071F1E218D0075ADD4 /* AEXML.framework */; };
 		76B5DBC81F05B1740056D499 /* SHNUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DBC71F05B1740056D499 /* SHNUserSettings.swift */; };
 		76B5DBCA1F05CD130056D499 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 76B5DBC91F05CD130056D499 /* readme.md */; };
 		76E8B1F31F13A7B0000BEEFD /* CustomBaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E8B1F21F13A7B0000BEEFD /* CustomBaseLabel.swift */; };
@@ -60,6 +60,7 @@
 		761D92921F1A306700E97C5E /* CalculatorMaster_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorMaster_ViewController.swift; sourceTree = "<group>"; };
 		76247796223C8CBB00E25715 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		765BFD461F0AE189006BF10F /* SettingDetailRate_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingDetailRate_ViewController.swift; sourceTree = "<group>"; };
+		7668B552259380B000523288 /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AEXML.framework; path = Carthage/Build/iOS/AEXML.framework; sourceTree = "<group>"; };
 		767D1DF11F1DD529005EA6C8 /* Calculator_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculator_ViewController.swift; sourceTree = "<group>"; };
 		767FF4F01EFB2920001329C1 /* SalaryIncomeCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalaryIncomeCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		767FF4F31EFB2920001329C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,7 +89,6 @@
 		76B5DBC91F05CD130056D499 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		76E8B1F21F13A7B0000BEEFD /* CustomBaseLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBaseLabel.swift; sourceTree = "<group>"; };
 		76F243041F1E1C7F0075ADD4 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		76F243071F1E218D0075ADD4 /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AEXML.framework; path = Carthage/Build/iOS/AEXML.framework; sourceTree = "<group>"; };
 		A45D2B3809634C2BB756B6FC /* Pods-SalaryIncomeCalculator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalaryIncomeCalculator.release.xcconfig"; path = "Target Support Files/Pods-SalaryIncomeCalculator/Pods-SalaryIncomeCalculator.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,7 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76921C8B1F211948000E0D54 /* AEXML.framework in Frameworks */,
+				7668B553259380B000523288 /* AEXML.framework in Frameworks */,
 				4934CA2F4C58F7B55545F1DF /* Pods_SalaryIncomeCalculator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,10 +216,10 @@
 		76B5D9EF1EFE6E60006D8476 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7668B552259380B000523288 /* AEXML.framework */,
 				76247796223C8CBB00E25715 /* GoogleMobileAds.framework */,
 				76907E95223AC6860072E68D /* Carthage */,
 				76907E93223AC6790072E68D /* Libraries */,
-				76F243071F1E218D0075ADD4 /* AEXML.framework */,
 				76B5D9F01EFE6E61006D8476 /* GoogleMobileAds.framework */,
 				2B7C40D32745C213C4ED4A01 /* Pods_SalaryIncomeCalculator.framework */,
 				1986C168302E11A57613C7D0 /* Pods_SalaryIncomeCalculatorTests.framework */,
@@ -294,7 +294,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1170;
 				ORGANIZATIONNAME = SH.Hong;
 				TargetAttributes = {
 					767FF4EF1EFB2920001329C1 = {
@@ -319,7 +319,7 @@
 			};
 			buildConfigurationList = 767FF4EB1EFB2920001329C1 /* Build configuration list for PBXProject "SalaryIncomeCalculator" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -372,18 +372,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SalaryIncomeCalculator/Pods-SalaryIncomeCalculator-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,7 +424,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -474,11 +472,13 @@
 /* Begin PBXTargetDependency section */
 		767FF5081EFB2923001329C1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 767FF4EF1EFB2920001329C1 /* SalaryIncomeCalculator */;
 			targetProxy = 767FF5071EFB2923001329C1 /* PBXContainerItemProxy */;
 		};
 		767FF5131EFB2924001329C1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 767FF4EF1EFB2920001329C1 /* SalaryIncomeCalculator */;
 			targetProxy = 767FF5121EFB2924001329C1 /* PBXContainerItemProxy */;
 		};
@@ -508,6 +508,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -558,7 +559,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -567,6 +568,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -608,8 +610,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -626,11 +629,13 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Libraries",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks",
 				);
 				INFOPLIST_FILE = SalaryIncomeCalculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = kr.asv.SalaryIncomeCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -648,11 +653,13 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Libraries",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks",
 				);
 				INFOPLIST_FILE = SalaryIncomeCalculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = kr.asv.SalaryIncomeCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -665,11 +672,15 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SalaryIncomeCalculatorTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = kr.asv.SalaryIncomeCalculatorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SalaryIncomeCalculator.app/SalaryIncomeCalculator";
 			};
 			name = Debug;
@@ -680,11 +691,15 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SalaryIncomeCalculatorTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = kr.asv.SalaryIncomeCalculatorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SalaryIncomeCalculator.app/SalaryIncomeCalculator";
 			};
 			name = Release;
@@ -694,11 +709,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SalaryIncomeCalculatorUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = kr.asv.SalaryIncomeCalculatorUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = SalaryIncomeCalculator;
 			};
 			name = Debug;
@@ -708,11 +727,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SalaryIncomeCalculatorUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = kr.asv.SalaryIncomeCalculatorUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = SalaryIncomeCalculator;
 			};
 			name = Release;

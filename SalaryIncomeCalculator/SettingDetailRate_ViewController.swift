@@ -76,7 +76,7 @@ class SettingDetailRate_ViewController: UIViewController {
     // 값 으로 변경하려고 할 때
     // 개체가 로딩 된 이후에 호출되어야 한다. 그 이전에 호출되면 fatal error
     func changeValue(_ value:Double){
-        var separated : [String] = String(value).components(separatedBy: ".")
+        let separated : [String] = String(value).components(separatedBy: ".")
         guard let major:Double = Double(separated[0]) else {
             return
         }

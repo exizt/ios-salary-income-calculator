@@ -17,9 +17,7 @@ import GoogleMobileAds
 class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADBannerViewDelegate {
     let isDebug: Bool = false
     let isAdmobDebug: Bool = false
-    var interstitialAD : GADInterstitial!
     var bannerADView: GADBannerView!
-    let isEnabled_InterstitialAD: Bool = false
     let isEnabled_BannerAD: Bool = true
     var isLandscapeBefore = false
     var isRotatedAsHiddenStatus = false
@@ -34,10 +32,9 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         super.viewDidLoad()
         
         // Admob 에 관련된 코드.
-        // Interstitial 은 전면광고, BannerAd 는 배너형 광고를 말한다.
-        // 위에서 true/false 여부에 지정해준 것에 따라서 호출하게 한다. 둘 다 호출할 수도 있고..
-        if(isEnabled_InterstitialAD) { interstitialAD = createWithLoadInterstitialGAD() }
-        if(isEnabled_BannerAD) { bannerADView = createWithLoadGADBanner() }
+        if(isEnabled_BannerAD) {
+            bannerADView = createWithLoadGADBanner()
+        }
         
         // rotate 될 때 동작
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotatedAdmobBanner), name: UIDevice.orientationDidChangeNotification, object: nil)
@@ -85,7 +82,7 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
         var testDevices : [Any] = []
         testDevices += [kGADSimulatorID] // all simulators
         //testDevices += ["4bac9987239aad2ff1b894917a15b4f3"] // SHiPhone7
-        request.testDevices = testDevices
+        // request.testDevices = testDevices
         
         return request
     }
@@ -198,52 +195,6 @@ class Calculator_ViewController: UIViewController, GADInterstitialDelegate, GADB
     
     // END of [[banner ads 관련]]
     // --------------------------
-    
-    
-    // --------------------------
-    // [[Admob 전면광고 관련]]
-    // Admob 전면광고 생성 메서드
-    func createWithLoadInterstitialGAD() -> GADInterstitial?{
-        if(!isEnabled_InterstitialAD) { return nil }
-        
-        //Admob Unit ID
-        let interstitialGAD = GADInterstitial(adUnitID: "ca-app-pub-6702794513299112/1093139381")
-        interstitialGAD.delegate = self
-        interstitialGAD.load(createRequestGAD())
-        
-        return interstitialGAD
-    }
-
-    
-    //Admob 전면광고
-    func viewInterstitial(){
-        if(!isEnabled_InterstitialAD) { return }
-        
-        // 준비가 완료되었다면 화면에 활성 present
-        if interstitialAD.isReady {
-            interstitialAD.present(fromRootViewController: self)
-        } else {
-            //print("Ad wasn't ready")
-        }
-    }
-    
-    
-    //로드가 완료되었을때 의 처리.
-    // 화면에 보여주기
-    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
-        if(!isEnabled_InterstitialAD) { return }
-        
-        //print("Interstitial loaded successfully")
-        ad.present(fromRootViewController: self)
-    }
-    
-    
-    //실패했을때의 처리
-    func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
-        if(!isEnabled_InterstitialAD) { return }
-        
-        //print("Fail to receive interstitial")
-    }
 
     // End of [[Admob 전면광고 관련]]
     // --------------------------
