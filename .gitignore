@@ -22,15 +22,13 @@ xcuserdata/
 
 ## Carthage
 Carthage/Build
-
+Carthage/Checkouts/AEXML/Example
+Carthage/Checkouts/AEXML/Tests
 
 ## Swift Package Manager
 .build/
 
 
 ##
-Pods/GoogleAppMeasurement
-Pods/Google-Mobile-Ads-SDK
-Pods/GoogleUtilities
-Pods/nanopb
+Pods/
  
